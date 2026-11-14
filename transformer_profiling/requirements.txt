@@ -1,0 +1,5 @@
+numpy==2.2.6
+pyarrow==20.0.0
+datasets==3.6.0
+huggingface-hub==0.32.4
+nvidia-ml-py==12.575.51

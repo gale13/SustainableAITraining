@@ -1,0 +1,11 @@
+committed=16, planned=19, epochs/block=229, lr=0.0005, precision=fp32
+Latest budget check that can admit one more block (Beijing): 2026-11-13T22:59:38+08:00
+block_0016_1794502409665550889.csv [('1', '5.7663910335756805', '5.315301468793083')]
+batch=4 checkpoint finite, global_steps=3737280
+batch=8 checkpoint finite, global_steps=1868640
+batch=10 checkpoint finite, global_steps=1494912
+batch=16 checkpoint finite, global_steps=934320
+batch=24 checkpoint finite, global_steps=622880
+batch=32 checkpoint finite, global_steps=468992
+batch=48 checkpoint finite, global_steps=311440
+batch=64 checkpoint finite, global_steps=234496

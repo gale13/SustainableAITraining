@@ -1,0 +1,13 @@
+Replay only: block=16, batch=4, uuid=device-00
+first math backend norm=12.48414421081543
+epoch=1 fallback=0/1020
+epoch=1, train_loss=5.064475, validation_loss=4.659091
+epoch=2 fallback=0/1020
+epoch=2, train_loss=4.769334, validation_loss=4.609189
+epoch=3 fallback=0/1020
+epoch=3, train_loss=4.639800, validation_loss=4.580795
+epoch=4 fallback=0/1020
+epoch=4, train_loss=4.556474, validation_loss=4.580144
+epoch=5 fallback=0/1020
+epoch=5, train_loss=4.487642, validation_loss=4.547593
+Five diagnostic epochs completed

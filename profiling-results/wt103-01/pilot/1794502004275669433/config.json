@@ -1,0 +1,37 @@
+{
+  "seed": 20261112,
+  "batches": [
+    4,
+    8,
+    10,
+    16,
+    24,
+    32,
+    48,
+    64
+  ],
+  "model": {
+    "layers": 6,
+    "d_model": 256,
+    "d_ff": 1024,
+    "heads": 4,
+    "seq_len": 512,
+    "dropout": 0.3
+  },
+  "precision": "fp32",
+  "learning_rate": 0.0005,
+  "warmup_steps": 100,
+  "grad_clip": 1.0,
+  "eval_batch": 10,
+  "cpu_threads_per_worker": 2,
+  "warmup_seconds": 30,
+  "pilot_seconds": 180,
+  "pilot_min_epochs": 3,
+  "power_interval_seconds": 0.5,
+  "memory_fraction_limit": 0.85,
+  "minimum_block_seconds": 1200,
+  "minimum_duration_margin": 1.2,
+  "budget_hours": 24,
+  "budget_reserve_seconds": 1800,
+  "runtime_margin": 1.15
+}

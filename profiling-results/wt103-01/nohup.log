@@ -1,0 +1,127 @@
+
+[2026-11-12T16:41:58Z] starting wt103-01 on ubuntu
+[wt103-01] preflight
+torch=2.7.1+cu128, CUDA=12.8, arch=['sm_75', 'sm_80', 'sm_86', 'sm_90', 'sm_100', 'sm_120', 'compute_120']
+{'index': 0, 'uuid': 'device-00', 'name': 'NVIDIA GeForce RTX 5090', 'memory_bytes': 34190917632, 'driver': '580.105.08', 'pci_bus_id': '00000000:08:00.0'} {'power_w': 23.163, 'energy_mj': 652549, 'temperature_c': 31, 'sm_clock_mhz': 247, 'memory_clock_mhz': 810, 'power_limit_mw': 575000, 'throttle_reasons': 4, 'backend': 'nvml', 'monotonic_s': 10414324.735863969, 'unix_s': 1794501736.4983368, 'query_seconds': 0.00975889153778553, 'gpu_uuid': 'device-00'} 
+{'index': 1, 'uuid': 'device-01', 'name': 'NVIDIA GeForce RTX 5090', 'memory_bytes': 34190917632, 'driver': '580.105.08', 'pci_bus_id': '00000000:09:00.0'} {'power_w': 50.574, 'energy_mj': 515863, 'temperature_c': 33, 'sm_clock_mhz': 2400, 'memory_clock_mhz': 14001, 'power_limit_mw': 575000, 'throttle_reasons': 0, 'backend': 'nvml', 'monotonic_s': 10414324.741966072, 'unix_s': 1794501736.5044365, 'query_seconds': 0.002932138741016388, 'gpu_uuid': 'device-01'} 
+{'index': 2, 'uuid': 'device-02', 'name': 'NVIDIA GeForce RTX 5090', 'memory_bytes': 34190917632, 'driver': '580.105.08', 'pci_bus_id': '00000000:0E:00.0'} {'power_w': 47.299, 'energy_mj': 421333, 'temperature_c': 32, 'sm_clock_mhz': 2400, 'memory_clock_mhz': 14001, 'power_limit_mw': 575000, 'throttle_reasons': 0, 'backend': 'nvml', 'monotonic_s': 10414324.74794913, 'unix_s': 1794501736.5104194, 'query_seconds': 0.0028768498450517654, 'gpu_uuid': 'device-02'} 
+{'index': 3, 'uuid': 'device-03', 'name': 'NVIDIA GeForce RTX 5090', 'memory_bytes': 34190917632, 'driver': '580.105.08', 'pci_bus_id': '00000000:11:00.0'} {'power_w': 58.699, 'energy_mj': 454321, 'temperature_c': 30, 'sm_clock_mhz': 2400, 'memory_clock_mhz': 14001, 'power_limit_mw': 575000, 'throttle_reasons': 0, 'backend': 'nvml', 'monotonic_s': 10414324.753964089, 'unix_s': 1794501736.5164344, 'query_seconds': 0.0029087793081998825, 'gpu_uuid': 'device-03'} 
+{'index': 4, 'uuid': 'device-04', 'name': 'NVIDIA GeForce RTX 5090', 'memory_bytes': 34190917632, 'driver': '580.105.08', 'pci_bus_id': '00000000:16:00.0'} {'power_w': 56.027, 'energy_mj': 346617, 'temperature_c': 32, 'sm_clock_mhz': 2400, 'memory_clock_mhz': 14001, 'power_limit_mw': 575000, 'throttle_reasons': 0, 'backend': 'nvml', 'monotonic_s': 10414324.761338923, 'unix_s': 1794501736.5238092, 'query_seconds': 0.004267655313014984, 'gpu_uuid': 'device-04'} 
+{'index': 5, 'uuid': 'device-05', 'name': 'NVIDIA GeForce RTX 5090', 'memory_bytes': 34190917632, 'driver': '580.105.08', 'pci_bus_id': '00000000:1C:00.0'} {'power_w': 52.875, 'energy_mj': 259332, 'temperature_c': 33, 'sm_clock_mhz': 2400, 'memory_clock_mhz': 14001, 'power_limit_mw': 575000, 'throttle_reasons': 0, 'backend': 'nvml', 'monotonic_s': 10414324.767254788, 'unix_s': 1794501736.529725, 'query_seconds': 0.002825159579515457, 'gpu_uuid': 'device-05'} 
+{'index': 6, 'uuid': 'device-06', 'name': 'NVIDIA GeForce RTX 5090', 'memory_bytes': 34190917632, 'driver': '580.105.08', 'pci_bus_id': '00000000:1F:00.0'} {'power_w': 62.888, 'energy_mj': 198625, 'temperature_c': 32, 'sm_clock_mhz': 2400, 'memory_clock_mhz': 14001, 'power_limit_mw': 575000, 'throttle_reasons': 0, 'backend': 'nvml', 'monotonic_s': 10414324.773376975, 'unix_s': 1794501736.5358474, 'query_seconds': 0.0029601193964481354, 'gpu_uuid': 'device-06'} 
+{'index': 7, 'uuid': 'device-07', 'name': 'NVIDIA GeForce RTX 5090', 'memory_bytes': 34190917632, 'driver': '580.105.08', 'pci_bus_id': '00000000:20:00.0'} {'power_w': 69.996, 'energy_mj': 124319, 'temperature_c': 32, 'sm_clock_mhz': 2400, 'memory_clock_mhz': 14001, 'power_limit_mw': 575000, 'throttle_reasons': 0, 'backend': 'nvml', 'monotonic_s': 10414324.779416673, 'unix_s': 1794501736.541887, 'query_seconds': 0.0029068831354379654, 'gpu_uuid': 'device-07'} 
+Preflight telemetry OK. The concurrent pilot tests actual model forward/backward kernels and memory.
+[wt103-01] preparing_data
+
+Generating test split:   0%|          | 0/4358 [00:00<?, ? examples/s]
+Generating test split: 100%|██████████| 4358/4358 [00:00<00:00, 273106.98 examples/s]
+
+Generating train split:   0%|          | 0/36718 [00:00<?, ? examples/s]
+Generating train split: 100%|██████████| 36718/36718 [00:00<00:00, 715942.79 examples/s]
+
+Generating validation split:   0%|          | 0/3760 [00:00<?, ? examples/s]
+Generating validation split: 100%|██████████| 3760/3760 [00:00<00:00, 612663.96 examples/s]
+
+Generating test split:   0%|          | 0/4358 [00:00<?, ? examples/s]
+Generating test split: 100%|██████████| 4358/4358 [00:00<00:00, 499556.62 examples/s]
+
+Generating train split:   0%|          | 0/1801350 [00:00<?, ? examples/s]
+Generating train split:   4%|▍         | 68000/1801350 [00:00<00:02, 669816.78 examples/s]
+Generating train split:   9%|▉         | 168000/1801350 [00:00<00:01, 862066.63 examples/s]
+Generating train split:  16%|█▋        | 293000/1801350 [00:00<00:01, 841114.83 examples/s]
+Generating train split:  22%|██▏       | 388000/1801350 [00:00<00:01, 818172.42 examples/s]
+Generating train split:  27%|██▋       | 483000/1801350 [00:00<00:01, 857640.61 examples/s]
+Generating train split:  32%|███▏      | 579000/1801350 [00:00<00:01, 830166.65 examples/s]
+Generating train split:  38%|███▊      | 677000/1801350 [00:00<00:01, 871157.19 examples/s]
+Generating train split:  43%|████▎     | 772000/1801350 [00:00<00:01, 859347.92 examples/s]
+Generating train split:  48%|████▊     | 867000/1801350 [00:01<00:01, 880704.43 examples/s]
+Generating train split:  55%|█████▌    | 999675/1801350 [00:01<00:00, 852800.32 examples/s]
+Generating train split:  61%|██████    | 1093675/1801350 [00:01<00:00, 829102.10 examples/s]
+Generating train split:  66%|██████▌   | 1189675/1801350 [00:01<00:00, 859891.07 examples/s]
+Generating train split:  71%|███████▏  | 1285675/1801350 [00:01<00:00, 832122.78 examples/s]
+Generating train split:  77%|███████▋  | 1383675/1801350 [00:01<00:00, 869503.70 examples/s]
+Generating train split:  82%|████████▏ | 1476675/1801350 [00:01<00:00, 834133.91 examples/s]
+Generating train split:  87%|████████▋ | 1575675/1801350 [00:01<00:00, 874191.43 examples/s]
+Generating train split:  93%|█████████▎| 1669675/1801350 [00:01<00:00, 848817.98 examples/s]
+Generating train split:  98%|█████████▊| 1761675/1801350 [00:02<00:00, 865599.32 examples/s]
+Generating train split: 100%|██████████| 1801350/1801350 [00:02<00:00, 848345.07 examples/s]
+
+Generating validation split:   0%|          | 0/3760 [00:00<?, ? examples/s]
+Generating validation split: 100%|██████████| 3760/3760 [00:00<00:00, 562813.00 examples/s]
+Prepared 49 blocks, 2,088,448 targets/block, 32,768 vocabulary entries
+[wt103-01] calibrating
+All GPUs completed block 0; max wall time 191.9s
+Plan: 229 epochs/block, 19 common blocks, estimated 22.91h with margin
+[wt103-01] training
+All GPUs completed block 0; max wall time 3830.4s
+All GPUs completed block 1; max wall time 3964.0s
+All GPUs completed block 2; max wall time 3765.2s
+All GPUs completed block 3; max wall time 3799.1s
+All GPUs completed block 4; max wall time 3664.2s
+All GPUs completed block 5; max wall time 3645.0s
+All GPUs completed block 6; max wall time 3668.2s
+All GPUs completed block 7; max wall time 3553.9s
+All GPUs completed block 8; max wall time 3876.6s
+All GPUs completed block 9; max wall time 4005.7s
+All GPUs completed block 10; max wall time 4077.0s
+All GPUs completed block 11; max wall time 4031.2s
+All GPUs completed block 12; max wall time 3995.7s
+All GPUs completed block 13; max wall time 3502.8s
+All GPUs completed block 14; max wall time 3493.1s
+All GPUs completed block 15; max wall time 3412.6s
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "~/wt103-conda/transformer_profiling/profiling/launch.py", line 253, in <module>
+    main()
+  File "~/wt103-conda/transformer_profiling/profiling/launch.py", line 249, in main
+    execute(args)
+  File "~/wt103-conda/transformer_profiling/profiling/launch.py", line 174, in execute
+    done = receive_all(connections, processes, "done")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "~/wt103-conda/transformer_profiling/profiling/launch.py", line 49, in receive_all
+    raise RuntimeError(message["detail"])
+RuntimeError: Traceback (most recent call last):
+  File "~/wt103-conda/transformer_profiling/profiling/launch.py", line 29, in entry
+    worker(connection, config, manifest, data, output, gpu, batch, mode, plan, committed, fingerprint)
+  File "~/wt103-conda/transformer_profiling/profiling/engine.py", line 256, in worker
+    row = engine.measured_epoch(tokens, meter, block_id, epoch, epoch_limit,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "~/wt103-conda/transformer_profiling/profiling/engine.py", line 137, in measured_epoch
+    train_loss, count = self.epoch(tokens)
+                        ^^^^^^^^^^^^^^^^^^
+  File "~/wt103-conda/transformer_profiling/profiling/engine.py", line 129, in epoch
+    raise FloatingPointError("Nonfinite loss; experiment stopped")
+FloatingPointError: Nonfinite loss; experiment stopped
+
+Traceback (most recent call last):
+  File "~/wt103-conda/transformer_profiling/profiling/pipeline.py", line 130, in main
+    execute(root)
+  File "~/wt103-conda/transformer_profiling/profiling/pipeline.py", line 98, in execute
+    module("launch", "run", *shared, "--plan", plan, "--out", formal)
+  File "~/wt103-conda/transformer_profiling/profiling/pipeline.py", line 35, in module
+    raise subprocess.CalledProcessError(process.returncode, command)
+subprocess.CalledProcessError: Command '['~/miniconda3/envs/wt103-profile/bin/python', '-m', 'profiling.launch', 'run', '--data', '~/wt103-conda/transformer_profiling/data/wt103-raw-first32k-s512-v1', '--config', '~/wt103-conda/transformer_profiling/results/wt103-01/config.json', '--deadline-unix', '1794588119.0927908', '--plan', '~/wt103-conda/transformer_profiling/results/wt103-01/plan.json', '--out', '~/wt103-conda/transformer_profiling/results/wt103-01/training']' returned non-zero exit status 1.
+
+[wt103-01] failed
+
+[2026-11-13T17:04:00Z] starting wt103-01 on ubuntu
+[wt103-01] preflight
+torch=2.7.1+cu128, CUDA=12.8, arch=['sm_75', 'sm_80', 'sm_86', 'sm_90', 'sm_100', 'sm_120', 'compute_120']
+{'index': 0, 'uuid': 'device-00', 'name': 'NVIDIA GeForce RTX 5090', 'memory_bytes': 34190917632, 'driver': '580.105.08', 'pci_bus_id': '00000000:08:00.0'} {'power_w': 24.548, 'energy_mj': 674253, 'temperature_c': 31, 'sm_clock_mhz': 217, 'memory_clock_mhz': 405, 'power_limit_mw': 575000, 'throttle_reasons': 4, 'backend': 'nvml', 'monotonic_s': 10502047.7440261, 'unix_s': 1794589459.5064995, 'query_seconds': 0.011948220431804657, 'gpu_uuid': 'device-00'} 
+{'index': 1, 'uuid': 'device-01', 'name': 'NVIDIA GeForce RTX 5090', 'memory_bytes': 34190917632, 'driver': '580.105.08', 'pci_bus_id': '00000000:09:00.0'} {'power_w': 47.243, 'energy_mj': 566780, 'temperature_c': 33, 'sm_clock_mhz': 2400, 'memory_clock_mhz': 810, 'power_limit_mw': 575000, 'throttle_reasons': 0, 'backend': 'nvml', 'monotonic_s': 10502047.760223707, 'unix_s': 1794589459.5226943, 'query_seconds': 0.0076608434319496155, 'gpu_uuid': 'device-01'} 
+{'index': 2, 'uuid': 'device-02', 'name': 'NVIDIA GeForce RTX 5090', 'memory_bytes': 34190917632, 'driver': '580.105.08', 'pci_bus_id': '00000000:0E:00.0'} {'power_w': 45.917, 'energy_mj': 453362, 'temperature_c': 31, 'sm_clock_mhz': 2400, 'memory_clock_mhz': 14001, 'power_limit_mw': 575000, 'throttle_reasons': 0, 'backend': 'nvml', 'monotonic_s': 10502047.766412612, 'unix_s': 1794589459.5288832, 'query_seconds': 0.0030003488063812256, 'gpu_uuid': 'device-02'} 
+{'index': 3, 'uuid': 'device-03', 'name': 'NVIDIA GeForce RTX 5090', 'memory_bytes': 34190917632, 'driver': '580.105.08', 'pci_bus_id': '00000000:11:00.0'} {'power_w': 56.457, 'energy_mj': 475585, 'temperature_c': 29, 'sm_clock_mhz': 2400, 'memory_clock_mhz': 14001, 'power_limit_mw': 575000, 'throttle_reasons': 0, 'backend': 'nvml', 'monotonic_s': 10502047.774676915, 'unix_s': 1794589459.5371473, 'query_seconds': 0.005095245316624641, 'gpu_uuid': 'device-03'} 
+{'index': 4, 'uuid': 'device-04', 'name': 'NVIDIA GeForce RTX 5090', 'memory_bytes': 34190917632, 'driver': '580.105.08', 'pci_bus_id': '00000000:16:00.0'} {'power_w': 53.702, 'energy_mj': 362016, 'temperature_c': 31, 'sm_clock_mhz': 2400, 'memory_clock_mhz': 14001, 'power_limit_mw': 575000, 'throttle_reasons': 0, 'backend': 'nvml', 'monotonic_s': 10502047.781058991, 'unix_s': 1794589459.5435295, 'query_seconds': 0.0030715614557266235, 'gpu_uuid': 'device-04'} 
+{'index': 5, 'uuid': 'device-05', 'name': 'NVIDIA GeForce RTX 5090', 'memory_bytes': 34190917632, 'driver': '580.105.08', 'pci_bus_id': '00000000:1C:00.0'} {'power_w': 51.57, 'energy_mj': 260496, 'temperature_c': 31, 'sm_clock_mhz': 2400, 'memory_clock_mhz': 14001, 'power_limit_mw': 575000, 'throttle_reasons': 0, 'backend': 'nvml', 'monotonic_s': 10502047.787973734, 'unix_s': 1794589459.5504444, 'query_seconds': 0.003745129331946373, 'gpu_uuid': 'device-05'} 
+{'index': 6, 'uuid': 'device-06', 'name': 'NVIDIA GeForce RTX 5090', 'memory_bytes': 34190917632, 'driver': '580.105.08', 'pci_bus_id': '00000000:1F:00.0'} {'power_w': 61.482, 'energy_mj': 204966, 'temperature_c': 30, 'sm_clock_mhz': 2400, 'memory_clock_mhz': 14001, 'power_limit_mw': 575000, 'throttle_reasons': 0, 'backend': 'nvml', 'monotonic_s': 10502047.794355905, 'unix_s': 1794589459.5568264, 'query_seconds': 0.0030620936304330826, 'gpu_uuid': 'device-06'} 
+{'index': 7, 'uuid': 'device-07', 'name': 'NVIDIA GeForce RTX 5090', 'memory_bytes': 34190917632, 'driver': '580.105.08', 'pci_bus_id': '00000000:20:00.0'} {'power_w': 66.826, 'energy_mj': 136599, 'temperature_c': 30, 'sm_clock_mhz': 2400, 'memory_clock_mhz': 14001, 'power_limit_mw': 575000, 'throttle_reasons': 0, 'backend': 'nvml', 'monotonic_s': 10502047.800653378, 'unix_s': 1794589459.5631237, 'query_seconds': 0.0029642879962921143, 'gpu_uuid': 'device-07'} 
+Preflight telemetry OK. The concurrent pilot tests actual model forward/backward kernels and memory.
+[wt103-01] preparing_data
+[wt103-01] training
+All GPUs completed block 16; max wall time 4422.6s
+All GPUs completed block 17; max wall time 4554.8s
+All GPUs completed block 18; max wall time 4434.9s
+[wt103-01] auditing
+{'passed': True, 'integrity_checks_passed': True, 'common_completed_blocks': 19, 'planned_blocks': 19, 'unused_full_blocks': 30, 'batch_count': 8, 'row_count': 34808, 'epochs_per_block': 229, 'all_duration_targets_met': True, 'shortest_train_block_seconds': 1457.8160304035991, 'scope': 'GPU board energy in training/validation windows; waiting, warmup and checkpoints excluded', 'uncommitted_outputs': 'Any block >= common_completed_blocks and all attempts are excluded from analysis'}
+[wt103-01] complete

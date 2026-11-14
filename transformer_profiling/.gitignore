@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
+data/
+cache/
+results/
+images/
+**/_state/
+*.pt
+*.bin
+*.tar
+*.tar.gz

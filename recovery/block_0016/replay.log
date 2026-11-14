@@ -1,0 +1,43 @@
+committed=16, planned=19, epochs/block=229, lr=0.0005, precision=fp32
+Latest budget check that can admit one more block (Beijing): 2026-11-13T22:59:38+08:00
+block_0016_1794502409665550889.csv [('1', '5.7663910335756805', '5.315301468793083')]
+Replay only: block=16, batch=4, uuid=device-00
+REPLAY FAILURE block=16 epoch=1 phase=train step_in_epoch=1 completed_global_steps=3737280 lr=0.0005
+Traceback (most recent call last):
+  File "~/wt103-conda/transformer_profiling/scripts/diagnose_nonfinite.py", line 59, in checked_clip
+    return original_clip(params, *a, **kw, error_if_nonfinite=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "~/miniconda3/envs/wt103-profile/lib/python3.11/site-packages/torch/nn/utils/clip_grad.py", line 38, in _no_grad_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "~/miniconda3/envs/wt103-profile/lib/python3.11/site-packages/torch/nn/utils/clip_grad.py", line 219, in clip_grad_norm_
+    total_norm = _get_total_norm(grads, norm_type, error_if_nonfinite, foreach)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "~/miniconda3/envs/wt103-profile/lib/python3.11/site-packages/torch/nn/utils/clip_grad.py", line 38, in _no_grad_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "~/miniconda3/envs/wt103-profile/lib/python3.11/site-packages/torch/nn/utils/clip_grad.py", line 106, in _get_total_norm
+    raise RuntimeError(
+RuntimeError: The total norm of order 2.0 for gradients from `parameters` is non-finite, so it cannot be clipped. To disable this error and scale the gradients by the non-finite norm anyway, set `error_if_nonfinite=False`
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "~/wt103-conda/transformer_profiling/scripts/diagnose_nonfinite.py", line 151, in <module>
+    main()
+  File "~/wt103-conda/transformer_profiling/scripts/diagnose_nonfinite.py", line 142, in main
+    replay(run, groups / "_state" / name, block, args.batch, project)
+  File "~/wt103-conda/transformer_profiling/scripts/diagnose_nonfinite.py", line 99, in replay
+    loss = trace_epoch(engine, tokens, block, epoch, True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "~/wt103-conda/transformer_profiling/scripts/diagnose_nonfinite.py", line 67, in trace_epoch
+    return engine.epoch(tokens, train=train)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "~/wt103-conda/transformer_profiling/profiling/engine.py", line 119, in epoch
+    loss = self.step(x, y)
+           ^^^^^^^^^^^^^^^
+  File "~/wt103-conda/transformer_profiling/profiling/engine.py", line 92, in step
+    torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.config["grad_clip"])
+  File "~/wt103-conda/transformer_profiling/scripts/diagnose_nonfinite.py", line 63, in checked_clip
+    raise RuntimeError(f"gradient clipping failed; nonfinite gradient tensors={bad}; {exc}") from exc
+RuntimeError: gradient clipping failed; nonfinite gradient tensors=[]; The total norm of order 2.0 for gradients from `parameters` is non-finite, so it cannot be clipped. To disable this error and scale the gradients by the non-finite norm anyway, set `error_if_nonfinite=False`

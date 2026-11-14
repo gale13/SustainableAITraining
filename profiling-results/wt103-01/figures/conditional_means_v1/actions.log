@@ -1,0 +1,3 @@
+phase=1 J=1.000 supported=8 observations=24 supported_actions=[ 4  8 10 16 24 32 48 64]
+phase=2 J=0.901 supported=8 observations=26 supported_actions=[ 4  8 10 16 24 32 48 64]
+phase=3 J=0.865 supported=8 observations=45 supported_actions=[ 4  8 10 16 24 32 48 64]

@@ -1,0 +1,25 @@
+Replay only: block=16, batch=4, uuid=device-00
+epoch=1 step=1 fp64_norm=2.03167e+26
+epoch=1 fallback=601/1020
+epoch=1, train_loss=6.197348, validation_loss=5.263246
+epoch=2 step=1 fp64_norm=4.41513e+26
+Traceback (most recent call last):
+  File "~/wt103-conda/transformer_profiling/scripts/wt103_clip_probe.py", line 49, in <module>
+    diag.replay(run, checkpoint, block, 4, base)
+  File "~/wt103-conda/transformer_profiling/scripts/diagnose_nonfinite.py", line 99, in replay
+    loss = trace_epoch(engine, tokens, block, epoch, True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "~/wt103-conda/transformer_profiling/scripts/wt103_clip_probe.py", line 43, in trace
+    result = engine.epoch(tokens, train=train)[0]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "~/wt103-conda/transformer_profiling/profiling/engine.py", line 119, in epoch
+    loss = self.step(x, y)
+           ^^^^^^^^^^^^^^^
+  File "~/wt103-conda/transformer_profiling/profiling/engine.py", line 92, in step
+    torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.config["grad_clip"])
+  File "~/miniconda3/envs/wt103-profile/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "~/wt103-conda/transformer_profiling/scripts/wt103_clip_probe.py", line 37, in clip
+    raise FloatingPointError(f"epoch={epoch} step={counts[0]} nonfinite gradient {bad}")
+FloatingPointError: epoch=2 step=292 nonfinite gradient ['embedding.weight', 'layers.0.qkv.weight', 'layers.0.qkv.bias']

@@ -1,0 +1,9 @@
+**
+!Dockerfile
+!requirements.txt
+!profiling/
+!profiling/*.py
+!configs/
+!configs/*.json
+!tests/
+!tests/*.py

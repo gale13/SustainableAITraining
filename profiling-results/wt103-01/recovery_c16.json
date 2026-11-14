@@ -1,0 +1,16 @@
+{
+  "first_patched_block_id": 16,
+  "run_id": "wt103-01",
+  "attention": "SDPBackend.MATH on all eight GPUs",
+  "gradient_clip": "unchanged threshold; fail before Adam on nonfinite norm",
+  "original_runtime": "771d7a1e84687487d277926517834590543cc184959947ea531c00a7ba82ca44",
+  "patched_runtime": "8580911a0809eb9b87d806a55f8c7fa9a962454b8b8a5c5d13c5e5efb17f3031",
+  "original_deadline": 1794588119.0927908,
+  "failure_unix": 1794562795.5490577,
+  "resumed_unix": 1794589440.827702,
+  "remaining_active_seconds": 25323.543733119965,
+  "new_deadline": 1794614764.3714352,
+  "measurement_note": "Report block IDs 0-15 and 16 onward separately when comparing time or energy.",
+  "patch_sha256": "b0fb783507e41c81d5c14a122e7c122a14b90ba9716591fd3b270b7bb5c90c7f",
+  "original_files": "~/wt103-recovery/wt103-01-c16"
+}

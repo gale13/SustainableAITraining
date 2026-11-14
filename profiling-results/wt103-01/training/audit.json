@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "integrity_checks_passed": true,
+  "common_completed_blocks": 19,
+  "planned_blocks": 19,
+  "unused_full_blocks": 30,
+  "batch_count": 8,
+  "row_count": 34808,
+  "epochs_per_block": 229,
+  "all_duration_targets_met": true,
+  "shortest_train_block_seconds": 1457.8160304035991,
+  "scope": "GPU board energy in training/validation windows; waiting, warmup and checkpoints excluded",
+  "uncommitted_outputs": "Any block >= common_completed_blocks and all attempts are excluded from analysis"
+}

@@ -1,0 +1,1 @@
+{'m_T_seconds': 8.410398402437568, 'm_GPU_demand_joules': 4142.986541834441, 'm_epsilon_seconds': 7.468653075655674}

@@ -1,0 +1,35 @@
+{
+  "gpu": {
+    "index": 3,
+    "uuid": "device-03",
+    "name": "NVIDIA GeForce RTX 5090",
+    "memory_bytes": 34190917632,
+    "driver": "580.105.08",
+    "pci_bus_id": "00000000:11:00.0"
+  },
+  "torch": "2.7.1+cu128",
+  "cuda_runtime": "12.8",
+  "cudnn": 90701,
+  "arch_list": [
+    "sm_75",
+    "sm_80",
+    "sm_86",
+    "sm_90",
+    "sm_100",
+    "sm_120",
+    "compute_120"
+  ],
+  "capability": [
+    12,
+    0
+  ],
+  "parameter_count": 13127168,
+  "initial_model_sha256": "0115932d056e453cd5258a39fbc248026ecf1839999981bd83f77dceb42f81cb",
+  "precision": "fp32",
+  "tf32": false,
+  "sensor_note": "",
+  "batch_sequences": 16,
+  "batch_tokens": 8192,
+  "pid": 1521729,
+  "fingerprint": "6177046289962dfa15508632d1abd7d93d167b1fb7118a68e3c2de06d34c780e"
+}

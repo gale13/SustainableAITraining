@@ -1,0 +1,558 @@
+{
+  "fingerprint": "6177046289962dfa15508632d1abd7d93d167b1fb7118a68e3c2de06d34c780e",
+  "config": {
+    "seed": 20261112,
+    "batches": [
+      4,
+      8,
+      10,
+      16,
+      24,
+      32,
+      48,
+      64
+    ],
+    "model": {
+      "layers": 6,
+      "d_model": 256,
+      "d_ff": 1024,
+      "heads": 4,
+      "seq_len": 512,
+      "dropout": 0.3
+    },
+    "precision": "fp32",
+    "learning_rate": 0.0005,
+    "warmup_steps": 100,
+    "grad_clip": 1.0,
+    "eval_batch": 10,
+    "cpu_threads_per_worker": 2,
+    "warmup_seconds": 30,
+    "pilot_seconds": 180,
+    "pilot_min_epochs": 3,
+    "power_interval_seconds": 0.5,
+    "memory_fraction_limit": 0.85,
+    "minimum_block_seconds": 1200,
+    "minimum_duration_margin": 1.2,
+    "budget_hours": 24,
+    "budget_reserve_seconds": 1800,
+    "runtime_margin": 1.15
+  },
+  "manifest": {
+    "dataset": "Salesforce/wikitext",
+    "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "config": "wikitext-103-raw-v1",
+    "block_reference": "wikitext-2-raw-v1",
+    "tokenizer": "whitespace + EOS after every dataset row",
+    "vocab_size": 32768,
+    "vocab_source": "first-block",
+    "vocab_sha256": "9025d5315349551938cc40e68ecdce1810c6ab7788faa3c8bbd017f9a978154b",
+    "seq_len": 512,
+    "wikitext2_train_tokens_same_tokenizer": 2088628,
+    "block_target_tokens": 2088448,
+    "train": {
+      "tokens": 103227021,
+      "unknown_tokens": 6143617,
+      "sha256": "2d317ee05a04133eb314b5f9cb1bc657cb13f8feb803fac2299eb3dddb0a823f"
+    },
+    "validation": {
+      "tokens": 217646,
+      "unknown_tokens": 11813,
+      "sha256": "abd8ae8ef813c463dadb79ab65140e5e4438488d69dd17dafbbde940fb900814"
+    },
+    "discarded_train_tail_targets": 893068,
+    "validation_targets": 217600,
+    "discarded_validation_tail_targets": 45,
+    "blocks": [
+      {
+        "block_id": 0,
+        "start": 0,
+        "target_tokens": 2088448,
+        "sha256": "252b163cd1ea591795a9a82baca2ad936bf96365f1bdb7fa3f1451105b0eac9d",
+        "unknown_tokens": 56149,
+        "unknown_fraction": 0.02688551498529051
+      },
+      {
+        "block_id": 1,
+        "start": 2088448,
+        "target_tokens": 2088448,
+        "sha256": "0d738258007b6449642c6299a729d7ce23d8c14ff04344ca32855dd29f9c6a38",
+        "unknown_tokens": 124985,
+        "unknown_fraction": 0.059845875980632506
+      },
+      {
+        "block_id": 2,
+        "start": 4176896,
+        "target_tokens": 2088448,
+        "sha256": "a5c92e89e4900926904a736829cb6db48e93951a71cf020dd12d25d8887edf5c",
+        "unknown_tokens": 124319,
+        "unknown_fraction": 0.05952697888575631
+      },
+      {
+        "block_id": 3,
+        "start": 6265344,
+        "target_tokens": 2088448,
+        "sha256": "10570937620dcee6b1257ea9c7db4f05e86b0e1f173f311cbf2902d07c8894de",
+        "unknown_tokens": 128223,
+        "unknown_fraction": 0.061396309604069624
+      },
+      {
+        "block_id": 4,
+        "start": 8353792,
+        "target_tokens": 2088448,
+        "sha256": "f092f264ebd8dada83c74a661e8d483dd4905de22c74a89c35cd34c00fbef73b",
+        "unknown_tokens": 124109,
+        "unknown_fraction": 0.05942642574773229
+      },
+      {
+        "block_id": 5,
+        "start": 10442240,
+        "target_tokens": 2088448,
+        "sha256": "e56675875848b87e7b63aa8284e41ec48e067e996d4bacc1cba3e8e52f45cd92",
+        "unknown_tokens": 127885,
+        "unknown_fraction": 0.06123446693429762
+      },
+      {
+        "block_id": 6,
+        "start": 12530688,
+        "target_tokens": 2088448,
+        "sha256": "51a07fa122f6268671fd26880e3dc41b722ab20c8798ce87133187b203c55761",
+        "unknown_tokens": 124216,
+        "unknown_fraction": 0.05947765996567786
+      },
+      {
+        "block_id": 7,
+        "start": 14619136,
+        "target_tokens": 2088448,
+        "sha256": "a505d5bd799c5f2beb76cd6ffceebdf517ffd4ba5a072518a08986ed0064447c",
+        "unknown_tokens": 119546,
+        "unknown_fraction": 0.057241549705810246
+      },
+      {
+        "block_id": 8,
+        "start": 16707584,
+        "target_tokens": 2088448,
+        "sha256": "2fc8d423c581d98c7858fc288886769202f29e6338912c7ec16a7d5596a4f525",
+        "unknown_tokens": 126031,
+        "unknown_fraction": 0.06034672637288551
+      },
+      {
+        "block_id": 9,
+        "start": 18796032,
+        "target_tokens": 2088448,
+        "sha256": "74b63c20654d2bb80ab8b2cddbba448b2d4e2035d6b86ef9e53868f0c3226fd5",
+        "unknown_tokens": 128610,
+        "unknown_fraction": 0.0615816146727139
+      },
+      {
+        "block_id": 10,
+        "start": 20884480,
+        "target_tokens": 2088448,
+        "sha256": "9ea37f953742fef6dcb9664b4b109f77b45a8e5d1625b49cd92dc6be6d66b4c8",
+        "unknown_tokens": 124652,
+        "unknown_fraction": 0.05968642743319441
+      },
+      {
+        "block_id": 11,
+        "start": 22972928,
+        "target_tokens": 2088448,
+        "sha256": "79db1196a2b941facc607a7ce2a575fc0ab3d13c4915e9a4fe7f048b79c497d3",
+        "unknown_tokens": 123304,
+        "unknown_fraction": 0.05904097205197352
+      },
+      {
+        "block_id": 12,
+        "start": 25061376,
+        "target_tokens": 2088448,
+        "sha256": "7f270f4005fd22037989bb8ecc9704402e1495a570abaad499121bb5eb330fcf",
+        "unknown_tokens": 124555,
+        "unknown_fraction": 0.05963998145991665
+      },
+      {
+        "block_id": 13,
+        "start": 27149824,
+        "target_tokens": 2088448,
+        "sha256": "9e54beb4e146772c617d6ee539dc79e45a2456149326171b62ba861e98f59f43",
+        "unknown_tokens": 128384,
+        "unknown_fraction": 0.06147340034322138
+      },
+      {
+        "block_id": 14,
+        "start": 29238272,
+        "target_tokens": 2088448,
+        "sha256": "03defc059fa5e8e751035f9265483eb640814cd6cd4aa5278ca581529e0e4337",
+        "unknown_tokens": 132563,
+        "unknown_fraction": 0.06347440778989949
+      },
+      {
+        "block_id": 15,
+        "start": 31326720,
+        "target_tokens": 2088448,
+        "sha256": "ab93dce141901c6625cd69ed3f640b1166feac78d5b3ffd9861680862cb3f876",
+        "unknown_tokens": 127664,
+        "unknown_fraction": 0.061128646727139004
+      },
+      {
+        "block_id": 16,
+        "start": 33415168,
+        "target_tokens": 2088448,
+        "sha256": "9189bd0d91bb4fce285800368b6e771a03f7052b5586de800bb95d154778ee60",
+        "unknown_tokens": 124715,
+        "unknown_fraction": 0.05971659337460162
+      },
+      {
+        "block_id": 17,
+        "start": 35503616,
+        "target_tokens": 2088448,
+        "sha256": "56a72c7f29c684a78f158610cf7f483291d0c7fda889cddf368a50115c7f98a4",
+        "unknown_tokens": 128815,
+        "unknown_fraction": 0.06167977368840402
+      },
+      {
+        "block_id": 18,
+        "start": 37592064,
+        "target_tokens": 2088448,
+        "sha256": "054cb44a7497c25d7e97bdb25d519c08fc6c0df8c56c3e6b560c57608d505877",
+        "unknown_tokens": 122311,
+        "unknown_fraction": 0.05856549935645992
+      },
+      {
+        "block_id": 19,
+        "start": 39680512,
+        "target_tokens": 2088448,
+        "sha256": "4630488de40bc1df49a281b9285a4625af171aec346cb91a75de444481ae9de7",
+        "unknown_tokens": 123584,
+        "unknown_fraction": 0.059175042902672226
+      },
+      {
+        "block_id": 20,
+        "start": 41768960,
+        "target_tokens": 2088448,
+        "sha256": "67f9d379897e6d49a92678e68ea261b829025621c4ff63ea6929d1443db75cee",
+        "unknown_tokens": 129702,
+        "unknown_fraction": 0.06210449099043883
+      },
+      {
+        "block_id": 21,
+        "start": 43857408,
+        "target_tokens": 2088448,
+        "sha256": "8f56cc8ae1bbd10d14af5af15ba40299865f79183514349731e195434e164bd4",
+        "unknown_tokens": 125627,
+        "unknown_fraction": 0.06015328128830596
+      },
+      {
+        "block_id": 22,
+        "start": 45945856,
+        "target_tokens": 2088448,
+        "sha256": "b212307af1ab2a6a0ce9a2340b9f2783e0c551b768659aa13d8622aa858cc6ec",
+        "unknown_tokens": 127108,
+        "unknown_fraction": 0.06086242032360873
+      },
+      {
+        "block_id": 23,
+        "start": 48034304,
+        "target_tokens": 2088448,
+        "sha256": "9b945d6a03c30b64796a5b74082f86a39ad68c6c3fcd6c6bbc8171f0b4a97aab",
+        "unknown_tokens": 120557,
+        "unknown_fraction": 0.05772564124172591
+      },
+      {
+        "block_id": 24,
+        "start": 50122752,
+        "target_tokens": 2088448,
+        "sha256": "e5d012145af43b147004e42f86d48607891405bfb4d5abbc359936ce9467f8c7",
+        "unknown_tokens": 123080,
+        "unknown_fraction": 0.05893371537141456
+      },
+      {
+        "block_id": 25,
+        "start": 52211200,
+        "target_tokens": 2088448,
+        "sha256": "07c560333d7d07df81048091a0c9eff0992dd3d6a800be955fe37f2589e46d43",
+        "unknown_tokens": 126073,
+        "unknown_fraction": 0.060366837000490316
+      },
+      {
+        "block_id": 26,
+        "start": 54299648,
+        "target_tokens": 2088448,
+        "sha256": "a6fe6cc621b22458c63e041975657a5ffe9aa357ac57054dc3e6d1c52ce4ba8f",
+        "unknown_tokens": 120820,
+        "unknown_fraction": 0.05785157207648933
+      },
+      {
+        "block_id": 27,
+        "start": 56388096,
+        "target_tokens": 2088448,
+        "sha256": "28032b8d9d2de8f5cb67f4e20103dbd3fb5ee7a6ae04ee7b1f0467e59469a977",
+        "unknown_tokens": 122282,
+        "unknown_fraction": 0.058551613446923265
+      },
+      {
+        "block_id": 28,
+        "start": 58476544,
+        "target_tokens": 2088448,
+        "sha256": "cf10c97f068c2196a728ef7cf0ad3f7327e702fdd6317bd59780dec8d9e7ac47",
+        "unknown_tokens": 129753,
+        "unknown_fraction": 0.062128911038244666
+      },
+      {
+        "block_id": 29,
+        "start": 60564992,
+        "target_tokens": 2088448,
+        "sha256": "7b46c627ade7d8c007b1eaf1f79e358748c82dd927864b5367b87f5976c42c18",
+        "unknown_tokens": 126552,
+        "unknown_fraction": 0.06059619392007845
+      },
+      {
+        "block_id": 30,
+        "start": 62653440,
+        "target_tokens": 2088448,
+        "sha256": "17602c2aa6fd17a944c05f2a12ba6bbe0bd3b825883681283b3c07b5c70df609",
+        "unknown_tokens": 128070,
+        "unknown_fraction": 0.06132304946065212
+      },
+      {
+        "block_id": 31,
+        "start": 64741888,
+        "target_tokens": 2088448,
+        "sha256": "c89a983594d762cd1d810a9b8869969eff8f599cf058ff7bc546c7c4da911910",
+        "unknown_tokens": 123154,
+        "unknown_fraction": 0.05896914838195636
+      },
+      {
+        "block_id": 32,
+        "start": 66830336,
+        "target_tokens": 2088448,
+        "sha256": "79275c4d4c144b246bc7fc8d66c643027b9f22e154dd8b049a9f2ba52c502bca",
+        "unknown_tokens": 126138,
+        "unknown_fraction": 0.060397960590831086
+      },
+      {
+        "block_id": 33,
+        "start": 68918784,
+        "target_tokens": 2088448,
+        "sha256": "39ec15bd2a7fd08aa3460f2f8dbf8164b7ba32cd4c6ab3a39e16bc2427eb6585",
+        "unknown_tokens": 126201,
+        "unknown_fraction": 0.060428126532238294
+      },
+      {
+        "block_id": 34,
+        "start": 71007232,
+        "target_tokens": 2088448,
+        "sha256": "0c81027b06ad6c76951b45924c6d10a7d4a69415251f9a9ba0a8244f020f60fc",
+        "unknown_tokens": 123082,
+        "unknown_fraction": 0.058934673020348126
+      },
+      {
+        "block_id": 35,
+        "start": 73095680,
+        "target_tokens": 2088448,
+        "sha256": "bdfe2e276d6b6934dadbb18ae12da4f0bfd9e433172922b771a162047c17835f",
+        "unknown_tokens": 124999,
+        "unknown_fraction": 0.05985257952316744
+      },
+      {
+        "block_id": 36,
+        "start": 75184128,
+        "target_tokens": 2088448,
+        "sha256": "7c95a8069698aca68a44cda71e90ffb55c0961e7cc087aecdc1ca55a0fd95f82",
+        "unknown_tokens": 126383,
+        "unknown_fraction": 0.06051527258519245
+      },
+      {
+        "block_id": 37,
+        "start": 77272576,
+        "target_tokens": 2088448,
+        "sha256": "227e21560bab18610aca57c83336f53142d4d81a6104c1a98c314e89d204a941",
+        "unknown_tokens": 127511,
+        "unknown_fraction": 0.0610553865837215
+      },
+      {
+        "block_id": 38,
+        "start": 79361024,
+        "target_tokens": 2088448,
+        "sha256": "f8e77fb97f8c9fd7e7fe263c0722a5bf2e6592216679252c735488c55faf91b8",
+        "unknown_tokens": 127836,
+        "unknown_fraction": 0.06121100453542535
+      },
+      {
+        "block_id": 39,
+        "start": 81449472,
+        "target_tokens": 2088448,
+        "sha256": "e187d51a8186071f1618c8a9da4ae1a46067beb2170098d485bba13e9e4b15d5",
+        "unknown_tokens": 125543,
+        "unknown_fraction": 0.06011306003309635
+      },
+      {
+        "block_id": 40,
+        "start": 83537920,
+        "target_tokens": 2088448,
+        "sha256": "82a8b250b7b886cd8c5aa2c5bf3ecc6386859d0520ee4020bd5b3d05c44bce40",
+        "unknown_tokens": 125450,
+        "unknown_fraction": 0.06006852935768571
+      },
+      {
+        "block_id": 41,
+        "start": 85626368,
+        "target_tokens": 2088448,
+        "sha256": "b78f4ff6ecf4181726b1e477d22ece9eeca0bb1a5d2e3e95853e4386ff40cf45",
+        "unknown_tokens": 125587,
+        "unknown_fraction": 0.060134128309634716
+      },
+      {
+        "block_id": 42,
+        "start": 87714816,
+        "target_tokens": 2088448,
+        "sha256": "c170bca46975cacddf04096961a65d476a137e1162103a960d1a9193946807e7",
+        "unknown_tokens": 129218,
+        "unknown_fraction": 0.061872739948516796
+      },
+      {
+        "block_id": 43,
+        "start": 89803264,
+        "target_tokens": 2088448,
+        "sha256": "6641cb85f46f8a703592f59ebcae7620fb3eba66d653b6e48d8a1561f41f31e4",
+        "unknown_tokens": 127614,
+        "unknown_fraction": 0.06110470550379995
+      },
+      {
+        "block_id": 44,
+        "start": 91891712,
+        "target_tokens": 2088448,
+        "sha256": "3441b10edf7e77564237222a3d2428fe180c65d26b4340176faafd27e5f9c1c5",
+        "unknown_tokens": 124340,
+        "unknown_fraction": 0.05953703419955871
+      },
+      {
+        "block_id": 45,
+        "start": 93980160,
+        "target_tokens": 2088448,
+        "sha256": "398b9428de3960836c07b054914fa98c04976153c46735b62cf0cba6be55b10c",
+        "unknown_tokens": 128002,
+        "unknown_fraction": 0.06129048939691101
+      },
+      {
+        "block_id": 46,
+        "start": 96068608,
+        "target_tokens": 2088448,
+        "sha256": "bf6864320c5bdc79f3c759fff5e85a8f239d21a95331332e428382c52fcdf0e4",
+        "unknown_tokens": 126996,
+        "unknown_fraction": 0.060808791983329245
+      },
+      {
+        "block_id": 47,
+        "start": 98157056,
+        "target_tokens": 2088448,
+        "sha256": "392bf00647f4570de08da98374af2dc1c4478d5323e23f4f28a5df684ea30a44",
+        "unknown_tokens": 123050,
+        "unknown_fraction": 0.05891935063741113
+      },
+      {
+        "block_id": 48,
+        "start": 100245504,
+        "target_tokens": 2088448,
+        "sha256": "81391cba2379c9b082ae38ca24cdae10df003d4a0f15951e350435b2ad1c0c0f",
+        "unknown_tokens": 124575,
+        "unknown_fraction": 0.059649557949252266
+      }
+    ],
+    "boundary_rule": "Each block reuses one preceding input token; prediction targets never overlap. Sequence order is never shuffled.",
+    "simulation_scope": "Ordered block availability, not timestamped production arrivals. Test split is unused."
+  },
+  "plan": {
+    "config_sha256": "9783c60ca0cfa41100ed337e2c226a052d8780a8c7fdc3271748e758fc827cfe",
+    "manifest_sha256": "5f96f5d9c2a2b0936012f940cc94dc52aa5f66dfbe9b59a9d188b3fe7ee19545",
+    "epochs_per_block": 229,
+    "planned_blocks": 19,
+    "paper_equivalent_epochs": 25,
+    "elapsed_before_plan_seconds": 597.1455323696136,
+    "fastest_measured_train_epoch_seconds": 6.296480068936944,
+    "slowest_measured_train_plus_validation_epoch_seconds": 16.483070582151413,
+    "predicted_fastest_train_block_seconds": 1441.8939357865602,
+    "predicted_slowest_block_seconds_with_margin": 4340.816637809574,
+    "predicted_total_hours_with_margin": 22.909865588439416,
+    "budget_hours": 24,
+    "interpretation": "Calibrated estimate, not a hard duration guarantee; no artificial sleep counted as training.",
+    "gpu_uuids": [
+      "device-00",
+      "device-01",
+      "device-02",
+      "device-03",
+      "device-04",
+      "device-05",
+      "device-06",
+      "device-07"
+    ],
+    "pilot_attempt": "1794502004275669433"
+  },
+  "gpus": [
+    {
+      "index": 0,
+      "uuid": "device-00",
+      "name": "NVIDIA GeForce RTX 5090",
+      "memory_bytes": 34190917632,
+      "driver": "580.105.08",
+      "pci_bus_id": "00000000:08:00.0"
+    },
+    {
+      "index": 1,
+      "uuid": "device-01",
+      "name": "NVIDIA GeForce RTX 5090",
+      "memory_bytes": 34190917632,
+      "driver": "580.105.08",
+      "pci_bus_id": "00000000:09:00.0"
+    },
+    {
+      "index": 2,
+      "uuid": "device-02",
+      "name": "NVIDIA GeForce RTX 5090",
+      "memory_bytes": 34190917632,
+      "driver": "580.105.08",
+      "pci_bus_id": "00000000:0E:00.0"
+    },
+    {
+      "index": 3,
+      "uuid": "device-03",
+      "name": "NVIDIA GeForce RTX 5090",
+      "memory_bytes": 34190917632,
+      "driver": "580.105.08",
+      "pci_bus_id": "00000000:11:00.0"
+    },
+    {
+      "index": 4,
+      "uuid": "device-04",
+      "name": "NVIDIA GeForce RTX 5090",
+      "memory_bytes": 34190917632,
+      "driver": "580.105.08",
+      "pci_bus_id": "00000000:16:00.0"
+    },
+    {
+      "index": 5,
+      "uuid": "device-05",
+      "name": "NVIDIA GeForce RTX 5090",
+      "memory_bytes": 34190917632,
+      "driver": "580.105.08",
+      "pci_bus_id": "00000000:1C:00.0"
+    },
+    {
+      "index": 6,
+      "uuid": "device-06",
+      "name": "NVIDIA GeForce RTX 5090",
+      "memory_bytes": 34190917632,
+      "driver": "580.105.08",
+      "pci_bus_id": "00000000:1F:00.0"
+    },
+    {
+      "index": 7,
+      "uuid": "device-07",
+      "name": "NVIDIA GeForce RTX 5090",
+      "memory_bytes": 34190917632,
+      "driver": "580.105.08",
+      "pci_bus_id": "00000000:20:00.0"
+    }
+  ],
+  "platform": "Linux-6.8.0-90-generic-x86_64-with-glibc2.39",
+  "python": "3.11.18 (main, Oct 26 2026, 11:35:17) [GCC 15.3.0]",
+  "created_unix": 1794502392.782893,
+  "mode": "run"
+}

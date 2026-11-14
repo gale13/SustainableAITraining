@@ -1,0 +1,25 @@
+{
+  "config_sha256": "9783c60ca0cfa41100ed337e2c226a052d8780a8c7fdc3271748e758fc827cfe",
+  "manifest_sha256": "5f96f5d9c2a2b0936012f940cc94dc52aa5f66dfbe9b59a9d188b3fe7ee19545",
+  "epochs_per_block": 229,
+  "planned_blocks": 19,
+  "paper_equivalent_epochs": 25,
+  "elapsed_before_plan_seconds": 597.1455323696136,
+  "fastest_measured_train_epoch_seconds": 6.296480068936944,
+  "slowest_measured_train_plus_validation_epoch_seconds": 16.483070582151413,
+  "predicted_fastest_train_block_seconds": 1441.8939357865602,
+  "predicted_slowest_block_seconds_with_margin": 4340.816637809574,
+  "predicted_total_hours_with_margin": 22.909865588439416,
+  "budget_hours": 24,
+  "interpretation": "Calibrated estimate, not a hard duration guarantee; no artificial sleep counted as training.",
+  "gpu_uuids": [
+    "device-00",
+    "device-01",
+    "device-02",
+    "device-03",
+    "device-04",
+    "device-05",
+    "device-06",
+    "device-07"
+  ]
+}

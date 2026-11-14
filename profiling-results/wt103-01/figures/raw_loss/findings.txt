@@ -1,0 +1,26 @@
+Training overall-down 152 first-last-down 152 overall delta range/median [-2.76359 -1.16704 -0.90467]
+late delta [-0.03131 -0.01716 -0.00947] late up 0 slope up 0 both 0 10/30 up 0 0
+up steps pooled 0.1216 curves with uptick 152 min epoch [222. 229. 229.] early and final median 4.160285196527308 3.003139639723444
+4 late up 0 both 0 median late delta -0.01225
+8 late up 0 both 0 median late delta -0.01581
+10 late up 0 both 0 median late delta -0.01664
+16 late up 0 both 0 median late delta -0.01704
+24 late up 0 both 0 median late delta -0.01844
+32 late up 0 both 0 median late delta -0.01894
+48 late up 0 both 0 median late delta -0.02099
+64 late up 0 both 0 median late delta -0.02162
+highest late rise 4 2 -0.00947 late means 3.23692 3.22745
+highest late rise 4 6 -0.00965 late means 3.23699 3.22734
+Validation overall-down 1 first-last-down 8 overall delta range/median [-0.14109  1.14288  1.3239 ]
+late delta [-0.00511  0.05138  0.09799] late up 151 slope up 151 both 151 10/30 up 148 152
+up steps pooled 0.6541 curves with uptick 152 min epoch [ 4. 10. 46.] early and final median 4.360991002531613 5.531347426526686
+4 late up 18 both 18 median late delta 0.0305
+8 late up 19 both 19 median late delta 0.04677
+10 late up 19 both 19 median late delta 0.05068
+16 late up 19 both 19 median late delta 0.04822
+24 late up 19 both 19 median late delta 0.05392
+32 late up 19 both 19 median late delta 0.05885
+48 late up 19 both 19 median late delta 0.05826
+64 late up 19 both 19 median late delta 0.06566
+highest late rise 32 12 0.09799 late means 5.42607 5.52407
+highest late rise 48 10 0.08612 late means 5.38526 5.47137

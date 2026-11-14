@@ -1,0 +1,9 @@
+{
+  "common_completed_blocks": 19,
+  "finished": true,
+  "deadline_unix": 1794614764.3714352,
+  "last_block_wall_seconds": 4434.934541966766,
+  "duration_violations": [],
+  "stop_reason": "planned_blocks_complete",
+  "finished_unix": 1794603000.8088486
+}

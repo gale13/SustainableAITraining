@@ -1,0 +1,6 @@
+{
+  "stage": "failed",
+  "unix_time": 1794562795.5490577,
+  "error": "Command '['~/miniconda3/envs/wt103-profile/bin/python', '-m', 'profiling.launch', 'run', '--data', '~/wt103-conda/transformer_profiling/data/wt103-raw-first32k-s512-v1', '--config', '~/wt103-conda/transformer_profiling/results/wt103-01/config.json', '--deadline-unix', '1794588119.0927908', '--plan', '~/wt103-conda/transformer_profiling/results/wt103-01/plan.json', '--out', '~/wt103-conda/transformer_profiling/results/wt103-01/training']' returned non-zero exit status 1.",
+  "previous_stage": "training"
+}

@@ -1,0 +1,12 @@
+batch=4 block=0 epoch=1 loss=6.7237 train=16.02s energy=4700.9J
+batch=4 block=0 epoch=2 loss=5.8826 train=15.64s energy=4725.6J
+batch=4 block=0 epoch=3 loss=5.5296 train=16.24s energy=4803.5J
+batch=4 block=0 epoch=4 loss=5.2887 train=15.70s energy=4804.0J
+batch=4 block=0 epoch=5 loss=5.1134 train=15.72s energy=4872.5J
+batch=4 block=0 epoch=6 loss=4.9692 train=15.18s energy=4830.2J
+batch=4 block=0 epoch=7 loss=4.8579 train=15.93s energy=4925.4J
+batch=4 block=0 epoch=8 loss=4.7699 train=15.50s energy=4855.2J
+batch=4 block=0 epoch=9 loss=4.6866 train=15.59s energy=4829.3J
+batch=4 block=0 epoch=10 loss=4.6179 train=15.78s energy=4878.7J
+batch=4 block=0 epoch=11 loss=4.5533 train=15.84s energy=4901.5J
+batch=4 block=0 epoch=12 loss=4.4994 train=15.80s energy=4876.8J
