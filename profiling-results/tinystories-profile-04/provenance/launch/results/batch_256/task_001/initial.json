@@ -1,0 +1,8 @@
+{
+  "task": 1,
+  "seed": 1337,
+  "batch": 256,
+  "initial_weights_sha256": "3022af6189adfe4a4ff5ea228c34b928346a06a346f017330e23ef8a63dc6f21",
+  "parameters": 260032,
+  "signature": "56aa5b30682e19ab33025ef23a277998d3eb110609b44800c6994f361d3bba56"
+}

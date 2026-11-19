@@ -1,0 +1,22 @@
+num decayed parameter tensors: 36, with 259,328 parameters
+num non-decayed parameter tensors: 11, with 704 parameters
+using fused AdamW: True
+num decayed parameter tensors: 36, with 259,328 parameters
+num non-decayed parameter tensors: 11, with 704 parameters
+using fused AdamW: True
+Expected interruption immediately after training checkpoint
+num decayed parameter tensors: 36, with 259,328 parameters
+num non-decayed parameter tensors: 11, with 704 parameters
+using fused AdamW: True
+num decayed parameter tensors: 36, with 259,328 parameters
+num non-decayed parameter tensors: 11, with 704 parameters
+using fused AdamW: True
+task=1 seed=1337 epoch=1 train=6.239339 valid=6.173936 seconds=0.10 joules=21.5
+task=1 seed=1337 epoch=2 train=6.174860 valid=6.098577 seconds=0.04 joules=7.9
+num decayed parameter tensors: 36, with 259,328 parameters
+num non-decayed parameter tensors: 11, with 704 parameters
+using fused AdamW: True
+task=2 seed=1338 epoch=1 train=6.252691 valid=6.198578 seconds=0.04 joules=3.6
+task=2 seed=1338 epoch=2 train=6.199634 valid=6.124253 seconds=0.04 joules=3.6
+PASS full worker, batch512, partial batches, 2 fresh tasks, checkpoints, resumed full training epoch, energy, seeds
+ARTIFACT /tmp/profile04-test-qdpd9slm

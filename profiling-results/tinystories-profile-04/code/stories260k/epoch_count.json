@@ -1,0 +1,373 @@
+{
+  "archive_sha256": "26cf7605aca15bc4ea6fa637256400d9d01317b28ed296172b2d1dd160cd7699",
+  "tokenizer_sha256": "dfff07d929db979913f166ec94a6f5ecad4c70cfed8eb5c9cbe7e464455e46f5",
+  "source_revision": "350e04fe35433e6d2941dce5a1f53308f87058eb",
+  "validation_shard": "data00.json",
+  "train_shards": 49,
+  "sequence_length": 512,
+  "batch_size": 128,
+  "scheduled_updates": 100000,
+  "train": {
+    "stories": 4867871,
+    "raw_tokens": 1813444928,
+    "usable_windows": 3541812,
+    "usable_tokens": 1813407744
+  },
+  "updates_per_pass": 27670.40625,
+  "equivalent_epochs": 3.613969346763747,
+  "checkpoint_98000_epochs": 3.541689959828472,
+  "train_seconds_per_pass": 278.2995293925721,
+  "eval_spacing_epochs": 0.07227938693527494,
+  "shards": [
+    {
+      "shard": "data00.json",
+      "stories": 100000,
+      "raw_tokens": 37294104,
+      "usable_windows": 72839,
+      "usable_tokens": 37293568
+    },
+    {
+      "shard": "data01.json",
+      "stories": 100000,
+      "raw_tokens": 37246377,
+      "usable_windows": 72745,
+      "usable_tokens": 37245440
+    },
+    {
+      "shard": "data02.json",
+      "stories": 100000,
+      "raw_tokens": 37344574,
+      "usable_windows": 72937,
+      "usable_tokens": 37343744
+    },
+    {
+      "shard": "data03.json",
+      "stories": 100000,
+      "raw_tokens": 37280399,
+      "usable_windows": 72812,
+      "usable_tokens": 37279744
+    },
+    {
+      "shard": "data04.json",
+      "stories": 100000,
+      "raw_tokens": 37314141,
+      "usable_windows": 72878,
+      "usable_tokens": 37313536
+    },
+    {
+      "shard": "data05.json",
+      "stories": 100000,
+      "raw_tokens": 37290993,
+      "usable_windows": 72832,
+      "usable_tokens": 37289984
+    },
+    {
+      "shard": "data06.json",
+      "stories": 100000,
+      "raw_tokens": 37283785,
+      "usable_windows": 72818,
+      "usable_tokens": 37282816
+    },
+    {
+      "shard": "data07.json",
+      "stories": 100000,
+      "raw_tokens": 37270698,
+      "usable_windows": 72793,
+      "usable_tokens": 37270016
+    },
+    {
+      "shard": "data08.json",
+      "stories": 100000,
+      "raw_tokens": 37292776,
+      "usable_windows": 72836,
+      "usable_tokens": 37292032
+    },
+    {
+      "shard": "data09.json",
+      "stories": 100000,
+      "raw_tokens": 37245435,
+      "usable_windows": 72743,
+      "usable_tokens": 37244416
+    },
+    {
+      "shard": "data10.json",
+      "stories": 100000,
+      "raw_tokens": 37216528,
+      "usable_windows": 72687,
+      "usable_tokens": 37215744
+    },
+    {
+      "shard": "data11.json",
+      "stories": 100000,
+      "raw_tokens": 37214286,
+      "usable_windows": 72683,
+      "usable_tokens": 37213696
+    },
+    {
+      "shard": "data12.json",
+      "stories": 100000,
+      "raw_tokens": 37262290,
+      "usable_windows": 72776,
+      "usable_tokens": 37261312
+    },
+    {
+      "shard": "data13.json",
+      "stories": 100000,
+      "raw_tokens": 37284538,
+      "usable_windows": 72820,
+      "usable_tokens": 37283840
+    },
+    {
+      "shard": "data14.json",
+      "stories": 100000,
+      "raw_tokens": 37147303,
+      "usable_windows": 72552,
+      "usable_tokens": 37146624
+    },
+    {
+      "shard": "data15.json",
+      "stories": 100000,
+      "raw_tokens": 37187660,
+      "usable_windows": 72631,
+      "usable_tokens": 37187072
+    },
+    {
+      "shard": "data16.json",
+      "stories": 100000,
+      "raw_tokens": 37183040,
+      "usable_windows": 72622,
+      "usable_tokens": 37182464
+    },
+    {
+      "shard": "data17.json",
+      "stories": 100000,
+      "raw_tokens": 37245306,
+      "usable_windows": 72743,
+      "usable_tokens": 37244416
+    },
+    {
+      "shard": "data18.json",
+      "stories": 100000,
+      "raw_tokens": 37306386,
+      "usable_windows": 72863,
+      "usable_tokens": 37305856
+    },
+    {
+      "shard": "data19.json",
+      "stories": 100000,
+      "raw_tokens": 37290411,
+      "usable_windows": 72831,
+      "usable_tokens": 37289472
+    },
+    {
+      "shard": "data20.json",
+      "stories": 100000,
+      "raw_tokens": 37240861,
+      "usable_windows": 72735,
+      "usable_tokens": 37240320
+    },
+    {
+      "shard": "data21.json",
+      "stories": 100000,
+      "raw_tokens": 37275752,
+      "usable_windows": 72803,
+      "usable_tokens": 37275136
+    },
+    {
+      "shard": "data22.json",
+      "stories": 100000,
+      "raw_tokens": 37308465,
+      "usable_windows": 72867,
+      "usable_tokens": 37307904
+    },
+    {
+      "shard": "data23.json",
+      "stories": 100000,
+      "raw_tokens": 37202829,
+      "usable_windows": 72660,
+      "usable_tokens": 37201920
+    },
+    {
+      "shard": "data24.json",
+      "stories": 100000,
+      "raw_tokens": 37224029,
+      "usable_windows": 72702,
+      "usable_tokens": 37223424
+    },
+    {
+      "shard": "data25.json",
+      "stories": 100000,
+      "raw_tokens": 37228077,
+      "usable_windows": 72710,
+      "usable_tokens": 37227520
+    },
+    {
+      "shard": "data26.json",
+      "stories": 100000,
+      "raw_tokens": 37316503,
+      "usable_windows": 72882,
+      "usable_tokens": 37315584
+    },
+    {
+      "shard": "data27.json",
+      "stories": 100000,
+      "raw_tokens": 37195852,
+      "usable_windows": 72647,
+      "usable_tokens": 37195264
+    },
+    {
+      "shard": "data28.json",
+      "stories": 100000,
+      "raw_tokens": 37353119,
+      "usable_windows": 72954,
+      "usable_tokens": 37352448
+    },
+    {
+      "shard": "data29.json",
+      "stories": 100000,
+      "raw_tokens": 37334951,
+      "usable_windows": 72918,
+      "usable_tokens": 37334016
+    },
+    {
+      "shard": "data30.json",
+      "stories": 100000,
+      "raw_tokens": 37294481,
+      "usable_windows": 72839,
+      "usable_tokens": 37293568
+    },
+    {
+      "shard": "data31.json",
+      "stories": 100000,
+      "raw_tokens": 37281093,
+      "usable_windows": 72813,
+      "usable_tokens": 37280256
+    },
+    {
+      "shard": "data32.json",
+      "stories": 100000,
+      "raw_tokens": 37211994,
+      "usable_windows": 72678,
+      "usable_tokens": 37211136
+    },
+    {
+      "shard": "data33.json",
+      "stories": 100000,
+      "raw_tokens": 37200342,
+      "usable_windows": 72655,
+      "usable_tokens": 37199360
+    },
+    {
+      "shard": "data34.json",
+      "stories": 100000,
+      "raw_tokens": 37225877,
+      "usable_windows": 72705,
+      "usable_tokens": 37224960
+    },
+    {
+      "shard": "data35.json",
+      "stories": 100000,
+      "raw_tokens": 37279784,
+      "usable_windows": 72811,
+      "usable_tokens": 37279232
+    },
+    {
+      "shard": "data36.json",
+      "stories": 100000,
+      "raw_tokens": 37180330,
+      "usable_windows": 72616,
+      "usable_tokens": 37179392
+    },
+    {
+      "shard": "data37.json",
+      "stories": 100000,
+      "raw_tokens": 37212506,
+      "usable_windows": 72679,
+      "usable_tokens": 37211648
+    },
+    {
+      "shard": "data38.json",
+      "stories": 100000,
+      "raw_tokens": 37253638,
+      "usable_windows": 72760,
+      "usable_tokens": 37253120
+    },
+    {
+      "shard": "data39.json",
+      "stories": 100000,
+      "raw_tokens": 37232648,
+      "usable_windows": 72719,
+      "usable_tokens": 37232128
+    },
+    {
+      "shard": "data40.json",
+      "stories": 100000,
+      "raw_tokens": 37272916,
+      "usable_windows": 72797,
+      "usable_tokens": 37272064
+    },
+    {
+      "shard": "data41.json",
+      "stories": 100000,
+      "raw_tokens": 37209807,
+      "usable_windows": 72674,
+      "usable_tokens": 37209088
+    },
+    {
+      "shard": "data42.json",
+      "stories": 100000,
+      "raw_tokens": 37270622,
+      "usable_windows": 72793,
+      "usable_tokens": 37270016
+    },
+    {
+      "shard": "data43.json",
+      "stories": 100000,
+      "raw_tokens": 37249367,
+      "usable_windows": 72751,
+      "usable_tokens": 37248512
+    },
+    {
+      "shard": "data44.json",
+      "stories": 100000,
+      "raw_tokens": 37215403,
+      "usable_windows": 72685,
+      "usable_tokens": 37214720
+    },
+    {
+      "shard": "data45.json",
+      "stories": 100000,
+      "raw_tokens": 37260412,
+      "usable_windows": 72773,
+      "usable_tokens": 37259776
+    },
+    {
+      "shard": "data46.json",
+      "stories": 100000,
+      "raw_tokens": 37251325,
+      "usable_windows": 72755,
+      "usable_tokens": 37250560
+    },
+    {
+      "shard": "data47.json",
+      "stories": 100000,
+      "raw_tokens": 37257004,
+      "usable_windows": 72766,
+      "usable_tokens": 37256192
+    },
+    {
+      "shard": "data48.json",
+      "stories": 100000,
+      "raw_tokens": 37238723,
+      "usable_windows": 72730,
+      "usable_tokens": 37237760
+    },
+    {
+      "shard": "data49.json",
+      "stories": 67871,
+      "raw_tokens": 25259292,
+      "usable_windows": 49333,
+      "usable_tokens": 25258496
+    }
+  ]
+}

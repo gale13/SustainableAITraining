@@ -1,0 +1,16 @@
+{
+  "phase": "training",
+  "batch": 32,
+  "gpu_uuid": "device-00",
+  "pid": 3605868,
+  "updated_unix": 1794981180.548932,
+  "task": 1,
+  "seed": 1337,
+  "epoch": 1,
+  "completed_tasks": 0,
+  "sequences_done": 501280,
+  "sequences_total": 3541812,
+  "train_loss": 1.90772894962961,
+  "train_seconds": 90.08746945485473,
+  "train_energy_j": 21943.003
+}

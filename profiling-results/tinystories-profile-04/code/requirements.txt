@@ -1,0 +1,6 @@
+torch==2.7.1
+numpy==2.2.6
+sentencepiece==0.2.0
+nvidia-ml-py==12.575.51
+requests
+tqdm

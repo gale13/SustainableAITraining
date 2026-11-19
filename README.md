@@ -1,3 +1,13 @@
+# Sustainable AI Training — profiling experiments
+
+## Profiling 04: TinyStories-260K
+
+[Complete Profiling 04 archive](profiling-results/tinystories-profile-04/README.md) · [MLP fits and simulator](profiling-results/tinystories-profile-04/simulator/README.md) · [600 original epoch measurements](profiling-results/tinystories-profile-04/experiment/epochs.csv)
+
+Five batch sizes (32, 64, 128, 256, 512), 30 paired random seeds each, four full epochs per task; loss, duration, GPU energy, raw telemetry and final training checkpoints. The simulator includes three conditional-mean MLPs and held-out residual/noise diagnostics.
+
+---
+
 # WikiText-103 Transformer profiling
 
 Version **profiling_test_11_13** archives the completed `wt103-01` experiment started on 13 November 2026. Eight RTX 5090 GPUs each ran a separate persistent, fixed-batch trajectory using batch sizes 4, 8, 10, 16, 24, 32, 48 and 64. All eight completed 19 common data blocks at 229 epochs per block, yielding 34,808 formal epoch records. Block identifiers in the CSVs start at zero. The pilot and interrupted attempts are retained separately from the formal epoch table.

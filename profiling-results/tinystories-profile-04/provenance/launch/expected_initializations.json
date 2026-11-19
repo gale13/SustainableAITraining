@@ -1,0 +1,152 @@
+[
+  {
+    "task": 1,
+    "seed": 1337,
+    "initial_weights_sha256": "3022af6189adfe4a4ff5ea228c34b928346a06a346f017330e23ef8a63dc6f21"
+  },
+  {
+    "task": 2,
+    "seed": 1338,
+    "initial_weights_sha256": "409b677c33f3a081f3f3962a2f2bcf02ca61ed4c51ea4207855b7da5fb0ae854"
+  },
+  {
+    "task": 3,
+    "seed": 1339,
+    "initial_weights_sha256": "7df41294c36ef03a8e8e4c4e480559f2d905a56ff4e2b8900d62092c1c216ab4"
+  },
+  {
+    "task": 4,
+    "seed": 1340,
+    "initial_weights_sha256": "30fc7ef4775a8bbf9ab1c7c5557df058ec5612989673adbed932dad120354abc"
+  },
+  {
+    "task": 5,
+    "seed": 1341,
+    "initial_weights_sha256": "756a1ed6d9295092584f09d48c2ce67ac0cef757882f8e18a3c39a25d1b1b3f0"
+  },
+  {
+    "task": 6,
+    "seed": 1342,
+    "initial_weights_sha256": "c905dd3c8183eedf50d36adb3358982d1ad5cd105e0a5b2809dd77de1c717b11"
+  },
+  {
+    "task": 7,
+    "seed": 1343,
+    "initial_weights_sha256": "e6f8f6034668718f9f3e64e94627b0c016e3b36569e2e941808531ab4c1f2ce0"
+  },
+  {
+    "task": 8,
+    "seed": 1344,
+    "initial_weights_sha256": "7e007008740fc56b60cf38932cb043fa4bc7bf6ac837300024943c0de91131b8"
+  },
+  {
+    "task": 9,
+    "seed": 1345,
+    "initial_weights_sha256": "569a993db411949a454814b61755d3cbbad32f93d670cd5f5c15e39004bfca54"
+  },
+  {
+    "task": 10,
+    "seed": 1346,
+    "initial_weights_sha256": "2e4f3a3479c957e17eb95c4bb28808a9f092b70144ed74404943c945d11b2c9a"
+  },
+  {
+    "task": 11,
+    "seed": 1347,
+    "initial_weights_sha256": "7d512852e10a13525102460446f8aeaad1c366986fc2af91880ef80fabfda2c1"
+  },
+  {
+    "task": 12,
+    "seed": 1348,
+    "initial_weights_sha256": "2648688a4b91fd65d697c3f023dc3928763f5e4cee0fdea8d945d65755d12b52"
+  },
+  {
+    "task": 13,
+    "seed": 1349,
+    "initial_weights_sha256": "85c7a55a87b5dca1d36b09efe0ba370ab02c3b0ea9177a47cec9841b90d9664a"
+  },
+  {
+    "task": 14,
+    "seed": 1350,
+    "initial_weights_sha256": "efd9ff5afd7fa3bd79f74ef8ac8224b09feacd536e68ee741115d600a321f2d7"
+  },
+  {
+    "task": 15,
+    "seed": 1351,
+    "initial_weights_sha256": "03f58ce49f20ea88e8b4ce8e215d59cfe88ac8cff3a4fb73b9050c7797aa1468"
+  },
+  {
+    "task": 16,
+    "seed": 1352,
+    "initial_weights_sha256": "448b2df396b201b90b470cf460508f31b06d5e84610258b5748b938301ba3d65"
+  },
+  {
+    "task": 17,
+    "seed": 1353,
+    "initial_weights_sha256": "7669c351b2551e6e2f1c04d19d6724452ac6761e0709f3fc8b1a3aa6a7a77fc4"
+  },
+  {
+    "task": 18,
+    "seed": 1354,
+    "initial_weights_sha256": "efcd31f1b2dd55f4e4f2c112347de83c0b87d9e96e6e67aca0d6251da40835d7"
+  },
+  {
+    "task": 19,
+    "seed": 1355,
+    "initial_weights_sha256": "9add7d7eeb11f6ec187b357bcfa1ac14c68f28ed8afe3e7d220f38c23ff3c6db"
+  },
+  {
+    "task": 20,
+    "seed": 1356,
+    "initial_weights_sha256": "e3989f53b653700ade11d4f38fe35543d76905e4d1efbb0cf07ff86deb8cc18d"
+  },
+  {
+    "task": 21,
+    "seed": 1357,
+    "initial_weights_sha256": "3865aacb3ec95cf38197a8edb248052c40228e05d1de2ef41e56fe5464400459"
+  },
+  {
+    "task": 22,
+    "seed": 1358,
+    "initial_weights_sha256": "abe5ba12752a45ee9a5fec147e0c7999785eea1acc68502098cc96f5fa975898"
+  },
+  {
+    "task": 23,
+    "seed": 1359,
+    "initial_weights_sha256": "fb803da26240c3f82bee030fca990c8c7dc12a6bff017683aadfc5227e7eb7a6"
+  },
+  {
+    "task": 24,
+    "seed": 1360,
+    "initial_weights_sha256": "bff1dee86417d11175096ae0624497e6f3ec21ca77b69c75f5f73460bd6233e0"
+  },
+  {
+    "task": 25,
+    "seed": 1361,
+    "initial_weights_sha256": "4d95a5673d8133335158b2a80cb8466ca1213e77202809174afc870ab30a197e"
+  },
+  {
+    "task": 26,
+    "seed": 1362,
+    "initial_weights_sha256": "10d6a6414ef192d6271add873c1ed65e83d461c2cb092d4ccb8a647b59c54746"
+  },
+  {
+    "task": 27,
+    "seed": 1363,
+    "initial_weights_sha256": "d346a4031820d0f6c06299ffaa4b3b631c7c9f30bbf71da6635d57a90828d731"
+  },
+  {
+    "task": 28,
+    "seed": 1364,
+    "initial_weights_sha256": "1afb437454efafec3cc1df6d67515ced40cf5a1ef3b311f0747f56b3d35faed2"
+  },
+  {
+    "task": 29,
+    "seed": 1365,
+    "initial_weights_sha256": "4d458bd2ed6389486d2898f740430528dcf92cedfec4e6b388f7e5c33843940d"
+  },
+  {
+    "task": 30,
+    "seed": 1366,
+    "initial_weights_sha256": "51196538e25b6b271a3240dc11cc9204492ffda759e7bf191e3cc3f62c32645b"
+  }
+]

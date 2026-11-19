@@ -1,0 +1,12 @@
+[
+  {
+    "name": "profiling04_full_server.tar.gz",
+    "bytes": 446299689,
+    "sha256": "b90212a0681cdc1742d5371183d56739cf9fae0f991385f640d9b611a27fca79"
+  },
+  {
+    "name": "profiling04_simulator.zip",
+    "bytes": 1415597,
+    "sha256": "3477fde61217e9207b08fe2fda41b20bb029677890f03d646ec6401594ee6155"
+  }
+]

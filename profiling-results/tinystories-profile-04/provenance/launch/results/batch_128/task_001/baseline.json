@@ -1,0 +1,39 @@
+{
+  "task": 1,
+  "seed": 1337,
+  "batch": 128,
+  "initial_weights_sha256": "3022af6189adfe4a4ff5ea228c34b928346a06a346f017330e23ef8a63dc6f21",
+  "parameters": 260032,
+  "signature": "82b38b516f620516110ad2e99e604738aea9ac5f08f71fc7bac9407433945f97",
+  "train_probe_loss": 6.2403671932220455,
+  "validation_loss": 6.240465582908857,
+  "train_probe_sequences": 12800,
+  "train_probe_measurement": {
+    "seconds": 0.21627124212682247,
+    "energy_j": 55.734,
+    "energy_wh": 0.015481666666666668,
+    "energy_method": "nvml_counter",
+    "energy_valid": true,
+    "mean_w": 257.70416562049115,
+    "power_integral_j": 30.044617227500304,
+    "counter_j": 55.734,
+    "counter_power_relative_difference": 0.4609283879229859,
+    "sample_count": 2,
+    "max_sample_gap_s": 0.21627124212682247,
+    "sensor_note": "short_interval_sensor_smoothing_may_dominate;counter_vs_power_difference_over_20_percent"
+  },
+  "validation_measurement": {
+    "seconds": 1.0293934978544712,
+    "energy_j": 539.472,
+    "energy_wh": 0.14985333333333334,
+    "energy_method": "nvml_counter",
+    "energy_valid": true,
+    "mean_w": 524.0678138383452,
+    "power_integral_j": 273.75832017500323,
+    "counter_j": 539.472,
+    "counter_power_relative_difference": 0.49254396859335936,
+    "sample_count": 5,
+    "max_sample_gap_s": 0.502573736011982,
+    "sensor_note": "short_interval_sensor_smoothing_may_dominate;counter_vs_power_difference_over_20_percent"
+  }
+}
