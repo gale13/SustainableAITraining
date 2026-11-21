@@ -15,3 +15,6 @@ simulator, its refitted models and complete noise diagnostics. Download the new
 GitHub-generated source archives identify the original training snapshot;
 the current simulator source is in `main`, and the replacement ZIP corresponds
 to the update commit linked in the release notes.
+
+The current simulator defaults to validation-only empirical residual resampling,
+with a fresh joint draw each epoch. See `simulator/EMPIRICAL_NOISE.md`.

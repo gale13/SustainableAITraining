@@ -12,8 +12,10 @@
     "paired split integrity",
     "exported MLP predictions and metrics",
     "stochastic simulator bounds and conditional scenario means",
+    "default empirical draws and backward-compatible independent alias",
+    "mean plus noise identity and validation donor provenance",
     "validation-only residual noise bank",
     "enumerated task path counts and probabilities",
-    "packaged previous-probe reference checksums unchanged"
+    "comparison reference data checksums unchanged; no old model required"
   ]
 }

@@ -1,5 +1,4 @@
 {
-  "paper_source": "INFORMS_MNSC_final_1021/INFORMS-MNSC-Template.tex",
   "paper_sha256": "42b599f05bbc1e6658abb463f4a94a02ab35238f9c484a0aef3706097d48cd03",
   "paper_lines": [
     [
@@ -19,20 +18,15 @@
       474
     ]
   ],
-  "previous_commit": "213fa63def4b7360aa63e77471ad8e584c6fe95a",
-  "source_sha256": "cee416db902b5d0c1925e778ea3db061626d3ab29158308ad2e894e257dd6f82",
   "reference_snapshot_sha256": {
-    "README.md": "8d38a86f2c0b434e87a122add512bbc58e59fd83a572b56eb1503996ae11ce45",
-    "action_tests.csv": "79366dd6bf480a56c008be6a7e6c3ad536763d8b370ff4c83f46e021002c369e",
+    "README.md": "2709d28031e5ba83e81e53bdc194c06722efea81762d2f4a32d3cb2716e47701",
     "epochs.csv": "9ced363dd802c6c51c93c2201591727ef71b2845ad0c05d747cbbe588729f487",
     "metrics.csv": "47060c45ce7ccdc5582fc35c1a90f504acc8cf07794c493dfa864d52b0f94564",
-    "metrics_by_action.csv": "ae7f6be3d4cd2762125fdef3d1f2e3ca9b6b984c4b23b3f5c911c1657ab028e2",
-    "model_config.json": "cdf5f36bd02d567922475bdc8bc9ef3e86c58372b5c34d1320bad2c54f9af2e6",
-    "model_selection.csv": "2f612344fd8ab92ca6cb6e377d4241f94a681e6fc1d5e4b5071b10fc8594aaa9",
-    "models.json": "e43e52a4fc307796f1f18f92c4e0194933fd2f03b108a6e4de651a155927d3ba",
     "noise_summary.csv": "8c6aca1902b0ad115053d0d0453d99f20b95ed986bf3223987ebbc8dfc7a16d6",
-    "residual_correlations.csv": "07471ac911d209ced1003ff404b0826f1e88a817872aece5678dd0b8e0a6d323",
-    "serial_correlation.csv": "aec6ac06dbe227853f13a75f63cd66055ec17b85e9595ceba3befa56fd3b4acf"
+    "reference_config.json": "e7ad3cd5e8add03424ba11968fff0431bc831597b328603d61771c9027a89eeb"
   },
-  "publication_note": "Host paths and hardware identifiers generalized; numeric measurements and fitted weights unchanged. Private manuscript excerpt omitted."
+  "paper_source": "INFORMS_MNSC_final_1021/INFORMS-MNSC-Template.tex",
+  "previous_commit": "4639dfaf4fada002306cee92c860f9b8cbb6bff1",
+  "source_sha256": "cee416db902b5d0c1925e778ea3db061626d3ab29158308ad2e894e257dd6f82",
+  "publication_note": "Single current simulator; comparison numbers only, no historical model weights. Host paths and hardware identifiers generalized; fitted weights unchanged; private manuscript excerpt omitted."
 }

@@ -31,17 +31,17 @@ def export(fig,name):
     plt.close(fig)
 
 def run():
-    old=pd.read_csv(ROOT/'previous_probe/epochs.csv')
+    old=pd.read_csv(ROOT/'comparison_reference/epochs.csv')
     new=pd.read_csv(ROOT/'epochs.csv')
     cfg=json.loads((ROOT/'model_config.json').read_text())
-    oldcfg=json.loads((ROOT/'previous_probe/model_config.json').read_text())
+    oldcfg=json.loads((ROOT/'comparison_reference/reference_config.json').read_text())
     models=json.loads((ROOT/'models.json').read_text())
     plt.rcParams.update({'font.family':'DejaVu Sans','font.size':10,'axes.spines.top':False,
                          'axes.spines.right':False,'axes.grid':True,'grid.alpha':.14,
                          'axes.titleweight':'bold','pdf.fonttype':42,'svg.fonttype':'none'})
     rows=[]
-    for version,folder in [('probe_previous',ROOT/'previous_probe'),('online_train_loss',ROOT)]:
-        met=pd.read_csv(folder/'metrics.csv');data=old if folder.name=='previous_probe' else new
+    for version,folder in [('probe_previous',ROOT/'comparison_reference'),('online_train_loss',ROOT)]:
+        met=pd.read_csv(folder/'metrics.csv');data=old if folder.name=='comparison_reference' else new
         met.insert(0,'version',version)
         met['rmse_over_target_mean_pct']=[100*r.rmse/data.loc[data.split.eq(r.split),r.metric].mean() for r in met.itertuples()]
         rows.append(met)
@@ -153,11 +153,11 @@ def run():
     (ROOT/'environment.json').write_text(json.dumps(versions,indent=2)+'\n')
     report=f'''# Profiling 04：按论文递推、改用 epoch train_loss 的重拟合与对比
 
-当前默认模拟器使用已完成 epoch 的 online train_loss，并保留训练前实测 loss 作为初始归一化基准。新增的 [完整噪声分析](NOISE_REPORT.md) 包含直方图、Q–Q、分 action 残差、跨轮相关性以及四轮总时长/总需求的联合抽样对比。
+当前默认模拟器使用已完成 epoch 的 online train_loss，并保留训练前实测 loss 作为初始归一化基准。默认噪声采用[验证集实测残差经验抽样](EMPIRICAL_NOISE.md)，每轮重新成组抽样，不强行指定正态分布。[完整噪声分析](NOISE_REPORT.md) 包含直方图、Q–Q、分 action 残差、跨轮相关性以及四轮总时长/总需求的联合抽样对比。
 
 ## 结论及论文核对
 
-核对的主稿为 `INFORMS_MNSC_final_1021/INFORMS-MNSC-Template.tex`，而非备份目录。定义映射、行号及 SHA-256 见 `MANUSCRIPT_MAPPING.md`、`provenance.json`。
+核对的是当前目录中日期最新的主稿 `INFORMS_MNSC_final_1021/INFORMS-MNSC-Template.tex`，而非备份目录。定义映射、行号及 SHA-256 见 `MANUSCRIPT_MAPPING.md`、`provenance.json`。
 
 原文第 310–319 行明确采用 normalized running minimum：
 
@@ -173,7 +173,7 @@ def run():
 
 ## 本次可复现的观测映射，以及“严格对齐”的边界
 
-使用全部 600 条原始记录，没有重新训练语言模型、丢弃异常点或覆盖旧目录。设 e=1,2,3,4 为日志轮号，r=e-1 为 task 内决策编号；c_e 为第 e 轮在线 train_loss；B 为同一 task 在任何训练更新前实测的初始 train_probe_loss。
+使用全部 600 条原始记录，没有重新训练语言模型或丢弃异常点。设 e=1,2,3,4 为日志轮号，r=e-1 为 task 内决策编号；c_e 为第 e 轮在线 train_loss；B 为同一 task 在任何训练更新前实测的初始 train_probe_loss。
 
     hat_J(0) = B
     hat_J(r) = c_r, r ≥ 1             # 在第 r+1 轮开始时已知
@@ -257,14 +257,14 @@ T 和 E_dem 的真实标签完全相同，测试误差几乎不变。两版 MLP 
 
 ## 使用、验证及适用范围
 
-`models.json` 保存全部参数，`model_config.json` 保存尺度、阈值、种子、拆分；`simulator.py` 提供 means/step。保持旧版的 validation-only 配对轨迹噪声方法，并用新残差重新生成 noise_bank.npz，避免旧状态残差直接混入新版。这里没有重新宣称高斯分布或 action independence。可以固定同一 validation donor 连续走四轮，也可以逐轮独立抽 donor。
+`models.json` 保存全部参数，`model_config.json` 保存尺度、阈值、种子、拆分；`simulator.py` 提供 means/step。**默认 `empirical`：逐轮从验证集的对应 action/epoch 实测残差中成组抽取三个指标，不指定正态分布。** `independent` 是兼容旧名称；`trajectory` 仅作为显式选用的相关噪声分析。噪声库仅含 6 个 validation seed 的 120 条观测，test 仅评估。相对残差、均值校准、物理约束及完整公式见 [经验噪声说明](EMPIRICAL_NOISE.md)。返回值包含三个 mean、三个 noise 和验证集 donor 来源，便于逐条核查。
 
 ```python
 from simulator import Simulator
 sim = Simulator(seed=42)
 sim.reset(initial_loss=6.240367221832275)  # 可传实际 task 的初始测量
 print(sim.means(sim.J, sim.phase, 128))
-trajectory = [sim.step(128, noise='trajectory') for _ in range(4)]
+rows = [sim.step(128) for _ in range(4)]  # 默认经验残差抽样，每轮重新抽取
 ```
 
 原始五组全部固定 batch，且每个 batch 固定一张 GPU。测试只能评估相同语料、硬件组合、已测动作下对新种子的泛化；它不能验证任意 batch 切换政策下的状态充分性，batch 与 GPU 的影响也未被分开。切换后的优化器状态、学习率历史等可能未被 J、phi 完全描述。默认初始 loss 取 train 集均值；显式传入实际初始值可精确复现其 J(0)。
@@ -280,9 +280,9 @@ python verify.py
 python compare.py
 ```
 
-环境版本见 environment.json；依赖见 requirements.txt。verify.py 校验因果输入、独立标量递推、loss 回升截平、阶段边界、整 seed 拆分、train-only 阈值、MLP 导出、三目标一致性、模拟器均值和边界，并核对打包的旧版对照文件 SHA-256。实际运行结果见 verification.json。
+环境版本见 environment.json；依赖见 requirements.txt。verify.py 校验因果输入、独立标量递推、loss 回升截平、阶段边界、整 seed 拆分、train-only 阈值、MLP 导出、三目标一致性、模拟器均值和边界，并核对历史对比参考数据的 SHA-256。实际运行结果见 verification.json。
 
-本目录保留全部原始 snapshot source.zip、旧版对比快照 previous_probe/、600 条新状态、逐点差异、全套指标和三种格式的图。未修改论文正文，未覆盖旧结果。
+本目录保留全部原始 snapshot source.zip、仅含数值表和阈值的对比参考数据 comparison_reference/、600 条新状态、逐点差异、全套指标和三种格式的图。本地只保留当前模拟器；旧模型权重及旧模拟器副本已清理。历史对比数据仅用于重现对比结果。
 '''
     (ROOT/'README.md').write_text(report)
     print(test[['version','metric','rmse','r2','action_only_rmse']].to_string(index=False))

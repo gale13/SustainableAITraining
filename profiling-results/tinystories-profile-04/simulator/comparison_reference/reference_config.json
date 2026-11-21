@@ -1,0 +1,8 @@
+{
+  "beta_internal": [
+    -0.27929107355578964,
+    -0.016905376141600183
+  ],
+  "reference_commit": "213fa63def4b7360aa63e77471ad8e584c6fe95a",
+  "purpose": "Numeric comparison inputs only; no model weights or executable old simulator."
+}

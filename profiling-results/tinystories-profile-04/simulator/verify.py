@@ -5,14 +5,14 @@ from zipfile import ZipFile
 import numpy as np
 import pandas as pd
 from fit import rebuild_states
-from simulator import ROOT, EPS, ACTIONS, METRICS, features, predict, phase_after, Simulator
+from simulator import ROOT, EPS, ACTIONS, METRICS, DEFAULT_NOISE, features, predict, phase_after, Simulator
 
 
 def run():
     cfg=json.loads((ROOT/'model_config.json').read_text())
     models=json.loads((ROOT/'models.json').read_text())
     saved=pd.read_csv(ROOT/'epochs.csv')
-    old=pd.read_csv(ROOT/'previous_probe/epochs.csv')
+    old=pd.read_csv(ROOT/'comparison_reference/epochs.csv')
     with ZipFile(ROOT/'source.zip') as z:
         raw=pd.read_csv(z.open('epochs.csv')).rename(columns={'batch':'action'})
         initial=json.load(z.open('baselines.json'))
@@ -75,7 +75,7 @@ def run():
         np.testing.assert_allclose(mse,row.mse,rtol=1e-9)
     sim=Simulator(seed=20261121)
     for a in ACTIONS:
-        for noise in ('none','trajectory','independent','pooled'):
+        for noise in ('none','empirical','trajectory','independent','pooled'):
             sim.reset(initial_loss=l0[1,a])
             for e in range(4):
                 j,p=sim.J,sim.phase
@@ -84,23 +84,42 @@ def run():
                 row=sim.step(a,noise)
                 assert 0<row['J_next']<=j and row['phase_next']>=p
                 np.testing.assert_allclose(row['epsilon_s'],row['T_s']*row['J_next'])
+                for key in ('T_s','demand_J','epsilon_s'):
+                    np.testing.assert_allclose(row[key],row['mean_'+key]+row['noise_'+key])
+                if noise!='none':
+                    assert row['noise_source']=='validation'
+                    assert row['noise_donor_task'] in cfg['split_tasks']['validation']
+                    assert row['noise_donor_epoch']==row['epoch']
+                    if noise!='pooled':assert row['noise_donor_action']==a
             assert sim.epoch==4
+    # Default and old independent spelling give exactly the same seeded draws.
+    assert DEFAULT_NOISE=='empirical'
+    default,explicit,alias=[Simulator(seed=20261121) for _ in range(3)]
+    example=[]
+    for a in (32,128,512,64):
+        row=default.step(a)
+        assert row==explicit.step(a,noise='empirical')==alias.step(a,noise='independent')
+        example.append(row)
+    # The fresh donor is drawn on every call, not reused for the whole task.
+    assert len({row['noise_donor_task'] for row in example})>1
     provenance=json.loads((ROOT/'provenance.json').read_text())
-    from pathlib import Path
-    if 'old_directory' in provenance and Path(provenance['old_directory']).is_dir():
-        for path,digest in provenance['old_sha256'].items():
-            assert hashlib.sha256((Path(provenance['old_directory'])/path).read_bytes()).hexdigest()==digest,path
-        old_check='original artifact checksums unchanged'
-    else:
-        # Public packages retain the reference snapshots, not private local paths.
-        for path,digest in provenance['reference_snapshot_sha256'].items():
-            assert hashlib.sha256((ROOT/'previous_probe'/path).read_bytes()).hexdigest()==digest,path
-        old_check='packaged previous-probe reference checksums unchanged'
+    # Only comparison data remain; verification never needs the deleted model.
+    for path,digest in provenance['reference_snapshot_sha256'].items():
+        assert hashlib.sha256((ROOT/'comparison_reference'/path).read_bytes()).hexdigest()==digest,path
+    old_check='comparison reference data checksums unchanged; no old model required'
     # Noise bank is reconstructed from validation rows only, never test residuals.
     va=saved[saved.split=='validation'].sort_values(['task','action','epoch'])
     expected_bank=np.column_stack([va['T']/va.pred_T,va.dem/va.pred_dem,
                                   va.J_next/va.J-va.pred_epsilon/(va.pred_T*va.J)]).reshape(6,5,4,3)
     np.testing.assert_allclose(sim.bank,expected_bank,rtol=1e-9,atol=1e-12)
+    np.testing.assert_array_equal(sim.donor_tasks,sorted(va.task.unique()))
+    # Replace every non-validation outcome. Neither bank nor empirical law changes.
+    altered=saved.copy()
+    altered.loc[altered.split!='validation',['T','dem','J_next']]=999999.
+    va_alt=altered[altered.split=='validation'].sort_values(['task','action','epoch'])
+    np.testing.assert_allclose(np.column_stack([va_alt['T']/va_alt.pred_T,va_alt.dem/va_alt.pred_dem,
+        va_alt.J_next/va_alt.J-va_alt.pred_epsilon/(va_alt.pred_T*va_alt.J)]).reshape(6,5,4,3),sim.bank,
+        rtol=1e-9,atol=1e-12)
     if (ROOT/'exact_task_distributions.csv').exists():
         paths=pd.read_csv(ROOT/'exact_task_distributions.csv')
         for (action,mode),g in paths.groupby(['action','mode']):
@@ -113,6 +132,8 @@ def run():
                       'phase interval convention and irreversible phase','train-only thresholds',
                       'paired split integrity','exported MLP predictions and metrics',
                       'stochastic simulator bounds and conditional scenario means',
+                      'default empirical draws and backward-compatible independent alias',
+                      'mean plus noise identity and validation donor provenance',
                       'validation-only residual noise bank','enumerated task path counts and probabilities',old_check]}
     (ROOT/'verification.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result,indent=2))

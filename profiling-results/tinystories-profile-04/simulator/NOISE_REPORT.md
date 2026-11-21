@@ -88,15 +88,15 @@ raw 是原单位残差，initial_state_only 只看同一初始状态的第一轮
 
 ## 模拟器中的可操作噪声表示
 
-保持此前的验证集经验方法，只用 6 个 validation seed 重建噪声库。每条记录同时保存 T 的比例残差、dem 的比例残差、J_next/J 的保留率残差。三项一起抽取，保留本 epoch 的耦合关系；在同一状态下校准有限场景，使 E[T]、E[dem]、E[T*J_next] 恢复为三个 MLP 均值，并保证正时长、正需求、0<J_next≤J。
+采用验证集实测残差的经验分布，只用 6 个 validation seed 的 120 条观测构成噪声库，不拟合参数分布。完整公式、mean + noise 表示及调用方式见 [EMPIRICAL_NOISE.md](EMPIRICAL_NOISE.md)。每条记录同时保存 T 的比例残差、dem 的比例残差、J_next/J 的保留率残差。三项一起抽取，保留本 epoch 的耦合关系；在同一状态下校准有限场景，使 E[T]、E[dem]、E[T*J_next] 恢复为三个 MLP 均值，并保证正时长、正需求、0<J_next≤J。
 
-- independent：每个 epoch 独立抽一个 validation seed 的对应 action/epoch 残差。
-- trajectory：task 开始时抽一个 validation seed，连续四轮使用该 seed 的对应残差。
+- **empirical（默认；independent 为兼容名称）**：每个 epoch 独立抽一个 validation seed 的对应 action/epoch 三元残差。下方图表中的 independent 就是该默认方式。
+- trajectory（显式选用）：task 开始时抽一个 validation seed，连续四轮使用该 seed 的对应残差，用于相关噪声敏感性分析。
 - pooled：混合 action 的对照方式，用于诊断；不作为 action-independent 已验证的证据。
 
-**条件均值的边界：** 固定输入状态下，有限场景库的等权平均与 MLP 均值一致。逐轮独立抽样按这个分布抽取；但 trajectory 固定同一 donor 后，donor 会与已观测历史和当前状态相关，其后验分布不再必然均匀。因此不能把场景均值检查当作论文“给定完整历史仍只依赖 s,a”的证明。联合轨迹模式适合检验相关噪声下的表现；若严格要求该更强的历史条件均值性质，应将 independent 作为基线，或扩展状态以描述相关性。
+**条件均值的边界：** 固定输入状态下，有限场景库的等权平均与 MLP 均值一致。逐轮独立抽样按这个分布抽取；但 trajectory 固定同一 donor 后，donor 会与已观测历史和当前状态相关，其后验分布不再必然均匀。因此不能把场景均值检查当作论文“给定完整历史仍只依赖 s,a”的证明。联合轨迹模式适合检验相关噪声下的表现；当前默认的 empirical/independent 在模拟器内满足该历史条件均值性质；这不构成真实数据的状态充分性证明。
 
-随机 donor 索引的抽取概率可以与 action 无关，但从索引到实际扰动的映射仍依赖 action 和 epoch。因此这是“共同随机输入 + 动作相关响应”的经验表示，不能改写成已识别的同分布加性外生噪声。轨迹默认方式沿用旧版本，没有根据 test 结果重新选择采样模式。
+随机 donor 索引的抽取概率可以与 action 无关，但从索引到实际扰动的映射仍依赖 action 和 epoch。因此这是“共同随机输入 + 动作相关响应”的经验表示，不能改写成已识别的同分布加性外生噪声。用户选择了经验残差方法；默认改为逐轮重新抽样，以保留 mean + noise 的条件均值解释，没有根据 test 结果挑选默认模式。测试数据不用于更新噪声库或校准。
 
 ## 单轮区间及四轮总量对比
 

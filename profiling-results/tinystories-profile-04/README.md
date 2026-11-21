@@ -39,14 +39,17 @@ the old probe model. See [the fit report](simulator/README.md).
 [Updated noise analysis](simulator/NOISE_REPORT.md) uses all 120 held-out points.
 Empirical residual SD is 1.61658 s, 702.928 J and 0.389383 s respectively; these
 are not validated shared Gaussian sigmas. Action-dependent scales, skew and
-tails remain. The noise bank uses validation seeds only and supports independent
-epoch draws and joint four-epoch trajectories. Exact task-total comparisons
+tails remain. The default noise is [empirical validation-residual resampling](simulator/EMPIRICAL_NOISE.md):
+each epoch draws a fresh joint triple from the matching action/epoch, with mean
+calibration and physical bounds. No Gaussian noise family is imposed. Test data
+are used only for evaluation. Joint four-epoch trajectories remain an explicit
+sensitivity option. Exact task-total comparisons
 enumerate 1,296 independent paths and six joint paths per batch. Joint draws
 better match energy on average, while independent draws better match duration
 on average in these six held-out seeds; neither universally wins.
 
-The replaced probe version remains available in Git history. `previous_probe/`
-contains explicit comparison snapshots, not the default model. The original
+The replaced probe version remains available in Git history. `comparison_reference/`
+contains only numeric comparison data and thresholds, with no old model weights. The original
 language-model training code, checkpoints and 600 measurements are unchanged.
 
 ## Reproduce analysis

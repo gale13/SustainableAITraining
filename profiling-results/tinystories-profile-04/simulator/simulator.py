@@ -1,10 +1,11 @@
 """Four-epoch, online-loss variant; inference requires NumPy only.
 
-The conditional means use the paper's J/phase recursions. The empirical noise
-bank remains a validation-calibrated diagnostic model, not a proof of state
-sufficiency or of action-independent noise. Action switching was not measured.
-Trajectory donors correlate with history: uniform scenario means are not a
-proof of history-conditional state sufficiency for trajectory sampling.
+The default draws one joint empirical residual from validation data afresh at
+each epoch; no parametric noise distribution is fitted. See EMPIRICAL_NOISE.md
+for relative residuals, mean calibration and physical constraints. This is not
+proof of state sufficiency or action-independent noise in the real experiment.
+Action switching was not measured. Optional trajectory donors correlate with
+history and do not have the default sampler's conditional-mean guarantee.
 """
 import json
 from pathlib import Path
@@ -13,6 +14,7 @@ ROOT=Path(__file__).resolve().parent
 ACTIONS=(32,64,128,256,512)
 METRICS=('T','dem','epsilon')
 EPS=1e-8
+DEFAULT_NOISE='empirical'
 
 def features(j,phase,action,config):
     j,p,a=np.broadcast_arrays(j,phase,action);j,p,a=j.ravel(),p.ravel(),a.ravel()
@@ -37,7 +39,11 @@ class Simulator:
     def __init__(self,seed=42):
         self.config=json.loads((ROOT/'model_config.json').read_text())
         self.models=json.loads((ROOT/'models.json').read_text())
-        self.bank=np.load(ROOT/'noise_bank.npz')['bank'] # donor task, action, epoch, correlated (T ratio,D ratio,retention error)
+        with np.load(ROOT/'noise_bank.npz') as saved:
+            self.bank=saved['bank'] # donor task, action, epoch, correlated (T ratio,D ratio,retention error)
+            self.donor_tasks=saved['tasks']
+        if self.donor_tasks.tolist()!=self.config['split_tasks']['validation']:
+            raise ValueError('Noise donors must be the validation tasks, in the configured order.')
         self.rng=np.random.default_rng(seed);self.reset()
     def reset(self,initial_loss=None):
         # Supplying a task's measured initial loss exactly reproduces its J(0).
@@ -48,15 +54,15 @@ class Simulator:
         self.J=l0/(l0+EPS);self.phase=1;self.epoch=0;self.donor=int(self.rng.integers(len(self.bank)))
     def means(self,J,phase,action):
         return dict(zip(METRICS,predict(self.models,features(J,phase,action,self.config),np.atleast_1d(J))[0]))
-    def scenarios(self,J,phase,action,epoch,noise='trajectory'):
+    def scenarios(self,J,phase,action,epoch,noise=DEFAULT_NOISE):
         if epoch not in range(4):raise ValueError('epoch must be zero-based 0..3')
         t,d,e=self.means(J,phase,action).values();ratio=e/(t*J)
         if noise=='none':return np.array([[t,d,e,e/t]])
-        if noise in ('trajectory','independent'):
+        if noise in ('empirical','trajectory','independent'):
             b=self.bank[:,ACTIONS.index(action),epoch,:]
         elif noise=='pooled':
             b=self.bank[:,:,epoch,:].reshape(-1,3)
-        else:raise ValueError('noise: trajectory, independent, pooled, none')
+        else:raise ValueError('noise: empirical (default; alias independent), trajectory, pooled, none')
         times=b[:,0]/b[:,0].mean();energies=b[:,1]/b[:,1].mean();raw=ratio+b[:,2]
         lo,hi=-raw.max(),1-raw.min()
         for _ in range(60):
@@ -65,11 +71,20 @@ class Simulator:
             else:hi=shift
         jp=J*np.clip(raw+(lo+hi)/2,1e-12,1.)
         return np.column_stack([t*times,d*energies,t*times*jp,jp])
-    def step(self,action,noise='trajectory'):
+    def step(self,action,noise=DEFAULT_NOISE):
         if self.epoch>=4:raise ValueError('Task complete. Call reset() to begin the next task.')
         cases=self.scenarios(self.J,self.phase,action,self.epoch,noise)
+        means=self.means(self.J,self.phase,action)
         idx=self.donor if noise=='trajectory' else int(self.rng.integers(len(cases)))
+        donor_task=None if noise=='none' else int(self.donor_tasks[idx//len(ACTIONS) if noise=='pooled' else idx])
+        donor_action=None if noise=='none' else (ACTIONS[idx%len(ACTIONS)] if noise=='pooled' else action)
         t,d,e,jp=cases[idx];j,p=self.J,self.phase
         self.phase=phase_after(p,j,jp,self.config);self.J=jp;self.epoch+=1
         return dict(epoch=self.epoch,action=action,J=j,phase=p,T_s=t,demand_J=d,demand_kWh=d/3.6e6,
-                    epsilon_s=e,J_next=jp,phase_next=self.phase)
+                    epsilon_s=e,J_next=jp,phase_next=self.phase,
+                    mean_T_s=means['T'],mean_demand_J=means['dem'],mean_epsilon_s=means['epsilon'],
+                    noise_T_s=t-means['T'],noise_demand_J=d-means['dem'],noise_epsilon_s=e-means['epsilon'],
+                    noise_mode='empirical' if noise=='independent' else noise,
+                    noise_source='none' if noise=='none' else 'validation',
+                    noise_donor_task=donor_task,noise_donor_action=donor_action,
+                    noise_donor_epoch=None if noise=='none' else self.epoch)
