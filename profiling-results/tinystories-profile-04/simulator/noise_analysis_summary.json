@@ -1,0 +1,20 @@
+{
+  "comparison": {
+    "total_T": {
+      "joint_lower_crps_batches": 2,
+      "independent_lower_crps_batches": 3
+    },
+    "total_dem": {
+      "joint_lower_crps_batches": 3,
+      "independent_lower_crps_batches": 2
+    }
+  },
+  "normal_noise_supported": false,
+  "single_action_independent_additive_noise_supported": false,
+  "test_seeds": 6,
+  "test_epoch_observations": 120,
+  "noise_bank_source": "validation only",
+  "independent_paths_per_batch": 1296,
+  "trajectory_paths_per_batch": 6,
+  "test_results_do_not_change_default_sampler": true
+}

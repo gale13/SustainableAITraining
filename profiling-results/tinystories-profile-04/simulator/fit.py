@@ -1,4 +1,10 @@
-"""Split by paired initialization seed, calibrate phases on train only, fit 3 small MLPs."""
+"""Paper-recursion refit using completed online epoch means and measured initial loss.
+
+The paper does not prescribe an online mean as the loss instrument. This is a
+causal alternative to the earlier fixed-probe instrument, not evidence that the
+earlier running-minimum recursion was wrong. See README.md for the initial
+measurement and checkpoint-interpretation limitations.
+"""
 import json,hashlib
 from zipfile import ZipFile
 import numpy as np
@@ -11,6 +17,35 @@ SEED=20261119
 
 def save(name,obj): (ROOT/name).write_text(json.dumps(obj,indent=2,allow_nan=False)+'\n')
 
+def rebuild_states(d, initial_losses, beta_internal):
+    """Do not use epoch e's result in its own decision-state features.
+
+    r=e-1 within a task. At r=0 the only saved pretraining measurement is the
+    fixed training probe. At r>=1 the latest observed loss is train_loss[e-1].
+    All post-epoch values, including the terminal one, belong to the same task.
+    """
+    d=d.sort_values(['task','action','epoch']).reset_index(drop=True).copy()
+    d['r']=d.epoch-1
+    d['L0']=[initial_losses[t,a] for t,a in zip(d.task,d.action)]
+    d['observed_loss_before']=d.groupby(['task','action']).train_loss.shift().fillna(d.L0)
+    d['observed_loss_after']=d.train_loss
+    d['J_next']=np.minimum(d.groupby(['task','action']).train_loss.cummin(),d.L0)/(d.L0+EPS)
+    d['J']=d.groupby(['task','action']).J_next.shift().fillna(d.L0/(d.L0+EPS))
+    d['T']=d.train_seconds
+    d['dem']=d.train_energy_j
+    d['epsilon']=d['T']*d.J_next
+    d['delta']=(d.J_next-d.J)/(d.J+EPS)
+    d['phi']=1
+    d['phi_next_within_task']=1
+    cfg={'K':3,'W_ma':1,'beta_internal':list(beta_internal)}
+    for _,g in d.groupby(['task','action']):
+        p=1
+        for row in g.itertuples():
+            d.loc[row.Index,'phi']=p
+            p=phase_after(p,row.J,row.J_next,cfg)
+            d.loc[row.Index,'phi_next_within_task']=p
+    return d
+
 def prepare():
     with ZipFile(ROOT/'source.zip') as z:
         d=pd.read_csv(z.open('epochs.csv')).rename(columns={'batch':'action'})
@@ -21,12 +56,7 @@ def prepare():
     assert d.groupby(['task','epoch']).order_sha256.nunique().eq(1).all()
     assert np.isfinite(d.select_dtypes('number')).all().all()
     l0={(v['task'],v['batch']):v['train_probe_loss'] for v in b}
-    d=d.sort_values(['task','action','epoch']).reset_index(drop=True)
-    d['L0']=[l0[t,a] for t,a in zip(d.task,d.action)]
-    d['J_next']=np.minimum(d.groupby(['task','action']).train_probe_loss.cummin(),d.L0)/(d.L0+EPS)
-    d['J']=d.groupby(['task','action']).J_next.shift().fillna(d.L0/(d.L0+EPS))
-    d['T']=d.train_seconds;d['dem']=d.train_energy_j;d['epsilon']=d['T']*d.J_next
-    d['delta']=(d.J_next-d.J)/(d.J+EPS)
+    d=rebuild_states(d,l0,[-0.3,-0.02]) # provisional phases discarded below
     # Six temporal strata of five paired seeds; 3 train, 1 validation, 1 test per stratum.
     rng=np.random.default_rng(SEED);splits={}
     for chunk in np.array_split(np.arange(1,31),6):
@@ -37,14 +67,17 @@ def prepare():
     betas=np.quantile(d.loc[tr & (d.epoch<4),'delta'],[1/3,2/3])
     cfg=dict(analysis_seed=SEED,K=3,W_ma=1,beta_internal=betas.tolist(),j_mean=float(d.loc[tr,'J'].mean()),
              j_sd=float(d.loc[tr,'J'].std(ddof=0)),actions=list(ACTIONS),task_epochs=4,
-             state_loss='fixed 12800-sequence eval-mode train_probe_loss; running minimum / initial probe loss',
+             state_loss='previous completed online epoch train_loss, with measured pretraining probe anchor; normalized running minimum',
+             initial_loss_source='baselines.json: train_probe_loss before any parameter update; 12800 fixed training sequences',
+             initial_loss_mean_train=float(d.loc[tr & d.epoch.eq(1),'L0'].mean()),
+             epsilon=EPS,
+             paper_source='INFORMS_MNSC_final_1021/INFORMS-MNSC-Template.tex:310-336,412-415,461-474',
+             observation_limitation='online epoch mean is an evolving-model average, not fixed-weight endpoint loss; initial anchor uses a different estimator',
+             beta_calibration='train only; first three within-task deltas; linear 1/3 and 2/3 quantiles; same protocol as old version',
+             measurement_scope='GPU training windows only; excludes validation, probe, checkpoint and preprocessing',
              split_tasks={s:sorted(t for t,v in splits.items() if v==s) for s in ['train','validation','test']},
              snapshot=meta,source_sha256=hashlib.sha256((ROOT/'source.zip').read_bytes()).hexdigest())
-    d['phi']=1
-    for _,g in d.groupby(['task','action']):
-        p=1
-        for r in g.itertuples():
-            d.loc[r.Index,'phi']=p;p=phase_after(p,r.J,r.J_next,cfg)
+    d=rebuild_states(d,l0,betas)
     save('model_config.json',cfg)
     return d,cfg
 

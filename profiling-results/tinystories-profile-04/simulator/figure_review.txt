@@ -1,0 +1,2 @@
+Reviewed noise histograms and QQ plots, action-conditioned residuals, validation-standardized residuals, common-proxy distributions, state/fit comparisons, and exact task-total CDFs.
+All observed tails are retained; axis units, counts, labels and limitations checked.

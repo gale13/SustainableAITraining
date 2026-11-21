@@ -22,11 +22,32 @@ Task seeds are 1337–1366, paired across batches. Each task resets model weight
 - `archives/`: complete server-record archive, including raw 0.5-second power traces, worker logs and all 150 final model/optimizer/RNG checkpoints. See its manifest for reconstruction.
 - `manifest.csv`: SHA-256 and byte size of every file in this publication.
 
-## Simulator result
+## Simulator result — updated 2026-11-21
 
-All models use pre-epoch `(J, phase, action)`. J is the normalized running-minimum fixed train-probe loss. Phase uses K=3, W=1, thresholds calibrated on training seeds only. Seed-group split: 18 train / 6 validation / 6 test; all actions and epochs of a seed remain together. Final test RMSE: duration **1.622 s**, GPU demand **709.3 J**, time-weighted error **0.3511 s**. No test data were used to retrain the published weights or calibrate the noise bank.
+The default simulator now uses the running minimum of **completed online epoch
+train_loss**, with the measured pretraining probe retained only as the initial
+normalization anchor. The pre-epoch input is `(J, phase, action)`; the current
+epoch outcome is never included in its own input. K=3, W=1, and training-only
+thresholds are -0.3401582057 and -0.0505373623.
 
-Residuals are action/GPU-dependent and are not one shared additive Gaussian. Empirical trajectory and independent noise sampling are included. See the report for tail undercoverage, limited held-out seeds, the third network's iteration-limit stop and unvalidated batch-switch effects.
+The paired-seed split remains 18 train / 6 validation / 6 test (360/120/120 epoch
+rows). All three selected MLPs converged. Test RMSE is **1.62203 s** for duration,
+**709.323 J** for GPU demand, and **0.39290 s** for T*J_next. The last target changes
+with the loss instrument, so its raw RMSE is not a same-label comparison with
+the old probe model. See [the fit report](simulator/README.md).
+
+[Updated noise analysis](simulator/NOISE_REPORT.md) uses all 120 held-out points.
+Empirical residual SD is 1.61658 s, 702.928 J and 0.389383 s respectively; these
+are not validated shared Gaussian sigmas. Action-dependent scales, skew and
+tails remain. The noise bank uses validation seeds only and supports independent
+epoch draws and joint four-epoch trajectories. Exact task-total comparisons
+enumerate 1,296 independent paths and six joint paths per batch. Joint draws
+better match energy on average, while independent draws better match duration
+on average in these six held-out seeds; neither universally wins.
+
+The replaced probe version remains available in Git history. `previous_probe/`
+contains explicit comparison snapshots, not the default model. The original
+language-model training code, checkpoints and 600 measurements are unchanged.
 
 ## Reproduce analysis
 
@@ -35,7 +56,10 @@ cd profiling-results/tinystories-profile-04/simulator
 python -m pip install -r requirements.txt
 python fit.py
 python diagnostics.py
-MPLCONFIGDIR=/tmp/mpl-profile04 python plots.py
+python plots.py
+python noise_analysis.py
+python verify.py
+python compare.py
 ```
 
 Inference requires NumPy only. Running the original experiment additionally requires compatible CUDA/PyTorch, five available GPUs, SentencePiece and NVML. Copy `code/` into a chosen experiment root's `code/`, use the root argument for `python -m stories260k.prepare ROOT`, then `python -m stories260k.launch ROOT`. Run from `ROOT/code`. The archived `start.sh` records the original launch approach with generic paths; configure these paths for your host. `stories260k.status ROOT` prints progress.

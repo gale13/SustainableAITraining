@@ -1,4 +1,7 @@
 """All 600 observations in fit plot; all 120 held-out residuals in distribution plots."""
+import os
+os.environ.setdefault('MPLCONFIGDIR','/private/tmp/mpl-profile04-refit')
+os.environ.setdefault('XDG_CACHE_HOME','/private/tmp/profile04-refit-cache')
 import numpy as np
 import pandas as pd
 from scipy import stats
@@ -6,7 +9,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from simulator import ROOT,ACTIONS,METRICS
-plt.rcParams.update({'font.family':'sans-serif','font.sans-serif':['Arial','DejaVu Sans'],'font.size':7,
+plt.rcParams.update({'font.family':'sans-serif','font.sans-serif':['DejaVu Sans'],'font.size':8,
  'axes.spines.top':False,'axes.spines.right':False,'axes.linewidth':.7,'legend.frameon':False,'pdf.fonttype':42,'svg.fonttype':'none'})
 NAMES=['Training duration','GPU energy demand','Time-weighted error']
 UNITS=['s','J','s']
@@ -35,7 +38,7 @@ def main():
         ax[i].plot([lo,hi],[lo,hi],ls='--',lw=.7,color='black');ax[i].set(title=NAMES[i],xlabel=f'Observed ({UNITS[i]})',ylabel=f'MLP prediction ({UNITS[i]})')
     ax[0].legend(fontsize=5.7,loc='upper left');fig.suptitle('Three conditional means | 600 epochs, paired-seed split',fontsize=9)
     save(fig,'fit')
-    fig,ax=plt.subplots(2,3,figsize=(7.2,4.8),layout='constrained')
+    fig,ax=plt.subplots(2,3,figsize=(10.5,6),layout='constrained')
     for i,k in enumerate(METRICS):
         r=te['res_'+k].to_numpy();hist(ax[0,i],r,UNITS[i],NAMES[i])
         ax[0,i].text(.98,.96,f"SD = {n.loc[k,'sd']:.3g}\nShapiro p = {n.loc[k,'shapiro_p']:.2g}",ha='right',va='top',transform=ax[0,i].transAxes,fontsize=6)

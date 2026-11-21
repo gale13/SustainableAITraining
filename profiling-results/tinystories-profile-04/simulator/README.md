@@ -1,168 +1,153 @@
-# Profiling 04：三个条件均值 MLP 与经验噪声模拟器
+# Profiling 04：按论文递推、改用 epoch train_loss 的重拟合与对比
 
-本版使用全部 5 batch × 30 task × 4 epoch = 600 个正式观测。5 个动作是 32、64、128、256、512。原始快照 source.zip 保留逐 epoch 表、每个 task 的初始 loss、种子、完成信息、配置与训练脚本。本版没有排除异常点；快照未发现 GPU overlap 事件，五组均只启动一次、失败次数为 0。
+当前默认模拟器使用已完成 epoch 的 online train_loss，并保留训练前实测 loss 作为初始归一化基准。新增的 [完整噪声分析](NOISE_REPORT.md) 包含直方图、Q–Q、分 action 残差、跨轮相关性以及四轮总时长/总需求的联合抽样对比。
 
-## 定义与信息边界
+## 结论及论文核对
 
-一项 task 是同一个模型从随机初始化开始完整训练 4 个 epoch。实验种子 1337–1366；task t 对应 seed=1336+t，同编号跨 batch 共用初始化权重和各轮数据排列，已逐项核验哈希。
+核对的主稿为 `INFORMS_MNSC_final_1021/INFORMS-MNSC-Template.tex`，而非备份目录。定义映射、行号及 SHA-256 见 `MANUSCRIPT_MAPPING.md`、`provenance.json`。
 
-采用论文的决策前状态 s=(J(r),φ(r)) 和 a=batch size。令 L(r) 为固定 12,800 条训练序列在当前权重、eval 模式下测得的 train_probe_loss；L(0) 是本次 task 的实测初始值。定义
+原文第 310–319 行明确采用 normalized running minimum：
 
-    J(r) = min{L(0),...,L(r)} / (L(0)+1e-8)
+    J(r) = min_{r_j ≤ q ≤ r} hat_J(q) / (hat_J(r_j) + eps).
 
-日志第 e 轮的 J 输入来自第 e−1 轮结束后的状态，第一轮来自初始探针。J_next 是第 e 轮结束后的 running minimum。验证语料 loss 不参与 J；train_loss 是在线整轮均值，保留在表里但不用于构造决策前状态。这避免把当前轮结果泄入当前轮输入。
+其中 hat_J(r) 是 epoch r 开始时已观测到的 training loss。第 322–333 行定义
 
-拟合的三个函数为：
+    delta(r) = (J(r+1)-J(r))/(J(r)+eps),
+    beta[k-1] < mean(last W_ma deltas) ≤ beta[k],
+    phi(r_j)=1, phi(r+1)=max(phi(r),candidate_phase).
 
-- m_T(J,φ,a)=E[T | J,φ,a]，T 是 train_seconds，单位秒。
-- m_dem(J,φ,a)=E[D | J,φ,a]，D 是同一训练窗口的单卡 train_energy_j，单位焦耳；除以 3,600,000 得 kWh。仅拟合需求，不包含 PV，也不将需求直接称作可再生能源短缺。
-- m_ε(J,φ,a)=E[T×J_next | J,φ,a]，单位秒。每个 epoch 先计算 T×J_next 再拟合；它不是原始 CE，也不是单独的 loss 降幅。
+所以：是逐 epoch 的归一化历史最低 loss；phi 根据近期相对下降率分段，不根据剩余 J 的绝对大小分段。eps=1e-8。论文没有规定 hat_J 必须是日志的在线整轮平均值，也没有规定 12,800 条 probe。旧版也已经做了 running minimum；本次改变的是每轮采用的 loss 测量口径，而非首次加入 running minimum。
 
-范围与前两版一致：训练 GPU 窗口，不包括数据准备、编译、完整验证、训练探针、checkpoint 写盘及机房其他用电。原始表另有验证/探针/整轮开销，未丢弃。
+## 本次可复现的观测映射，以及“严格对齐”的边界
 
-## 阶段标定
+使用全部 600 条原始记录，没有重新训练语言模型、丢弃异常点或覆盖旧目录。设 e=1,2,3,4 为日志轮号，r=e-1 为 task 内决策编号；c_e 为第 e 轮在线 train_loss；B 为同一 task 在任何训练更新前实测的初始 train_probe_loss。
 
-沿用论文的近期相对下降率定义，而不是将剩余 J 阈值当作同一概念。每个 task 只有 4 轮，使用 K=3、W_ma=1。旧的三轮滑动窗口会让绝大多数决策停留在初始阶段。对于 δ(r)=(J_next−J)/(J+1e-8)，候选阶段落在 (β[k−1],β[k]]；阶段取历史最大值，task 初始阶段为 1。
+    hat_J(0) = B
+    hat_J(r) = c_r, r ≥ 1             # 在第 r+1 轮开始时已知
+    J_before(e) = min(B,c_1,...,c_{e-1})/(B+eps)
+    J_after(e)  = min(B,c_1,...,c_e)/(B+eps)
 
-两条内部 β 取训练集前 3 轮 δ 的 1/3、2/3 分位数（只有这些下降率会用于后续决策），不使用验证或测试数据。固定阈值后所有集合共用。
+第 e 轮用 [J_before(e),phi_before(e),a] 预测本轮结果；c_e 只用于 J_after 和下一轮 phase，绝不进入本轮输入。末轮 J_after 是本 task 的末态，不能提前重置成下一 task 的 1。`epochs.csv` 保留 observed_loss_before/after、J、J_next、delta、phi、phi_next_within_task。
 
-β=(-∞, -0.279291074, -0.016905376, 0)，即约 −27.9291%、−1.69054%。600 个输入状态的阶段计数为 300、150、150。由于 J 和阶段在这 4 轮中高度相关，本实验不能单独识别 φ 相对于 J 的贡献。
+**初始测量限制：** 原数据没有初始“完整训练集、固定权重”loss，也不可能在尚未训练时有在线 epoch 均值。为保留全部四轮和真实初始状态，本次仅在归一化初始锚点 B 继续使用已保存的 probe。每轮结束的 probe 都不参与新版状态。用 c_1 反填初始值会把第一轮结果泄漏到第一轮决策，还使归一化尺度依赖第一个动作；用整条轨迹的最终 loss 做 min–max 归一化同样不符合论文。
 
-## 数据划分
+**观测解释限制：** c_e 是不同 mini-batch、不同更新中权重的平均，能在下一轮开始时观测到，但不等于该时刻模型权重在固定训练集上的 loss。因此本版严格实现了论文的归一化、历史最小值、时间索引和阶段递推；“用在线均值作为 hat_J”的观测约定仍需在实验方法中说明，不能称为原文唯一指定的口径。若要求 hat_J 精确对应当前 checkpoint 的固定权重 loss，旧 probe 的测量方式更接近这一解释；现有日志不能补出全训练集的固定权重初始/端点 loss。
 
-这里的 train/validation/test 是模拟器的观测划分，区别于原始语言模型使用的训练/验证文本。按 task seed 整组划分，同一个 seed 的五种动作和全部四轮始终在同一集合。将 task 1–30 分成六个连续时间区间，每区间五个 seed 按分析种子 20261119 打乱，分配 3 train、1 validation、1 test，避免某集合只覆盖早期或晚期。
+实际 150 条轨迹中，两种 loss 的相邻轮回升次数分别为 0、0。所以这份数据上 running minimum 没有触发截平；代码另用回升样例验证了截平逻辑。在线均值不能给单个 checkpoint 赋予同样的实测 loss，故不能凭本拟合宣称已经验证论文的 best-checkpoint 解释或状态充分性假设。
 
-| 集合 | 独立 seed 数 | 训练轨迹数 | epoch 点数 | task 编号 |
-| --- | --- | --- | --- | --- |
-| train | 18 | 90 | 360 | 2, 4, 5, 6, 7, 9, 12, 13, 14, 18, 19, 20, 22, 23, 25, 26, 27, 28 |
-| validation | 6 | 30 | 120 | 1, 8, 11, 17, 21, 30 |
-| test | 6 | 30 | 120 | 3, 10, 15, 16, 24, 29 |
+## 三个条件均值及计量范围
 
-训练集拟合权重和输入尺度；验证集选择隐藏宽度及 L2，并提供噪声库；测试集只用于最终评估与残差诊断。最终模拟器保留这些训练集权重，没有用测试集重拟合或校准噪声。测试回答的是同一语料、硬件和已测动作下对新初始化种子的泛化。
+令 s=(J,phi)，a∈{32,64,128,256,512}：
 
-## 网络、训练目标与最后的 loss
+    m_T(s,a)       = E[T | J,phi,a]
+    m_dem(s,a)     = E[E_dem | J,phi,a]
+    m_epsilon(s,a) = E[T * J_next | J,phi,a]
 
-输入 x=[标准化 J, onehot(φ), onehot(a)]，共 9 维。每个 MLP 一个 tanh 隐层。令 h_k=tanh(W_k x+b_k)：
+T=train_seconds，单位秒；E_dem=train_energy_j，单位焦耳；epsilon=T*J_next，单位秒。第三项严格按论文第 412–415 行的 b(x,y)=xy 构造每条观测，再直接回归乘积，并非 loss reduction，也不通过假设独立将两个条件均值相乘。m_dem 是需求部分，不是有 PV 时的 m_Es。
 
-    m_T   = c_T softplus(v_T h_T+b_T)
-    m_dem = c_D softplus(v_D h_D+b_D)
-    m_ε   = J × m_T × sigmoid(v_ε h_ε+b_ε)
+省略 xi 的条件是：本次只标定 GPU 训练需求和训练进展，假设同一供电/硬件条件下 PV 可用量不会直接改变这些结果；不拟合 renewable shortfall。时长和能耗都仅包括原始 GPU training 窗口，不包含预处理、验证、probe、存盘和机房其他耗电。在线 loss 版不再需要逐轮 probe，但本次没有擅自修改已经测得的 T、D 窗口。
 
-第三个 MLP 独立优化，时长网络在此时被冻结；训练标签仍是逐点 T×J_next，直接最小化该最终输出的 MSE。这个参数化保证 0<m_ε<J m_T。它没有假设 T 与 J_next 独立。c_T、c_D 为训练集标签均值。
+## 阶段参数
 
-候选隐藏宽度 4/8/16，L2=1e-4/1e-2；每种配置使用 20261119、20261120 两个初始化，先按训练目标取更好的初始化，再按验证集原单位 MSE 选配置。L-BFGS-B 每次最多 1800 步，目标为标准化 MSE + 对 W、v 的均方 L2 惩罚。输入的均值、SD 及全部参数见 model_config.json、models.json。
+继续用 K=3、W_ma=1；论文一般模型允许这两个参数，并未替 Profiling 04 指定数值。其附录其他工作负载的 K、beta 数字不是本数据的强制设置。四轮 task 下保留旧设置，也让对比只更换观测口径。阈值仍只取训练集前 3 轮、可用于后续决策的 270 个 delta 的 1/3、2/3 线性分位数，部署前冻结。
 
-| 目标 | 隐藏单元 | 参数数 | L2 | 最终优化目标（含正则） | 优化步数 | 停止状态 |
+| 参数 | 旧 probe | 新 online train_loss |
+| --- | --- | --- |
+| beta_1 | -0.2792910736 | -0.3401582057 |
+| beta_2 | -0.0169053761 | -0.0505373623 |
+| 输入阶段路径 | [1,1,2,3] | [1,1,2,3] |
+
+两版 600 个输入 phase 的不同记录数为 0；阶段 1/2/3 分别 300/150/150 点。这是校准约定，不是论文推出的最优阈值；本数据中分位数位于相邻阶段降幅之间的空隙，具体数值不宜赋予物理最优性。J、phi、epoch 关联很强，无法独立识别 phase 的因果贡献。
+
+![两种状态的所有观测](state_comparison.png)
+
+## 相同的数据划分与训练流程
+
+语言模型种子为 1337–1366；同一 seed 的五个 batch 和四轮成组划分。模拟器划分和原版完全相同，六个连续 task 区间内各分配 3/1/1 个 seed，分析随机种子 20261119：
+
+- Train：18 seed、360 点；tasks [2, 4, 5, 6, 7, 9, 12, 13, 14, 18, 19, 20, 22, 23, 25, 26, 27, 28]。
+- Validation：6 seed、120 点；tasks [1, 8, 11, 17, 21, 30]。
+- Test：6 seed、120 点；tasks [3, 10, 15, 16, 24, 29]。
+
+这些集合是用于拟合模拟器的 epoch 观测划分，不是语言模型的训练/验证文本划分。输入标准化、阈值和权重只用 train；validation 选择隐藏宽度及 L2；test 不参与任何选择。没有在 train+validation+test 上重拟合。
+
+3 个单隐层 tanh MLP，输入 [标准化 J,onehot(phi),onehot(a)] 共 9 维。a 是实测的五个离散动作，不外推未测 batch。输出参数化与旧版完全相同：
+
+    h_X = tanh(x W_X+b_X)
+    m_T = c_T softplus(h_T v_T+b_T_out)
+    m_dem = c_D softplus(h_D v_D+b_D_out)
+    m_epsilon = J * m_T * sigmoid(h_epsilon v_epsilon+b_epsilon_out)
+
+最后一个网络单独优化，训练时 T 网络冻结，标签始终为逐点 T*J_next。该界来自 J_next≤J，并不假设 T 与 J_next 独立。c_T,c_D 为 train 标签均值。
+
+隐藏宽度候选 4/8/16，L2 候选 1e-4/1e-2；每项用 20261119、20261120 两个初始化，按训练目标选初始化，再按验证 MSE 选网络。L-BFGS-B 最多 1800 次，目标=按 train 标签 SD 缩放的 MSE + 权重均方 L2。
+
+| target | width | parameters | L2 | optimization_loss | iterations | converged |
 | --- | --- | --- | --- | --- | --- | --- |
-| T | 4 | 45 | 0.01 | 0.0010049801 | 864 | 收敛 |
-| dem | 16 | 177 | 0.01 | 0.0012480639 | 1348 | 收敛 |
-| epsilon | 16 | 177 | 0.0001 | 7.2134779e-05 | 1800 | 达到预设迭代上限 |
+| T | 4 | 45 | 0.01 | 0.0010049689 | 603 | True |
+| dem | 16 | 177 | 0.01 | 0.0012480983 | 1238 | True |
+| epsilon | 16 | 177 | 0.0001 | 7.034111e-05 | 1682 | True |
 
-以下 MSE 不含正则；RMSE 为 MSE 的平方根，与目标同单位。三个不同量纲的优化目标不应直接比较。
+所有选中网络均收敛；搜索中未收敛的候选保留在 model_selection.csv。旧 epsilon 网络曾到达同一 1800 次上限，旧结果原样保留。
 
-| 目标 | 集合 | n | MSE | RMSE | MAE | R² |
+新版原单位 loss（MSE，不含正则）及预测误差：
+
+| metric | split | n | mse | rmse | mae | r2 |
 | --- | --- | --- | --- | --- | --- | --- |
-| T | train | 360 | 1.2131295 | 1.10142 | 0.593153 | 0.999960 |
-| T | validation | 120 | 2.5610972 | 1.60034 | 0.715368 | 0.999915 |
-| T | test | 120 | 2.630527 | 1.62189 | 0.722986 | 0.999913 |
-| dem | train | 360 | 518724.06 | 720.225 | 418.84 | 0.998827 |
-| dem | validation | 120 | 578313.17 | 760.469 | 431.68 | 0.998712 |
-| dem | test | 120 | 503161.94 | 709.339 | 436.004 | 0.998846 |
-| epsilon | train | 360 | 0.087630528 | 0.296025 | 0.166199 | 0.999932 |
-| epsilon | validation | 120 | 0.14551609 | 0.381466 | 0.197776 | 0.999887 |
-| epsilon | test | 120 | 0.12324677 | 0.351065 | 0.17231 | 0.999906 |
+| T | train | 360 | 1.2129577 | 1.1013436 | 0.59310153 | 0.99995977 |
+| T | validation | 120 | 2.5611169 | 1.600349 | 0.71539194 | 0.99991492 |
+| T | test | 120 | 2.6309748 | 1.622028 | 0.72296743 | 0.99991328 |
+| dem | train | 360 | 518713.01 | 720.21733 | 418.78744 | 0.99882751 |
+| dem | validation | 120 | 578078.41 | 760.31468 | 431.80723 | 0.99871226 |
+| dem | test | 120 | 503138.53 | 709.32258 | 436.0975 | 0.99884629 |
+| epsilon | train | 360 | 0.1049344 | 0.3239358 | 0.18153958 | 0.99993449 |
+| epsilon | validation | 120 | 0.18656788 | 0.43193504 | 0.22165458 | 0.99988319 |
+| epsilon | test | 120 | 0.15436673 | 0.39289532 | 0.19731779 | 0.99990443 |
 
-只按 action 取训练均值的简单基线，其测试 RMSE 分别为 1.59895 s、703.827 J、1.16318 s。MLP 在时长和能耗上没有超过这个基线，在时间加权误差上从 1.16318 s 降至 0.351065 s。总体 R² 很高，主要因为不同 batch 的均值差异大；不要据此认定微小噪声已被准确解释。metrics_by_action.csv 给出各 batch 内部误差。
+## 测试集对比
 
-![全部观测与模型预测](fit.png)
+| version | metric | rmse | mae | r2 | action_only_rmse | rmse_over_target_mean_pct |
+| --- | --- | --- | --- | --- | --- | --- |
+| probe_previous | T | 1.62189 | 0.7229863 | 0.9999133 | 1.5989524 | 0.53135659 |
+| probe_previous | dem | 709.33909 | 436.00359 | 0.99884624 | 703.82746 | 0.59356694 |
+| probe_previous | epsilon | 0.35106519 | 0.17231025 | 0.99990571 | 1.1631787 | 0.54534946 |
+| online_train_loss | T | 1.622028 | 0.72296743 | 0.99991328 | 1.5989524 | 0.53140181 |
+| online_train_loss | dem | 709.32258 | 436.0975 | 0.99884629 | 703.82746 | 0.59355313 |
+| online_train_loss | epsilon | 0.39289532 | 0.19731779 | 0.99990443 | 3.7520522 | 0.54336027 |
 
-## 残差形状及 action independence
+T 和 E_dem 的真实标签完全相同，测试误差几乎不变。两版 MLP 对 T、D 均未超过仅按 action 取训练均值的基线；总体 R² 很高主要反映 batch 之间的巨大差别，不能解释为 epoch 微小随机性已被准确预测。
 
-定义 η_X=X−m̂_X(J,φ,a)。以下只用 120 个留出点，来自 6 个独立 seed、30 条四轮轨迹。残差包含环境扰动、模型拟合偏差及压缩状态未包含的信息，不能直接等同于纯外生噪声。
+**epsilon 的原始 RMSE 不是同一目标上的竞赛：** J_next 口径改变后，epsilon 标签也改变了。新版全体 epsilon 平均水平增加 12.323%。所以只能把各自 RMSE、R²、相对平均值的 RMSE 视为各自定义下的拟合质量；不能直接由 0.351 与 0.393 秒判断哪个 loss 口径“更正确”。旧模型只能按旧状态和旧标签评价；本报告没有把旧参数喂进新状态后冒充公平对比。
 
-所有点和尾部都保留。直方图叠加与样本均值、SD 匹配的正态密度；Q–Q 图与该正态的理论分位数比较。Shapiro–Wilk 的原假设为正态分布，参见 [SciPy 文档](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.shapiro.html)。相邻轮和配对动作并不独立，以下 p 只作形状诊断，不能当作 120 次独立重复的精确推断。三项总体形状检验的 Holm 校正 p 也保存在 CSV。
+![三个目标的所有观测与预测](fit_comparison.png)
 
-| 残差（单位） | 均值 | 经验 SD | SD 的 95% seed-bootstrap 区间 | P5 | P95 | 偏度 | 超额峰度 | Shapiro p |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| T (s) | 0.198809 | 1.61641 | [0.7931, 2.186] | -1.25 | 2.3129 | 4.202 | 25.46 | 8.5e-17 |
-| dem (J) | -114.669 | 702.944 | [473.7, 868.2] | -1426.2 | 837.82 | 0.6987 | 3.791 | 7.87e-09 |
-| epsilon (s) | 0.0561772 | 0.347994 | [0.1801, 0.4723] | -0.25907 | 0.46807 | 3.599 | 19.32 | 1.99e-15 |
+![分 batch 的测试误差](test_errors_by_action.png)
 
-SD 区间由整 seed 重采样 2000 次得到，保留同 seed 的五种动作和四轮。只有 6 个测试 seed，区间仍不稳定。上表 SD 是经验离散程度，不是已经得到验证的共同高斯 σ。三项合并残差都不适合一个统一高斯；T、ε 尤其右偏、长尾。
+## 使用、验证及适用范围
 
-![残差直方图与QQ图](noise.png)
-
-不同 action 的经验 SD：
-
-| Batch | 时长 SD (s) | 能耗 SD (J) | ε SD (s) |
-| --- | --- | --- | --- |
-| 32 | 3.18673 | 1409.81 | 0.681539 |
-| 64 | 0.85755 | 586.717 | 0.223725 |
-| 128 | 0.142391 | 237.398 | 0.0853386 |
-| 256 | 0.149623 | 71.9218 | 0.071109 |
-| 512 | 0.292677 | 150.34 | 0.121773 |
-
-检验动作间分布差异时，在每个 seed 内交换五条完整四轮轨迹的 action 标签，保持时间关联；以共同七个分位点处 CDF 差异为统计量，进行 4999 次置换。另作第一轮对照（相同初始状态）和按验证集逐 action 均值、SD 标准化后的比较。原始五个 GPU 与 batch 一一固定、执行墙钟时刻不同，置换只刻画 action/GPU 组合之间的分布差异，不能证明 action 是差异的因果来源。加一校正与配对检验思路见 [SciPy 文档](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.permutation_test.html)。
-
-| 目标 | 比较范围 | 置换 p | 三指标 Holm 校正 p |
-| --- | --- | --- | --- |
-| T | raw | 0.0004 | 0.0008 |
-| T | initial_state_only | 0.0002 | 0.0006 |
-| T | validation_standardized | 0.0658 | 0.0658 |
-| dem | raw | 0.0326 | 0.0326 |
-| dem | initial_state_only | 0.1474 | 0.2948 |
-| dem | validation_standardized | 0.0292 | 0.0584 |
-| epsilon | raw | 0.0002 | 0.0006 |
-| epsilon | initial_state_only | 0.2602 | 0.2948 |
-| epsilon | validation_standardized | 0.0036 | 0.0108 |
-
-原尺度的统一加性噪声假设不受支持。按验证集逐 action 标准化后，T 的动作差异 p=0.0658，能耗 p=0.0292（Holm 后 0.0584），ε p=0.0036（Holm 后 0.0108）。T、ε 标准化残差仍明显非正态；能耗标准化残差 Shapiro p=0.277，在本次小样本上与正态相容。因此“能耗=均值+动作相关尺度×共用近似正态变量”可以作为敏感性分析近似，但不能据未拒绝检验就宣称严格独立。每个动作的标准化参数仅来自验证集。
-
-![各动作的全部留出残差](noise_by_action.png)
-![按验证集位置尺度标准化后的残差](standardized_noise.png)
-
-进一步对同一 seed、同一 epoch 的五个去动作均值残差取平均，得到 24 个共同成分代理。其 SD 为 0.568 s、298.593 J、0.148 s；但用其余四个动作的均值预测本动作时，三个指标的误差均高于零预测。对应平均非对角协方差为 −0.1475 s²、−9350 J²、0.000380 s²。没有稳健证据从这些记录中识别出一个共同外生加性冲击，不能把代理的 SD 当成 action-independent σ。共同代理直方图、留一动作诊断、残差相关矩阵和逐动作 lag-1 相关均随包保存。匹配 seed/epoch 也不是匹配同一墙钟时间。
-
-## 已实现的模拟器
-
-推断只依赖 NumPy。三个 m 的权重保留训练/验证评估版本；不使用测试噪声校准。噪声库由 6 个验证 seed 的完整 4 轮、5 个 action 构成，保存同轮的 T 比例、D 比例与 J 保留率残差，保留跨指标关联。
-
-- trajectory（默认）：每个模拟 task 在验证 seed 中选一条，连续四轮沿用同一 donor。按 action/epoch 读取该条轨迹的扰动，保留可观测的跨轮关联。
-- independent：每个 epoch 重新选择 donor，仍同时抽取三个相关结果。
-- pooled：在对应 epoch 混合五种动作的标准化扰动库，用于比较共用噪声形状这一近似。
-- none：输出条件均值，并令 J_next=m_ε/m_T。注意这个比值是时间加权的状态均值，一般不等于 E[J_next]。
-
-对每个状态和动作，候选场景分别校准时长和能耗均值，再校准有界的 J 保留率，使单步枚举场景均值与三个 m 一致，且 T,D>0、0<J_next≤J、ε=T×J_next。已在所有测试状态验证这些约束。trajectory 保留 donor 后，当前 J 与 donor 会相关，因此该逐点校准不意味着整个相关过程仅给定 (J,φ) 就严格满足同一条件均值；它是复现序列关联的经验近似。
-
-用留出集检查 validation-only 的单步 90% 经验区间，independent 的覆盖率仅为 T 73.3%、D 66.7%、ε 79.2%；pooled 分别为 85.8%、86.7%、90.0%。每个 action/epoch 只有 6 个校准样本，尾部区间偏窄，这一版能跑通模拟，但不应称作已校准的 90% 预测区间。没有为提高覆盖率而使用测试数据扩宽区间。
+`models.json` 保存全部参数，`model_config.json` 保存尺度、阈值、种子、拆分；`simulator.py` 提供 means/step。保持旧版的 validation-only 配对轨迹噪声方法，并用新残差重新生成 noise_bank.npz，避免旧状态残差直接混入新版。这里没有重新宣称高斯分布或 action independence。可以固定同一 validation donor 连续走四轮，也可以逐轮独立抽 donor。
 
 ```python
 from simulator import Simulator
 sim = Simulator(seed=42)
-print(sim.means(J=1.0, phase=1, action=128))
-for _ in range(4):
-    print(sim.step(128, noise='trajectory'))
-sim.reset()  # 新 task
+sim.reset(initial_loss=6.240367221832275)  # 可传实际 task 的初始测量
+print(sim.means(sim.J, sim.phase, 128))
+trajectory = [sim.step(128, noise='trajectory') for _ in range(4)]
 ```
 
-只接受五个已测 action。中途换 batch 的代码可执行，但正式数据只有固定 batch 轨迹，尚未验证切换后优化器历史和学习率状态的因果影响。该模拟器是同一任务族的经验近似，未验证新数据集、新 GPU 或未测 batch 的泛化；J、φ 是否足以构成 Markov 状态也未由此次拟合证明。
+原始五组全部固定 batch，且每个 batch 固定一张 GPU。测试只能评估相同语料、硬件组合、已测动作下对新种子的泛化；它不能验证任意 batch 切换政策下的状态充分性，batch 与 GPU 的影响也未被分开。切换后的优化器状态、学习率历史等可能未被 J、phi 完全描述。默认初始 loss 取 train 集均值；显式传入实际初始值可精确复现其 J(0)。
 
-## 复现与文件
+在本目录运行以下命令可再现，不使用服务器 GPU：
 
 ```bash
 python fit.py
 python diagnostics.py
-MPLCONFIGDIR=/tmp/mpl-profile04 python plots.py
+python plots.py
+python noise_analysis.py
+python verify.py
+python compare.py
 ```
 
-环境：Python 3.11.4、NumPy 1.26.4、pandas 3.0.1、SciPy 1.11.3、Matplotlib 3.8.0、threadpoolctl 3.2.0。版本记录是本机实际运行环境，不要求这些版本作为新的最小兼容组合。
+环境版本见 environment.json；依赖见 requirements.txt。verify.py 校验因果输入、独立标量递推、loss 回升截平、阶段边界、整 seed 拆分、train-only 阈值、MLP 导出、三目标一致性、模拟器均值和边界，并核对打包的旧版对照文件 SHA-256。实际运行结果见 verification.json。
 
-- source.zip：冻结的原始观测；epochs.csv：600 行状态、划分、目标、预测与残差。
-- models.json、model_config.json、model_selection.csv：权重、种子/阈值/划分、全部候选验证结果。
-- metrics.csv、metrics_by_action.csv：原单位最终误差及动作内误差。
-- noise_summary.csv、action_tests.csv、standardized_noise.csv、common_component.csv：噪声与独立性诊断。
-- noise_bank.npz、simulator.py：可直接调用的模拟器及验证集经验库。
-- heldout_rollouts.csv、simulation_samples.csv、interval_coverage.csv：四轮回放、模拟样本、覆盖率。
-- 五组图均提供 PDF/SVG 可编辑矢量与 PNG 预览；没有截断残差尾部或删点。
-
-图形 QA：定量网格、182.9 mm 宽、统一单位、全部观测可追溯；随机数仅用于箱线图横向错开观测点，未生成实验数据。自动检查无 FAIL，PNG 采用 300 dpi 预览而非 TIFF 投稿栅格，PDF/SVG 为主输出。已人工检查排版和坐标。更详细的合规期刊尺寸应在投稿时再核对。
+本目录保留全部原始 snapshot source.zip、旧版对比快照 previous_probe/、600 条新状态、逐点差异、全套指标和三种格式的图。未修改论文正文，未覆盖旧结果。

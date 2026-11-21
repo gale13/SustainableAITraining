@@ -5,3 +5,13 @@ Download `profiling04_full_server.tar.gz` from the [Profiling 04 release](https:
 It contains all 150 final model/optimizer/RNG checkpoints, all raw power traces, per-task metrics and metadata, worker logs, launch/recovery tests and deployed code. The several-GB public corpus and regenerable compiler caches are excluded. Dataset source hashes and preparation scripts are included in the repository.
 
 Verify with `shasum -a 256 profiling04_full_server.tar.gz` against `release_assets.json`, then extract with `tar -xzf profiling04_full_server.tar.gz` into an empty directory. `server_file_manifest.json` lists each public file's SHA-256 and original server hash. Numeric measurements and checkpoint bytes are unchanged; user paths and hardware UUIDs in text metadata are replaced with portable identifiers.
+
+
+## Simulator replacement (2026-11-21)
+
+The same release's `profiling04_simulator.zip` now contains the online train_loss
+simulator, its refitted models and complete noise diagnostics. Download the new
+`SHA256SUMS` with it. The full server archive is unchanged. The release tag and
+GitHub-generated source archives identify the original training snapshot;
+the current simulator source is in `main`, and the replacement ZIP corresponds
+to the update commit linked in the release notes.

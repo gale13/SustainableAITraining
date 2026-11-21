@@ -1,0 +1,4 @@
+target,width,parameters,L2,optimization_loss,iterations,converged
+T,4,45,0.01,0.0010049688565679168,603,True
+dem,16,177,0.01,0.0012480982547042776,1238,True
+epsilon,16,177,0.0001,7.034110956777144e-05,1682,True

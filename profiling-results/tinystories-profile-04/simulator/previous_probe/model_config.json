@@ -1,0 +1,127 @@
+{
+  "analysis_seed": 20261119,
+  "K": 3,
+  "W_ma": 1,
+  "beta_internal": [
+    -0.27929107355578964,
+    -0.016905376141600183
+  ],
+  "j_mean": 0.4095914596720865,
+  "j_sd": 0.34089027258984783,
+  "actions": [
+    32,
+    64,
+    128,
+    256,
+    512
+  ],
+  "task_epochs": 4,
+  "state_loss": "fixed 12800-sequence eval-mode train_probe_loss; running minimum / initial probe loss",
+  "split_tasks": {
+    "train": [
+      2,
+      4,
+      5,
+      6,
+      7,
+      9,
+      12,
+      13,
+      14,
+      18,
+      19,
+      20,
+      22,
+      23,
+      25,
+      26,
+      27,
+      28
+    ],
+    "validation": [
+      1,
+      8,
+      11,
+      17,
+      21,
+      30
+    ],
+    "test": [
+      3,
+      10,
+      15,
+      16,
+      24,
+      29
+    ]
+  },
+  "snapshot": {
+    "as_of": "2026-11-19T13:22:52.982375+08:00",
+    "epochs": 600,
+    "completed_tasks": 150,
+    "queue": {
+      "pid": 3605604,
+      "updated_unix": 1795057945.2543523,
+      "jobs": [
+        {
+          "batch": 32,
+          "gpu": 0,
+          "state": "complete",
+          "failures": 0,
+          "attempts": 1,
+          "pid": 3605868,
+          "uuid": "device-00",
+          "started_unix": 1794980987.0955513
+        },
+        {
+          "batch": 64,
+          "gpu": 1,
+          "state": "complete",
+          "failures": 0,
+          "attempts": 1,
+          "pid": 3606082,
+          "uuid": "device-01",
+          "started_unix": 1794980999.5139778
+        },
+        {
+          "batch": 128,
+          "gpu": 2,
+          "state": "complete",
+          "failures": 0,
+          "attempts": 1,
+          "pid": 3606089,
+          "uuid": "device-02",
+          "started_unix": 1794980999.9916556
+        },
+        {
+          "batch": 256,
+          "gpu": 3,
+          "state": "complete",
+          "failures": 0,
+          "attempts": 1,
+          "pid": 3606095,
+          "uuid": "device-03",
+          "started_unix": 1794981000.4117181
+        },
+        {
+          "batch": 512,
+          "gpu": 4,
+          "state": "complete",
+          "failures": 0,
+          "attempts": 1,
+          "pid": 3606104,
+          "uuid": "device-04",
+          "started_unix": 1794981000.716703
+        }
+      ]
+    },
+    "overlap_events": {
+      "32": 0,
+      "64": 0,
+      "128": 0,
+      "256": 0,
+      "512": 0
+    }
+  },
+  "source_sha256": "cee416db902b5d0c1925e778ea3db061626d3ab29158308ad2e894e257dd6f82"
+}

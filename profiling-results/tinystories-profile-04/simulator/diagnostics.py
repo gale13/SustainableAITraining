@@ -16,7 +16,8 @@ def holm(values):
     return out
 
 def main():
-    d=pd.read_csv(ROOT/'epochs.csv');te=d[d.split=='test'];va=d[d.split=='validation'];rng=np.random.default_rng(SEED)
+    d=pd.read_csv(ROOT/'epochs.csv').sort_values(['task','action','epoch']).reset_index(drop=True)
+    te=d[d.split=='test'];va=d[d.split=='validation'];rng=np.random.default_rng(SEED)
     rows=[];tests=[];commons=[];common_rows=[];standardized=[];lag=[]
     perms=np.array([[rng.permutation(5) for _ in range(6)] for _ in range(4999)])
     for k in METRICS:
@@ -40,7 +41,8 @@ def main():
         cov=np.cov(centered,rowvar=False);off=cov[np.triu_indices(5,1)].mean()
         commons.append(dict(metric=k,**summary(proxy),mean_offdiagonal_covariance=off,loo_corr=np.corrcoef(loo.ravel(),centered.ravel())[0,1],
                             loo_skill_vs_zero=1-np.mean((loo-centered)**2)/np.mean(centered**2)))
-        for (t,e),v in zip(te[['task','epoch']].drop_duplicates().itertuples(index=False,name=None),proxy):common_rows.append(dict(metric=k,task=t,epoch=e,proxy=v))
+        keys=te.pivot(index=['task','epoch'],columns='action',values=col).index
+        for (t,e),v in zip(keys,proxy):common_rows.append(dict(metric=k,task=t,epoch=e,proxy=v))
         for ai,a in enumerate(ACTIONS):
             v=mat[:,:,ai];lag.append(dict(metric=k,action=a,lag1_corr=np.corrcoef(v[:,:-1].ravel(),v[:,1:].ravel())[0,1],pairs=18))
         # Exactly all test residuals, including tails, are used in every diagnostic.
@@ -72,7 +74,7 @@ def main():
         for i,k in enumerate(METRICS):coverage.append(dict(mode=mode,metric=k,coverage90=covered[i]/len(te),width=width[i]/len(te),n=len(te)))
     pd.DataFrame(coverage).to_csv(ROOT/'interval_coverage.csv',index=False)
     for (task,a),g in te.groupby(['task','action']):
-        sim.reset();path=[sim.step(a,noise='none') for _ in range(4)]
+        sim.reset(initial_loss=float(g.iloc[0].L0));path=[sim.step(a,noise='none') for _ in range(4)]
         for r,p in zip(g.itertuples(),path):rollouts.append(dict(task=task,action=a,epoch=r.epoch,observed_J_next=r.J_next,simulated_J_next=p['J_next'],observed_T=r.T,simulated_T=p['T_s'],observed_dem=r.dem,simulated_dem=p['demand_J']))
     pd.DataFrame(rollouts).to_csv(ROOT/'heldout_rollouts.csv',index=False)
     # Full task stochastic examples, preserving the measured three-outcome coupling.

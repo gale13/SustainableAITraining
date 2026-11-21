@@ -1,0 +1,40 @@
+{
+  "old_beta": [
+    -0.27929107355578964,
+    -0.016905376141600183
+  ],
+  "new_beta": [
+    -0.34015820570585115,
+    -0.050537362338658506
+  ],
+  "phase_changed_rows": 0,
+  "input_phase_counts": {
+    "1": 300,
+    "2": 150,
+    "3": 150
+  },
+  "adjacent_loss_increases": {
+    "train_loss": 0,
+    "train_probe_loss": 0
+  },
+  "mean_J_next_old_by_epoch": {
+    "1": 0.2168652344238309,
+    "2": 0.2118941446437283,
+    "3": 0.20943306555301272,
+    "4": 0.20863181171541026
+  },
+  "mean_J_next_new_by_epoch": {
+    "1": 0.2608702645186458,
+    "2": 0.2340734919999792,
+    "3": 0.23062377843568105,
+    "4": 0.2290173472433385
+  },
+  "epsilon_target_mean_change_percent": 12.32258827786934,
+  "online_loss_meaning": "full-epoch weighted average over changing weights",
+  "initial_anchor": "measured pretraining train_probe_loss; not epoch 1 outcome",
+  "old_and_new_targets_identical": [
+    "T",
+    "dem"
+  ],
+  "changed_target": "epsilon = T * variant-specific J_next"
+}

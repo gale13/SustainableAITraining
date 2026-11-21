@@ -1,0 +1,11 @@
+Exact task distributions complete: 32
+Exact task distributions complete: 64
+Exact task distributions complete: 128
+Exact task distributions complete: 256
+Exact task distributions complete: 512
+   metric        mode        crps  wasserstein  coverage90
+  total_T independent    1.831220     2.031054    0.700000
+  total_T  trajectory    1.905583     2.372902    0.766667
+total_dem independent 1283.567993  1105.249465    0.666667
+total_dem  trajectory 1154.908950   792.459632    0.666667
+{"total_T": {"joint_lower_crps_batches": 2, "independent_lower_crps_batches": 3}, "total_dem": {"joint_lower_crps_batches": 3, "independent_lower_crps_batches": 2}}

@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "observations": 600,
+  "paired_seed_groups": 30,
+  "checks": [
+    "independent scalar paper recursion",
+    "current/future outcome causality",
+    "post-epoch probe and validation exclusion",
+    "running minimum under loss rises",
+    "phase interval convention and irreversible phase",
+    "train-only thresholds",
+    "paired split integrity",
+    "exported MLP predictions and metrics",
+    "stochastic simulator bounds and conditional scenario means",
+    "validation-only residual noise bank",
+    "enumerated task path counts and probabilities",
+    "packaged previous-probe reference checksums unchanged"
+  ]
+}

@@ -1,4 +1,11 @@
-"""Four-epoch TinyStories simulator; inference requires NumPy only."""
+"""Four-epoch, online-loss variant; inference requires NumPy only.
+
+The conditional means use the paper's J/phase recursions. The empirical noise
+bank remains a validation-calibrated diagnostic model, not a proof of state
+sufficiency or of action-independent noise. Action switching was not measured.
+Trajectory donors correlate with history: uniform scenario means are not a
+proof of history-conditional state sufficiency for trajectory sampling.
+"""
 import json
 from pathlib import Path
 import numpy as np
@@ -14,6 +21,8 @@ def features(j,phase,action,config):
     return np.column_stack([(j-config['j_mean'])/config['j_sd']]+[p==k for k in [1,2,3]]+[a==k for k in ACTIONS])
 
 def phase_after(previous,j,j_next,config):
+    if config.get('W_ma',1)!=1:
+        raise ValueError('This four-epoch calibration uses W_ma=1; a longer window needs explicit history.')
     delta=(j_next-j)/(j+EPS)
     return max(previous,1+int(np.searchsorted(config['beta_internal'],delta,side='left')))
 
@@ -30,8 +39,13 @@ class Simulator:
         self.models=json.loads((ROOT/'models.json').read_text())
         self.bank=np.load(ROOT/'noise_bank.npz')['bank'] # donor task, action, epoch, correlated (T ratio,D ratio,retention error)
         self.rng=np.random.default_rng(seed);self.reset()
-    def reset(self):
-        self.J=1.;self.phase=1;self.epoch=0;self.donor=int(self.rng.integers(len(self.bank)))
+    def reset(self,initial_loss=None):
+        # Supplying a task's measured initial loss exactly reproduces its J(0).
+        # The default uses only the training-split mean (no held-out leakage).
+        l0=float(self.config['initial_loss_mean_train'] if initial_loss is None else initial_loss)
+        if not np.isfinite(l0) or l0<=0:
+            raise ValueError('initial_loss must be finite and positive')
+        self.J=l0/(l0+EPS);self.phase=1;self.epoch=0;self.donor=int(self.rng.integers(len(self.bank)))
     def means(self,J,phase,action):
         return dict(zip(METRICS,predict(self.models,features(J,phase,action,self.config),np.atleast_1d(J))[0]))
     def scenarios(self,J,phase,action,epoch,noise='trajectory'):
