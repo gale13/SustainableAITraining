@@ -2,9 +2,15 @@
 
 ## Profiling 04: TinyStories-260K
 
-[Complete Profiling 04 archive](profiling-results/tinystories-profile-04/README.md) · [MLP fits and simulator](profiling-results/tinystories-profile-04/simulator/README.md) · [600 original epoch measurements](profiling-results/tinystories-profile-04/experiment/epochs.csv)
+[Complete Profiling 04 archive](profiling-results/tinystories-profile-04/README.md) · [Feasibility fits and simulator](profiling-results/tinystories-profile-04/simulator/README.md) · [600 original epoch measurements](profiling-results/tinystories-profile-04/experiment/epochs.csv)
 
 Five batch sizes (32, 64, 128, 256, 512), 30 paired random seeds each, four full epochs per task; loss, duration, GPU energy, raw telemetry and final training checkpoints. The simulator includes three conditional-mean MLPs and held-out residual/noise diagnostics. Updated 2026-11-21: the default uses completed online train_loss, with new residual diagnostics and independent-versus-joint four-epoch noise comparisons; the initial measured loss remains the normalization anchor. The default noise now resamples validation residual triples afresh each epoch; no Gaussian assumption is imposed, and test data are evaluation-only.
+
+For simulation use, the separate [full-data simulator](profiling-results/tinystories-profile-04/simulator-full-data/README.md)
+refits all three MLPs and calibrates empirical noise on all 600 observations.
+The original [feasibility experiment](profiling-results/tinystories-profile-04/simulator/README.md)
+remains unchanged as the independent held-out evaluation. See the
+[two-version guide](profiling-results/tinystories-profile-04/SIMULATORS.md).
 
 ---
 

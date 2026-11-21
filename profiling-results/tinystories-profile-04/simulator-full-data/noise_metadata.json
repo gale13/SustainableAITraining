@@ -1,0 +1,32 @@
+{
+  "source": "all 600 full-data calibration observations",
+  "residual_type": "In-sample relative residual triples from the final all-data MLPs.",
+  "shape": [
+    30,
+    5,
+    4,
+    3
+  ],
+  "axes": [
+    "task",
+    "action",
+    "epoch",
+    "joint residual component"
+  ],
+  "components": [
+    "T / predicted_T",
+    "demand / predicted_demand",
+    "J_next / J - predicted_epsilon / (predicted_T * J)"
+  ],
+  "default": "empirical: new uniform task draw per epoch, joint across metrics, conditional on action/epoch",
+  "gaussian_assumption": false,
+  "fit_rows": 600,
+  "noise_rows": 600,
+  "held_out_rows": 0,
+  "original_split_counts": {
+    "train": 360,
+    "validation": 120,
+    "test": 120
+  },
+  "caution": "Calibration fit and noise may be optimistic because the same observations fit the mean and residual bank. Independent feasibility evidence is preserved separately."
+}

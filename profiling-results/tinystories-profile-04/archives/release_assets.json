@@ -8,5 +8,10 @@
     "name": "profiling04_simulator.zip",
     "bytes": 3470214,
     "sha256": "a4ac03cbad87608461591fd24eb4796d58d07010de56ead0cfc296abbb985119"
+  },
+  {
+    "name": "profiling04_simulator_full_data.zip",
+    "bytes": 935279,
+    "sha256": "56fafef6ae4eecef26c22760b8fa62ac6b12218b34700f7c345eedad90a938e2"
   }
 ]

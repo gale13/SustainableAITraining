@@ -18,3 +18,12 @@ to the update commit linked in the release notes.
 
 The current simulator defaults to validation-only empirical residual resampling,
 with a fresh joint draw each epoch. See `simulator/EMPIRICAL_NOISE.md`.
+
+
+## Separate full-data simulator
+
+`profiling04_simulator_full_data.zip` contains the all-600-observation refit,
+with its own `profiling04_simulator_full_data.zip.sha256` checksum asset.
+`profiling04_simulator.zip` and its existing checksum remain the preserved
+feasibility experiment. Neither that ZIP nor the full training archive is
+replaced. See `../SIMULATORS.md` for their different evaluation roles.

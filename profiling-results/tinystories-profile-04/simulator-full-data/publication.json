@@ -1,0 +1,13 @@
+{
+  "source": "Full-data calibration from all 600 observations",
+  "feasibility_commit": "9e379438019b951b1648fb27f28e3958c2b897f0",
+  "feasibility_directory": "../simulator",
+  "original_local_source_sha256": "f76efed5e5f1fcc75ba3dd58cf21a3359e7a31735054d98c94eb2f18a75d8c1d",
+  "public_source_sha256": "cee416db902b5d0c1925e778ea3db061626d3ab29158308ad2e894e257dd6f82",
+  "portability_changes": [
+    "Reuse public source snapshot with generic hardware identifiers",
+    "Use public sibling simulator path and public feasibility file hashes",
+    "Exclude generated Python cache files from the public preservation check"
+  ],
+  "learned_weights_and_numeric_results_unchanged": true
+}

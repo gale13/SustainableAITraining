@@ -22,7 +22,25 @@ Task seeds are 1337–1366, paired across batches. Each task resets model weight
 - `archives/`: complete server-record archive, including raw 0.5-second power traces, worker logs and all 150 final model/optimizer/RNG checkpoints. See its manifest for reconstruction.
 - `manifest.csv`: SHA-256 and byte size of every file in this publication.
 
-## Simulator result — updated 2026-11-21
+## Full-data simulator for simulation use
+
+Two distinct versions are retained; see [the version guide](SIMULATORS.md).
+
+- [Full-data simulator](simulator-full-data/README.md): all **600 observations**
+  refit the three MLPs and supply the empirical residual bank. Each action/epoch
+  has **30 joint residual donors**. Architecture, regularization and phase
+  thresholds are fixed from the feasibility experiment; there is no held-out
+  set in this final calibration. Calibration RMSE is 1.31946 s for duration,
+  723.988 J for GPU demand, and 0.359819 s for time-weighted loss.
+- [Preserved feasibility experiment](simulator/README.md): 360 training rows,
+  120 validation residuals and 120 independent test rows. Its files and existing
+  release ZIP are unchanged; use this version as the independent evaluation.
+
+The full-data directory includes source, fitted weights, all residual donors,
+noise summaries, figures, sample rollouts, verification and SHA-256 checksums.
+Its separate release asset is `profiling04_simulator_full_data.zip`.
+
+## Feasibility simulator result — updated 2026-11-21
 
 The default simulator now uses the running minimum of **completed online epoch
 train_loss**, with the measured pretraining probe retained only as the initial

@@ -1,0 +1,4 @@
+metric,width,parameters,L2,initialization_seed,iterations,converged
+T,4,45,0.01,20261120,755,True
+dem,16,177,0.01,20261119,1312,True
+epsilon,16,177,0.0001,20261120,2327,True

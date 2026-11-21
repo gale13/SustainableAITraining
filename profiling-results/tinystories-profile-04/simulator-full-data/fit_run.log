@@ -1,0 +1,10 @@
+FIT T seed 20261119 objective 0.001022708157097968 iterations 578 converged True
+FIT T seed 20261120 objective 0.0010227040882310366 iterations 755 converged True
+FIT dem seed 20261119 objective 0.0012604352805475247 iterations 1312 converged True
+FIT dem seed 20261120 objective 0.001260590305094219 iterations 837 converged True
+FIT epsilon seed 20261119 objective 8.515490275471563e-05 iterations 1665 converged True
+FIT epsilon seed 20261120 objective 8.511563499367894e-05 iterations 2327 converged True
+ metric         dataset   n           mse       rmse        mae  mean_residual       r2  standardized_mse  regularized_optimization_loss
+      T all_calibration 600      1.740977   1.319461   0.638557      -0.024892 0.999942          0.000058                       0.001023
+    dem all_calibration 600 524158.618261 723.987996 418.181816      -0.060670 0.998815          0.001185                       0.001260
+epsilon all_calibration 600      0.129470   0.359819   0.189838       0.003182 0.999919          0.000081                       0.000085
