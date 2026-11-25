@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "dates": 240,
+  "configurations": 33,
+  "runs": 253440,
+  "epochs": 30412800,
+  "all_parameter_points_retained": true,
+  "figure_points_per_panel": 33,
+  "all_day_all_seed_section52_regression_max_error": 0.0,
+  "max_run_hours": 21.294761583681208,
+  "min_queue_bound_slack": -4.163336342344337e-16,
+  "mean_only_decisions": true,
+  "weights": [
+    100,
+    10,
+    1
+  ],
+  "alpha": 4.1928776597152995,
+  "figure_count": 1,
+  "panels": [
+    "a",
+    "b"
+  ],
+  "independent_multi_sigma_replay_epochs": 4320,
+  "standalone_decisions_with_no_noise_file": 99,
+  "standalone_max_score_error": 1.4551915228366852e-11,
+  "decision_future_PV_and_noise_isolation": true,
+  "frozen_environment_and_history_unchanged": true,
+  "exports": {
+    "width_inches": 6.5,
+    "height_inches": 3.0,
+    "fonts": [
+      "STIXGeneral-Italic",
+      "STIXGeneral-Regular",
+      "TimesNewRomanPSMT"
+    ],
+    "minimum_text_size_pt": 6.300000190734863,
+    "embedded_fonts": true,
+    "outside_text": []
+  }
+}

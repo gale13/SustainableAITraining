@@ -1,0 +1,9 @@
+# Same-V decay-versus-Increasing companion figure
+
+Question: at the same V, how do the four existing decay schedules compare with the previously defined Increasing=(100,1000,10000)? Keep the Fixed companion intact. Positive values mean lower TARS than Increasing; include all negative and zero effects if observed.
+
+Reuse the identical frozen decay runs and the prior Increasing runs at V=.1. Evaluate Increasing only at the other 16 values of the existing 17-point V grid, sigma_e=.235, all 240 days, midnight, 30 tasks x4 epochs, 32 paired seeds. No new weight, date, PV-scale, or sigma tuning. Decision: MLP means and latest past observed power times mT. Environment: empirical joint noise and actual-window PV integration. Total comparison uses 652800 runs, of which 122880 are newly evaluated, 7680 are prior Increasing and 522240 are prior decay runs.
+
+Archetype: one quantitative comparison panel. Python/matplotlib, matching the existing OR grayscale Times New Roman 3.5 x3.2-inch panel, PDF/SVG/PNG/600 dpi TIFF. All 68 effects retained. Source fields V, decay_family and gain_percent map directly to log x, series and y. Denominator is the positive Increasing mean TARS at the same V. Equal-date means; 2000 paired calendar-week bootstrap resamples, pointwise 95% intervals. All dates/seeds retained, no curve fitting. Report absolute TARS, DWAE, observed violations and separately best grid values in tables; do not infer universal or tuned dominance from localized same-V benefits.
+
+The only experimental change is comparator Fixed -> Increasing. Increasing retains its historical scale (100,1000,10000); schedules match initial weight, not weight sum. The result concerns these explicit schedules, not all possible increasing functions. The plot adapts the current project's same-V script structurally, preserving its statistics and styles while replacing comparator labels and data.

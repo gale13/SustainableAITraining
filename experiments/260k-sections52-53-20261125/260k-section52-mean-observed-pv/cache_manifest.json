@@ -1,0 +1,8 @@
+{
+  "protocol": "186333807456c4d5093c6aef066b43da3bc5511de238234c5c54351bd0a99613",
+  "selected": "7b3d73f2186ae4511dfbc9f68d357e4dfbe5276a5c94b99ca12bfcbe94399913",
+  "engine.cpp": "4a2306f9a24b2d62fc5e74513f69dd7579fb5b96c6ffecbf557b9255badcb293",
+  "controller.cpp": "e03a5ef5e676f8b4c2302de393a9d4d0c7a5798fd39c9f5187bc2385c8bea786",
+  "runtime.py": "1ca35de95f99dec1a1d2799e77b4e221c65d83b74af5a4185fc0e1a13c979a69",
+  "pv_observations.py": "8bc5c89f21b2adde84998137e00bca8b7c166bf3a03ea1cdd8da0d91bcdf0789"
+}

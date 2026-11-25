@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "opencem-pv-trajectories"
+version = "1.0.0"
+description = "Audited OpenCEM inverter-1 daily PV trajectories with official interpolation"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24", "pandas>=1.5"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+opencem_pv = ["data/*.sqlite", "data/*.json"]
+
+[project.scripts]
+opencem-pv = "opencem_pv.__main__:main"

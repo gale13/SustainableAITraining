@@ -1,0 +1,10 @@
+{
+  "figures": 1,
+  "panels": 2,
+  "sigma_curves_per_panel": 3,
+  "V_points_per_curve": 11,
+  "total_points_per_panel": 33,
+  "all_dates": 240,
+  "raw_runs": 253440,
+  "shaded_interval": "Pointwise 95% paired calendar-week bootstrap, 2000 resamples"
+}

@@ -1,0 +1,70 @@
+{
+  "status": "PASS",
+  "isolated_temporary_copy": true,
+  "no_GPU_or_network_required": true,
+  "all_full_package_hashes_verified": true,
+  "current_protocol_preparation_passed": 4,
+  "independently_reproduced_runs": 12,
+  "independently_reproduced_epochs": 1440,
+  "all_three_regenerated_PNGs_byte_identical": true,
+  "reanalysis_from_saved_runs_passed": true,
+  "steps": [
+    {
+      "directory": ".",
+      "arguments": [
+        "reproduce.py",
+        "verify"
+      ],
+      "exit_code": 0
+    },
+    {
+      "directory": "260k-section52-mean-observed-pv",
+      "arguments": [
+        "experiment.py",
+        "prepare"
+      ],
+      "exit_code": 0
+    },
+    {
+      "directory": "260k-section53-v-mean-observed-pv",
+      "arguments": [
+        "experiment.py",
+        "prepare"
+      ],
+      "exit_code": 0
+    },
+    {
+      "directory": "260k-section53-weight-sameV",
+      "arguments": [
+        "experiment.py",
+        "prepare"
+      ],
+      "exit_code": 0
+    },
+    {
+      "directory": "260k-section53-weight-sameV-increasing",
+      "arguments": [
+        "experiment.py",
+        "prepare"
+      ],
+      "exit_code": 0
+    },
+    {
+      "directory": "260k-section53-weight-sameV-increasing",
+      "arguments": [
+        "-c",
+        "12 matched Increasing replay runs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "directory": ".",
+      "arguments": [
+        "reproduce.py",
+        "analyze"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "all_original_source_files_unchanged": true
+}

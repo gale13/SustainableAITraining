@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "dates": 240,
+  "configurations": 85,
+  "runs": 652800,
+  "epochs": 78336000,
+  "sigma_e": 0.235,
+  "V_values": 17,
+  "all_curves_and_dates_retained": true,
+  "paired_effects": 68,
+  "new_simulations": 122880,
+  "reused_decay_runs": 522240,
+  "reused_increasing_runs": 7680,
+  "regression_runs": 7680,
+  "regression_max_error": 0.0,
+  "additional_regression_source_sha256": "970f21ca4a4b80d129bb8a731b455ab905f96d402933e37e6e9df46e85d4d0a4",
+  "max_run_hours": 21.294761583681208,
+  "max_DWAE": 0.2335692026016962,
+  "total_violations": 0,
+  "min_queue_bound_slack": 0.0014307973983037,
+  "engine_checks": {
+    "status": "PASS",
+    "independent_python_replay_epochs": 1800,
+    "standalone_no_noise_file_decisions": 1800,
+    "increasing_verified": true,
+    "inherited_decay_replay_epochs": 9000,
+    "max_saved_metric_error": 7.275957614183426e-12,
+    "verified_sigma": 0.235,
+    "verified_V": [
+      1e-06,
+      3e-05,
+      0.0001,
+      0.1,
+      100.0
+    ],
+    "nonzero_noise_epochs": 1800,
+    "max_score_error": 1.7053025658242404e-11,
+    "max_environment_PV_error_J": 0.0009484331822022796,
+    "mean_only_and_past_only_controller_verified": true,
+    "unchanged_engine_inherits_future_PV_and_noise_isolation_checks": true
+  },
+  "exports": {
+    "width_inches": 3.5,
+    "height_inches": 3.1999999152289496,
+    "min_font_pt": 6.300000190734863,
+    "fonts": [
+      "STIXGeneral-Italic",
+      "STIXGeneral-Regular",
+      "TimesNewRomanPSMT"
+    ],
+    "embedded": true,
+    "outside_text": []
+  },
+  "all_68_points_retained": true,
+  "one_figure": true,
+  "full_V_range_preserved": true,
+  "saved_csv_resume_validated": true
+}

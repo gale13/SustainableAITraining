@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "model_files_only": [
+    "models.json",
+    "model_config.json"
+  ],
+  "noise_file_absent": true,
+  "random_states": 150,
+  "max_score_error": 1.4210854715202004e-13
+}

@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "days": 240,
+  "noise_replicates": 32,
+  "settings": 6,
+  "policy_variants": 8,
+  "total_runs": 368640,
+  "total_simulated_epochs": 44236800,
+  "max_run_hours": 21.294761583681208,
+  "paired_donors": true,
+  "all_runs_start_at_midnight": true,
+  "all_runs_finish_same_day": true,
+  "all_dates_equal_weight": true,
+  "selected_parameters_frozen": true,
+  "PV_gap_rule": "None (explicit official unlimited interpolation)",
+  "decreasing_weights": [
+    100,
+    10,
+    1
+  ],
+  "control": "LYA-previous = historical noise-distribution and future-integrated-PV LYA",
+  "decision": "MLP means and last real observed PV power times m_T; no noise scenarios or PV integrals",
+  "data_origin_counts": {
+    "Unchanged historical baseline/control": 322560,
+    "New mean-only observed-PV LYA": 46080
+  },
+  "simulator_unchanged": true
+}

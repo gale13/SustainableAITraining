@@ -1,0 +1,13 @@
+{
+  "installed_import_ok": true,
+  "bundled_database_ok": true,
+  "official_code_hash_ok": true,
+  "dates": 242,
+  "recommended_dates": 142,
+  "example_energy_j": 35565.43845128652,
+  "unit_tests_passed": 8,
+  "unit_test_command": "PYTHONPATH=src python -m unittest discover -s tests -v",
+  "simulator_smoke_epochs": 600,
+  "cli_export_rows": 1440,
+  "cli_export_missing": 0
+}

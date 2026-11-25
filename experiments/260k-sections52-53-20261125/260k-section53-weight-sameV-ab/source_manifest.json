@@ -1,0 +1,8 @@
+{
+  "260k-section53-weight-sameV/source_data/sameV_curves.csv": "f2c762d788b21f98af4d3ca4d30b05aa1e61ebcafea9f0b71177ce54e76cf675",
+  "260k-section53-weight-sameV/protocol.json": "9ac344d4654c02c033b74e0b6d79b5bffb23e91617ec876e3310c3e39f4488b4",
+  "260k-section53-weight-sameV/verification.json": "306bb4bc05e439ce43dc3bd882c60789ec85f37978261290438b2a0458a743ca",
+  "260k-section53-weight-sameV-increasing/source_data/sameV_curves.csv": "e7bfddc0a65c47d068038f3d31cc7cfce35dc02010263e02b4788b4623e66e8e",
+  "260k-section53-weight-sameV-increasing/protocol.json": "b6f71c79f7bfe1fad2d0c3b91b2cdc28e038fa1d836ac81007d80d8398de28d3",
+  "260k-section53-weight-sameV-increasing/verification.json": "5ee1d03e3f6bc2c724a59e8a8dd7330e6c62589a5b40add1c0d792d7fbac249d"
+}

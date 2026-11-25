@@ -1,0 +1,37 @@
+{
+  "style": "OR manuscript, grayscale, Times New Roman",
+  "size_inches": [
+    6.5,
+    5.8
+  ],
+  "minimum_configured_font_pt": 9,
+  "tiles": 240,
+  "daily_scatter_points": 1680,
+  "summary_points": 7,
+  "numeric_cells_replaced_by": "PV energy gray level + negative/tie symbols; exact values remain in source tables",
+  "outcome_counts": {
+    "win": 230,
+    "loss": 9,
+    "tie": 1
+  },
+  "source_sha256": {
+    "daily_tiles.csv": "2c9c2500b15c02fda217b0468009fb7b964a3dd48ee009021c842282297a4b7f",
+    "daily_scatter.csv": "6f766897dd95e6a9ab77a62dca4f07579ad78ca9aa3fe990731aa7c66f7bbbf5",
+    "algorithm_summary.csv": "744a9ab6bf56128ae721f0a026c7362ec1ebfb3aedb3a4cffa64835e49730a36"
+  },
+  "same_PV_setting_as_parent": true,
+  "alpha": 4.1928776597152995,
+  "decreasing_weights": [
+    100,
+    10,
+    1
+  ],
+  "V": 0.1,
+  "sigma_e": 0.24,
+  "decision_information": "MLP means and latest real observed PV power; no noise bank or future PV integration",
+  "legend": "LYA is the paper's phase-aware renewal\u2013Lyapunov policy, here using decreasing phase weights; DEC is a separate batch-schedule baseline",
+  "terminology": {
+    "DWAE": "Duration-weighted average error",
+    "TARS": "Time-averaged renewable shortfall"
+  }
+}

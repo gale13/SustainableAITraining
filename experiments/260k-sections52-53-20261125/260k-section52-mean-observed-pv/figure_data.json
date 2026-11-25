@@ -1,0 +1,28 @@
+{
+  "LYA_parameters": {
+    "alpha": 4.1928776597152995,
+    "V": 0.1,
+    "weights": [
+      100.0,
+      10.0,
+      1.0
+    ],
+    "tuning_mean_TARS_W": 118.03798009960816,
+    "tuning_max_DWAE": 0.23298038518164144
+  },
+  "sigma_e": 0.24,
+  "tile_count": 240,
+  "scatter_points": 1680,
+  "outcome_counts": {
+    "win": 230,
+    "loss": 9,
+    "tie": 1
+  },
+  "api_energy_max_error_kWh": 7.105427357601002e-15,
+  "all_dates_PV_percent": 72.28963903140695,
+  "source_sha256": {
+    "daily_scatter.csv": "6f766897dd95e6a9ab77a62dca4f07579ad78ca9aa3fe990731aa7c66f7bbbf5",
+    "algorithm_summary.csv": "744a9ab6bf56128ae721f0a026c7362ec1ebfb3aedb3a4cffa64835e49730a36",
+    "daily_tiles.csv": "2c9c2500b15c02fda217b0468009fb7b964a3dd48ee009021c842282297a4b7f"
+  }
+}

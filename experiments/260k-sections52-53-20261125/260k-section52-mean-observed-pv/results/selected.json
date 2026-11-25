@@ -1,0 +1,69 @@
+{
+  "capacity_x1": {
+    "alpha": 1.0,
+    "V": 1.0,
+    "weights": [
+      100.0,
+      10.0,
+      1.0
+    ],
+    "tuning_mean_TARS_W": 169.90561844716424,
+    "tuning_max_DWAE": 0.23329390203473713
+  },
+  "capacity_x2": {
+    "alpha": 2.0,
+    "V": 0.1,
+    "weights": [
+      100.0,
+      10.0,
+      1.0
+    ],
+    "tuning_mean_TARS_W": 141.13145853130277,
+    "tuning_max_DWAE": 0.23329147464771327
+  },
+  "capacity_x4": {
+    "alpha": 4.0,
+    "V": 0.1,
+    "weights": [
+      100.0,
+      10.0,
+      1.0
+    ],
+    "tuning_mean_TARS_W": 119.61047749192498,
+    "tuning_max_DWAE": 0.23309018358744488
+  },
+  "capacity_x8": {
+    "alpha": 8.0,
+    "V": 1.0,
+    "weights": [
+      100.0,
+      10.0,
+      1.0
+    ],
+    "tuning_mean_TARS_W": 110.44986767045641,
+    "tuning_max_DWAE": 0.23193122904523522
+  },
+  "capacity_x16": {
+    "alpha": 16.0,
+    "V": 1.0,
+    "weights": [
+      100.0,
+      10.0,
+      1.0
+    ],
+    "tuning_mean_TARS_W": 108.42823420170123,
+    "tuning_max_DWAE": 0.23019952010205613
+  },
+  "mean70": {
+    "alpha": 4.1928776597152995,
+    "V": 0.1,
+    "weights": [
+      100.0,
+      10.0,
+      1.0
+    ],
+    "tuning_mean_TARS_W": 118.03798009960816,
+    "tuning_max_DWAE": 0.23298038518164144
+  },
+  "_protocol_sha256": "186333807456c4d5093c6aef066b43da3bc5511de238234c5c54351bd0a99613"
+}

@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "independent_python_replay_epochs": 9000,
+  "standalone_no_noise_file_decisions": 9000,
+  "all_five_schedules_verified": true,
+  "verified_sigma": 0.235,
+  "verified_V": [
+    1e-06,
+    3e-05,
+    0.0001,
+    0.1,
+    100.0
+  ],
+  "nonzero_noise_epochs": 9000,
+  "max_score_error": 1.0913936421275139e-11,
+  "max_environment_PV_error_J": 0.0009484331822022796,
+  "mean_only_and_past_only_controller_verified": true,
+  "unchanged_engine_inherits_future_PV_and_noise_isolation_checks": true
+}

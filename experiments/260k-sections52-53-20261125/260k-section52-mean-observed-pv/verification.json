@@ -1,0 +1,93 @@
+{
+  "status": "PASS",
+  "raw_runs": 368640,
+  "new_LYA_evaluation_runs": 46080,
+  "tuning_runs": 16128,
+  "simulated_epochs": 44236800,
+  "baseline_and_historical_control_rows_preserved": 322560,
+  "daily_mean_max_error": 5.684341886080802e-14,
+  "all_date_causal_trace_epochs": 28800,
+  "max_saved_trace_TARS_error_W": 2.842170943040401e-14,
+  "min_decision_time_minus_observation_time_s": 0.0,
+  "mean_only_decision_verified": true,
+  "last_observation_P_times_mT_verified": true,
+  "future_PV_and_noise_bank_counterfactuals_passed": true,
+  "standalone_controller_without_noise_file_passed": true,
+  "max_run_hours": 21.294761583681208,
+  "source_experiments_unchanged": true,
+  "frozen_simulator_unchanged": true,
+  "all_240_tiles_preserved": true,
+  "all_1680_scatter_points_preserved": true,
+  "exports": {
+    "all_240_daily_differences.pdf": {
+      "width_inches": 6.5,
+      "height_inches": 3.5,
+      "min_font_pt": 9.0,
+      "fonts": [
+        "TimesNewRomanPSMT"
+      ],
+      "embedded": true,
+      "outside_text": []
+    },
+    "data_quality_sensitivity.pdf": {
+      "width_inches": 6.5,
+      "height_inches": 3.3000000847710504,
+      "min_font_pt": 9.0,
+      "fonts": [
+        "TimesNewRomanPSMT"
+      ],
+      "embedded": true,
+      "outside_text": []
+    },
+    "figure8_capacity_x4.pdf": {
+      "width_inches": 6.5,
+      "height_inches": 3.1999999152289496,
+      "min_font_pt": 9.0,
+      "fonts": [
+        "TimesNewRomanPSMT"
+      ],
+      "embedded": true,
+      "outside_text": []
+    },
+    "figure8_mean70.pdf": {
+      "width_inches": 6.5,
+      "height_inches": 3.1999999152289496,
+      "min_font_pt": 9.0,
+      "fonts": [
+        "TimesNewRomanPSMT"
+      ],
+      "embedded": true,
+      "outside_text": []
+    },
+    "figure8_pv70_mean_observed.pdf": {
+      "width_inches": 6.5,
+      "height_inches": 5.8000000847710504,
+      "min_font_pt": 9.0,
+      "fonts": [
+        "TimesNewRomanPSMT"
+      ],
+      "embedded": true,
+      "outside_text": []
+    },
+    "figure8_raw_pv.pdf": {
+      "width_inches": 6.5,
+      "height_inches": 3.1999999152289496,
+      "min_font_pt": 9.0,
+      "fonts": [
+        "TimesNewRomanPSMT"
+      ],
+      "embedded": true,
+      "outside_text": []
+    },
+    "scale_sensitivity.pdf": {
+      "width_inches": 6.5,
+      "height_inches": 3.8000000847710504,
+      "min_font_pt": 9.0,
+      "fonts": [
+        "TimesNewRomanPSMT"
+      ],
+      "embedded": true,
+      "outside_text": []
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "profile_sha256": "1c737ccad31fb5f1d809e1d0aecbe57358b6a609294b4b9063ad00d295656c01",
+  "date": "2025-12-26",
+  "PV_scale": 0.1,
+  "tasks_per_batch": 30,
+  "epochs_per_task": 4,
+  "smoke_epoch_count": 600,
+  "all_intervals_fully_supported": true,
+  "simulated_hours_by_batch": {
+    "32": 21.279266882593245,
+    "64": 10.53158096091858,
+    "128": 6.19687210261976,
+    "256": 6.1466561463089615,
+    "512": 6.704470330800953
+  },
+  "official_exact_energy_query_mean_microseconds": 7.604229199932888,
+  "quadrature_error_by_step": {
+    "1.0": {
+      "median": 8.699933220051251e-08,
+      "max": 7.912796346998894e-06
+    },
+    "5.0": {
+      "median": 7.276183679281477e-05,
+      "max": 0.00091902069867448
+    },
+    "15.0": {
+      "median": 0.0003338925860638378,
+      "max": 0.005325947179230645
+    }
+  },
+  "conclusion": "Dense 12-14s dates provide about 14-49 native intervals per measured epoch. Earlier 111/366s dates are coarse; interpolation cannot recover missing physical variation. Recommended subset is quality-based, independent of algorithm outcomes.",
+  "limitations": "Grid comparison checks numerical integration only; it does not validate the unknown physical waveform between observations. This is an interface smoke test, not a rerun of Figure 8/9 or parameter tuning."
+}

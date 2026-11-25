@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-23",
+  "timing": "Specified during evaluation, before reading final evaluation outcomes",
+  "primary_population": "240 dates requested by the user, with explicit unlimited official interpolation",
+  "primary_mean": "Average each metric over 32 paired noise seeds per date, then average dates equally; do not simulate an averaged PV day",
+  "independent_confirmation": "192 dates excluded from LYA parameter tuning, with evaluation noise seeds distinct from tuning seeds",
+  "quality_sensitivity": "Report the same frozen policies and scales on the 195 dates complete at 300s gap limit, the 213 dates complete at 600s limit and the 142 recommended dense dates",
+  "uncertainty_amendment": "Use 2000 paired calendar-week cluster bootstrap replicates as the reported interval, rather than treating all weather days or epoch observations as independent. Resample weeks jointly across policies; within each replicate retain equal date weights.",
+  "interpretation": "Intervals describe finite recorded-weather variability conditional on the frozen simulator, selected parameters and interpolation assumption; they do not include MLP calibration uncertainty or unknown weather within long gaps.",
+  "parameter_selection": "Fix weights (100,10,1); re-evaluate original seven V candidates on the original 48 days and 8 seeds. Select lowest equal-day TARS with DWAE<=0.24 in every tuning run; ties within 1e-10 W select smaller V.",
+  "original_policy_control": "LYA-previous = previous decreasing-weight LYA using noise-distribution and future-integrated PV information",
+  "revision_scope": "Replace decision information only; environmental responses and six baselines unchanged."
+}

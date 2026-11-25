@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "dates": 240,
+  "configurations": 18,
+  "runs": 138240,
+  "epochs": 16588800,
+  "V": 0.1,
+  "weights": {
+    "Linear": [
+      100.0,
+      50.5,
+      1.0
+    ],
+    "Exponential": [
+      100.0,
+      10.0,
+      1.0
+    ],
+    "Inverse-power": [
+      100.0,
+      5.471929494104974,
+      1.0
+    ],
+    "Random-monotone": [
+      100.0,
+      56.298646422323216,
+      1.0
+    ],
+    "Fixed": [
+      100.0,
+      100.0,
+      100.0
+    ],
+    "Increasing": [
+      100.0,
+      1000.0,
+      10000.0
+    ]
+  },
+  "all_schedules_and_dates_retained": true,
+  "all_seed_donors_paired": true,
+  "existing_schedule_regression_runs": 69120,
+  "existing_schedule_regression_max_error": 0.0,
+  "regression_source_sha256": "4ddc7cc0b29e4a6b02b060b0a4cb2393c6dca3b9a9e54bf00845b4be688cd6fa",
+  "max_run_hours": 21.294761583681208,
+  "min_queue_bound_slack": 8.350469441331665e-05,
+  "no_parameter_tuning": true,
+  "engine_checks": {
+    "status": "PASS",
+    "independent_python_replay_epochs": 6480,
+    "standalone_no_noise_file_decisions": 6480,
+    "all_six_schedules_and_three_targets_verified": true,
+    "nonzero_noise_epochs": 6480,
+    "max_score_error": 5.729816621169448e-11,
+    "max_environment_PV_error_J": 0.0011511787306517363,
+    "mean_only_and_past_only_controller_verified": true,
+    "unchanged_engine_inherits_future_PV_and_noise_isolation_checks": true,
+    "V": 0.1
+  },
+  "exports": {
+    "width_inches": 6.5,
+    "height_inches": 3.4000000423855252,
+    "min_font_pt": 6.300000190734863,
+    "fonts": [
+      "STIXGeneral-Italic",
+      "STIXGeneral-Regular",
+      "TimesNewRomanPSMT"
+    ],
+    "embedded": true,
+    "outside_text": []
+  },
+  "default_sigma_each_decay_fixed_identical_runs": 7680,
+  "sigma235_each_decay_exponential_identical_runs": 7680,
+  "plotted_paired_comparisons": 24,
+  "decay_families": 4,
+  "comparators": 2,
+  "all_outcomes_retained": true,
+  "conclusion": "At fixed V=.1, the four decay families do not show a consistent TARS advantage over Fixed and Increasing."
+}

@@ -1,0 +1,17 @@
+{
+  "FIGURE_CAPTIONS.md": "cb338196f192557b89f7c0172157083394142717586ede7fee8483ce6ff10ad0",
+  "FIGURE_CONTRACT.md": "a5a0590e3112c099138b06ea0b0567870c564e8cf888ec68db744630b2b8aa8c",
+  "FIGURE_QA.md": "e9771b348f23286f6ad3e5cdccf9d4411aa1c1fe91e3fc2c5b88122cab0e45fd",
+  "README.md": "d8ed8d21a1afad288a0c26713932d2c7e8911256c16377a70909013a466ef362",
+  "figures/weight_decay_sameV_ab.pdf": "2e94d0e99ec8e9701cb3db95a13a072d82baa7da863d5b773e4c72624105f1a3",
+  "figures/weight_decay_sameV_ab.png": "f43c605dbf983f58eeb5b2f9b0ad5ce3a086c6a42663f302be5c861ea1ed5bb6",
+  "figures/weight_decay_sameV_ab.svg": "55f01704b12ea4783d58f851c164a7d35fa105df2088bbff19756853c54d9153",
+  "figures/weight_decay_sameV_ab.tiff": "613c45b5f5f2146f7d88a503663ba3e4f00dd9b22e679f9e3063ef137eae5829",
+  "plot_figure.py": "3641d8fe036b1ecd57a7e895895ec78192b81bcebbdb75a097127d66f707afdf",
+  "qa/pdf_proof.png": "f6adaecb722d8aae2ce854a1f53b35e86b684e7c7c1ec1d3c4849868d0c345fa",
+  "qa/source_preflight.json": "9b476dec52920d2aad7189ff238d1486d1fb4148bec53f6ecd0803d054a892be",
+  "source_data/fixed_curves.csv": "f2c762d788b21f98af4d3ca4d30b05aa1e61ebcafea9f0b71177ce54e76cf675",
+  "source_data/increasing_curves.csv": "e7bfddc0a65c47d068038f3d31cc7cfce35dc02010263e02b4788b4623e66e8e",
+  "source_manifest.json": "ae721154b7366c023bec399a711a28553cc0f24b77d4548474644b5f5db5b77f",
+  "verification.json": "c1e6190b2e5e9f25ce4a73b6f382bc5b7c0ada91436b091dd74aac7fac5cb99a"
+}

@@ -1,5 +1,11 @@
 # Sustainable AI Training — profiling experiments
 
+## Current paper experiments: Sections 5.2 and 5.3 (2026-11-25)
+
+[**Three current figures, experiment code and results**](experiments/260k-sections52-53-20261125/README.md) · [**Full reproducibility archive**](https://github.com/gale13/SustainableAITraining/releases/tag/sections52_53_2026_11_25)
+
+All 240 OpenCEM PV dates; the frozen full-data 260K simulator; mean-only LYA decisions and latest observed PV power times mean duration. Includes the Section 5.2 algorithm comparison, Section 5.3 V/TARS/queue panels, and the paired decay-versus-Fixed/Increasing panels. Complete saved runs, PV database, model/noise parameters and source-table checksums are in the release. The older profiling and simulator releases below remain unchanged.
+
 ## Profiling 04: TinyStories-260K
 
 [Complete Profiling 04 archive](profiling-results/tinystories-profile-04/README.md) · [Feasibility fits and simulator](profiling-results/tinystories-profile-04/simulator/README.md) · [600 original epoch measurements](profiling-results/tinystories-profile-04/experiment/epochs.csv)

@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "fit_rows": 600,
+  "noise_rows": 600,
+  "noise_bank_shape": [
+    30,
+    5,
+    4,
+    3
+  ],
+  "noise_donors_per_action_epoch": 30,
+  "held_out_rows": 0,
+  "all_selected_models_converged": true,
+  "feasibility_files_unchanged": true,
+  "maximum_scenario_mean_absolute_error": 8.731149137020111e-11,
+  "checks": [
+    "all original splits included",
+    "frozen recipe",
+    "causal paper state and scalar running minimum",
+    "all-data feature scales and MLP exports",
+    "all-data empirical bank reconstruction",
+    "all 600 conditional means and physical bounds",
+    "seeded default sampling and donor provenance"
+  ]
+}

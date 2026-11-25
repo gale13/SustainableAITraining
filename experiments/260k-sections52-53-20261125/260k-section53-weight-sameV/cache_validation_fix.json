@@ -1,0 +1,16 @@
+{
+  "reason": "Pandas decimal round trips differ by one binary floating-point ULP for V=0.0003 and 0.3; cache checks use tight relative tolerance, without changing simulation inputs or outputs.",
+  "before": {
+    "experiment.py": "b507ee64ef3f5407111146355eada94c747a2dc5ddd28fefbf3444025efa8df5",
+    "protocol.json": "c48eb07df5116b068e253461b144a84d6164f933bb1563b33019c424f12e2ac4",
+    "cache_manifest.json": "6084c838ee205ab42ee11e5bc01e6babd6bc5b1929991689d0d500746d50dd03",
+    "results/evaluation_runs.csv.gz": "eecc5d956845730cfb97a944f2d517da768b961dd3c6182d87d9b57c3e397ac6"
+  },
+  "after": {
+    "experiment.py": "c778e86ed3bab06a5a326aa91390baf4149c0d755bb43a1cf82e67574dc37a01",
+    "protocol.json": "189c9b2ce5e30e44f8dabecf56fb16cc199cec1bf71c8e5e4ad1058d28b1149e",
+    "cache_manifest.json": "99fa589d33b210c0da55da4b885f61778c20e6935fe5de9daecf46d31e4be7a2",
+    "results/evaluation_runs.csv.gz": "eecc5d956845730cfb97a944f2d517da768b961dd3c6182d87d9b57c3e397ac6"
+  },
+  "outcomes_unchanged": true
+}

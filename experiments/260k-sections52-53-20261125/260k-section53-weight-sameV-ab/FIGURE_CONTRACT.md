@@ -1,0 +1,3 @@
+# Weight-decay panels a,b
+
+Combine the two completed same-V comparisons without new experiments or statistical changes: (a) versus Fixed, (b) versus Increasing. Quantitative comparison grid, Python/matplotlib, OR grayscale, Times New Roman, 7.2 x3.2 inches, shared legend and identical x/y limits. Replot the exact 68 source rows per panel, including negative values and all pointwise bootstrap intervals. No filtering, smoothing, new fit, rounding, or outcome-dependent axis truncation. Preserve both source experiments unchanged. Export editable PDF/SVG and PNG/600 dpi TIFF. The interpretation remains V-dependent improvement, not uniform or separately tuned dominance.

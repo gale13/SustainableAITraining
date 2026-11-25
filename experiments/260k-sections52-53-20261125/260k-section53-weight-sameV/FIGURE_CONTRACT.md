@@ -1,0 +1,13 @@
+# Same-V decay-versus-Fixed curves
+
+The user abandons the single fixed-V design and requests the supplied plot type: percentage TARS reduction relative to Fixed at the same V, four decreasing families, sigma_e=.235. The current mean-only/past-power controller and noisy environment remain unchanged.
+
+Preserve the most recent functional schedules: Linear=(100,50.5,1), Exponential=(100,10,1), Inverse-power=(100,5.471929494104974,1), Random-monotone=(100,56.298646422323216,1), and Fixed=(100,100,100). Do not revert silently to the screenshot's historical weight normalization or residual/future-PV controller. K=3 means only the middle weights differ across these decreasing families.
+
+Predeclare a complete V grid before evaluation: for exponents -6 through 1, use 10^exponent and 3*10^exponent, plus 100 (17 values). This uniformly resolves each logarithmic decade with round values. All five schedules are evaluated at every V using all 240 days, midnight, PV70 alpha=4.1928776597152995, 30 tasks x4 epochs, 32 paired seeds. Total 85 settings, 652,800 runs, 78,336,000 epochs. No outcome-driven V restriction, date selection, weight tuning, or sigma search. Increasing is outside this requested same-V-versus-Fixed figure.
+
+One quantitative line panel: x=V (logarithmic), y=100*(mean TARS Fixed - mean TARS decay)/mean TARS Fixed. Four grayscale line/marker styles, all 68 paired effects retained. Connect observed settings without fitting. The zero line and any negative effects remain within the axis range. Pointwise paired week-bootstrap 95% bands accompany the curves; exact intervals and absolute/constraint outcomes remain in tables. Complete-range and plateau behavior must remain visible even if the benefit occurs only in a narrow V range.
+
+Claim boundary: determine whether decay helps at the same V and how that depends on V. Do not translate a localized same-V benefit into universal dominance or superiority after separate V tuning. Any highlighted maximum is descriptive among the predeclared grid, not an independently validated optimum. Report feasibility for all configurations. Main sigma=.235 comes from the user's supplied figure and is explicitly recorded as a follow-up after earlier results.
+
+Use the same equal-date mean and 2000 paired calendar-week bootstrap procedure. Supply the original 192-day and 195/142-day quality subset tables, without picking one to replace the 240-day result. Python/matplotlib, OR grayscale, Times New Roman 9–10 pt, one compact 3.5 x3.2-inch panel with editable PDF/SVG, PNG and 600 dpi TIFF. Preserve the current Section 5.3 V panels a,b and all frozen sources.

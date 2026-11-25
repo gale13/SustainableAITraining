@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "dates": 240,
+  "configurations": 85,
+  "runs": 652800,
+  "epochs": 78336000,
+  "sigma_e": 0.235,
+  "V_values": 17,
+  "all_curves_and_dates_retained": true,
+  "paired_effects": 68,
+  "regression_runs": 115200,
+  "regression_max_error": 0.0,
+  "additional_regression_source_sha256": "970f21ca4a4b80d129bb8a731b455ab905f96d402933e37e6e9df46e85d4d0a4",
+  "max_run_hours": 21.294761583681208,
+  "max_DWAE": 0.2335414697436942,
+  "total_violations": 0,
+  "min_queue_bound_slack": 0.0014585302563057
+}

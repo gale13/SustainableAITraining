@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "panels": 2,
+  "points_per_panel": 68,
+  "all_points_retained": true,
+  "source_csv_byte_identical": true,
+  "shared_decay_values_identical": true,
+  "shared_xlim": [
+    7e-07,
+    150
+  ],
+  "shared_ylim": [
+    -2.471794727748213,
+    28.328848918200233
+  ],
+  "source_files_unchanged": true,
+  "width_inches": 7.2,
+  "height_inches": 3.2,
+  "fonts": [
+    "STIXGeneral-Italic",
+    "STIXGeneral-Regular",
+    "TimesNewRomanPSMT"
+  ],
+  "fonts_embedded": true,
+  "outside_text": []
+}
